@@ -5,12 +5,14 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Header(props) {
+export default function Header({ title, invoices }) {
   return (
-    <header className="font-spartan w-screen h-11 flex items-center">
+    <header className="w-screen h-11 flex items-center px-6">
       <div className="mr-auto">
-        <h2 className="text-xl font-medium">{props.title}</h2>
-        <p>{props.title.toLowerCase()}</p>
+        <h2 className="text-2xl font-medium">{title}</h2>
+        <p className="font-light">
+          {invoices.length + ' ' + title.toLowerCase()}
+        </p>
       </div>
 
       <div className="flex items-center gap-3 mr-5">
@@ -24,7 +26,7 @@ export default function Header(props) {
       <button className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2">
         <FontAwesomeIcon
           icon={faPlus}
-          className="text-brightPurple bg-white rounded-full p-2.5"
+          className="text-brightPurple bg-white rounded-full p-2"
         ></FontAwesomeIcon>
         <span className="pt-[1px] pr-2.5">New</span>
       </button>
