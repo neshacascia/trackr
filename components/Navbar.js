@@ -12,7 +12,7 @@ export default function Navbar() {
         ></FontAwesomeIcon>
       </div>
 
-      <h1 className="font-spartan font-medium text-2xl tracking-wide ml-6 mr-auto">
+      <h1 className="font-medium text-2xl tracking-wide ml-6 mr-auto">
         trackr
       </h1>
 

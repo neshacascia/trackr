@@ -4,6 +4,7 @@ export default function PaymentsList({ invoices }) {
   const invoicesList = invoices.map(
     ({ id, clientName, createdAt, total, status }) => (
       <Payment
+        key={id}
         id={id}
         clientName={clientName}
         createdAt={createdAt}
