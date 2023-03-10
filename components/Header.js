@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleDown,
@@ -6,6 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header({ title, invoices }) {
+  const router = useRouter();
+
   return (
     <header className="w-screen h-11 flex items-center px-6">
       <div className="mr-auto">
@@ -23,7 +26,10 @@ export default function Header({ title, invoices }) {
         ></FontAwesomeIcon>
       </div>
 
-      <button className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2">
+      <button
+        onClick={() => router.push('/new-invoice')}
+        className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2"
+      >
         <FontAwesomeIcon
           icon={faPlus}
           className="text-brightPurple bg-white rounded-full p-2"
