@@ -53,7 +53,7 @@ export default function Payment({
         <div className="flex justify-between">
           <span className="font-medium">
             <span className="text-lightPurple">#</span>
-            {id.slice(-6)}
+            {id.slice(-6).toUpperCase()}
           </span>
           <p className="font-light">{clientName}</p>
         </div>
