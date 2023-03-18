@@ -37,6 +37,23 @@ export default function NewInvoiceForm({ addInvoice }) {
     setItems([...items, newItem]);
   }
 
+  function updateItemValue(id, key, value) {
+    setItems(
+      items.map(item => {
+        if (item.id === id) {
+          const total = (item.price * item.quantity).toFixed(2);
+          return {
+            ...item,
+            total,
+            [key]: value,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
+  }
+
   function submitHandler(e) {
     e.preventDefault();
 
@@ -277,6 +294,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                 name="itemName"
                 ref={itemNameInputRef}
                 value={item.itemName}
+                onChange={e =>
+                  updateItemValue(item.id, 'itemName', e.target.value)
+                }
                 className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
               />
             </label>
@@ -294,6 +314,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                   placeholder="0"
                   ref={quantityInputRef}
                   value={item.quantity}
+                  onChange={e =>
+                    updateItemValue(item.id, 'quantity', Number(e.target.value))
+                  }
                   className="text-white bg-mainPurple font-medium w-auto border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
                 />
               </label>
@@ -310,6 +333,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                   placeholder="0"
                   ref={priceInputRef}
                   value={item.price}
+                  onChange={e =>
+                    updateItemValue(item.id, 'price', Number(e.target.value))
+                  }
                   className="text-white bg-mainPurple border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
                 />
               </label>
@@ -323,6 +349,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                     name="total"
                     ref={totalInputRef}
                     value={(item.price * item.quantity).toFixed(2)}
+                    onChange={e =>
+                      updateItemValue(item.id, 'total', Number(e.target.value))
+                    }
                     className="text-grayPurple bg-transparent font-medium py-3 pr-5 mt-4"
                     disabled
                   />
