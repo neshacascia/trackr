@@ -14,7 +14,11 @@ export default function Header({ title, invoices }) {
       <div className="mr-auto">
         <h2 className="text-2xl font-medium">{title}</h2>
         <p className="font-light">
-          {invoices.length + ' ' + title.toLowerCase()}
+          {invoices.length === 0
+            ? 'No ' + title.toLowerCase()
+            : invoices.length === 1
+            ? invoices.length + ' ' + title.toLowerCase().slice(0, -1)
+            : invoices.length + ' ' + title.toLowerCase()}
         </p>
       </div>
 
