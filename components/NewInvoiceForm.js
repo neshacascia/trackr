@@ -71,6 +71,7 @@ export default function NewInvoiceForm({ addInvoice }) {
       invoiceDate: invoiceDateInputRef.current.value,
       paymentTerms: paymentTermsInputRef.current.value,
       description: descriptionInputRef.current.value,
+      status: statusInputRef.current.value,
     };
 
     addInvoice(invoiceData);
