@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import FormFooter from './FormFooter';
 
 export default function NewInvoiceForm({ addInvoice }) {
@@ -16,6 +16,26 @@ export default function NewInvoiceForm({ addInvoice }) {
   const paymentTermsInputRef = useRef();
   const descriptionInputRef = useRef();
   const statusInputRef = useRef();
+
+  const itemNameInputRef = useRef();
+  const quantityInputRef = useRef();
+  const priceInputRef = useRef();
+  const totalInputRef = useRef();
+
+  const [items, setItems] = useState([
+    { id: 0, itemName: '', quantity: '', price: '', total: 0 },
+  ]);
+
+  function addNewItem() {
+    const newItem = {
+      id: items.length,
+      itemName: '',
+      quantity: '',
+      price: '',
+      total: 0,
+    };
+    setItems([...items, newItem]);
+  }
 
   function submitHandler(e) {
     e.preventDefault();
@@ -237,6 +257,92 @@ export default function NewInvoiceForm({ addInvoice }) {
             <option>Paid</option>
           </select>
         </label>
+      </section>
+
+      <section className="mt-16 mb-12">
+        <h3 className="text-boldGrayPurple text-xl font-medium mb-6">
+          Item List
+        </h3>
+
+        {items.map(item => (
+          <div key={item.id} className="w-full mb-12">
+            <label
+              htmlFor={`item-${item.id}`}
+              className="font-light text-grayPurple flex flex-col"
+            >
+              Item Name
+              <input
+                type="text"
+                id={`item-${item.id}`}
+                name="itemName"
+                ref={itemNameInputRef}
+                value={item.itemName}
+                className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+              />
+            </label>
+
+            <div className="flex justify-between mt-6">
+              <label
+                htmlFor={`qty-${item.id}`}
+                className="font-light text-grayPurple w-[64px] flex flex-col"
+              >
+                Qty.
+                <input
+                  type="number"
+                  id={`qty-${item.id}`}
+                  name="quantity"
+                  placeholder="0"
+                  ref={quantityInputRef}
+                  value={item.quantity}
+                  className="text-white bg-mainPurple font-medium w-auto border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                />
+              </label>
+
+              <label
+                htmlFor="price"
+                className="font-light text-grayPurple w-[100px] flex flex-col"
+              >
+                Price
+                <input
+                  type="number"
+                  id={`price-${item.id}`}
+                  name="price"
+                  placeholder="0"
+                  ref={priceInputRef}
+                  value={item.price}
+                  className="text-white bg-mainPurple border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                />
+              </label>
+
+              <label className="font-light text-grayPurple flex flex-col">
+                Total
+                <div>
+                  <input
+                    type="number"
+                    id={`total-${item.id}`}
+                    name="total"
+                    ref={totalInputRef}
+                    value={(item.price * item.quantity).toFixed(2)}
+                    className="text-grayPurple bg-transparent font-medium py-3 pr-5 mt-4"
+                    disabled
+                  />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="text-grayPurple text-lg"
+                  ></FontAwesomeIcon>
+                </div>
+              </label>
+            </div>
+          </div>
+        ))}
+
+        <button
+          onClick={addNewItem}
+          type="button"
+          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16"
+        >
+          + Add New Item
+        </button>
       </section>
 
       <FormFooter />
