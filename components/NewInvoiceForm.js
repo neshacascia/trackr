@@ -72,6 +72,12 @@ export default function NewInvoiceForm({ addInvoice }) {
       paymentTerms: paymentTermsInputRef.current.value,
       description: descriptionInputRef.current.value,
       status: statusInputRef.current.value,
+      items: items.map(item => ({
+        itemName: item.itemName,
+        quantity: item.quantity,
+        price: item.price,
+        total: Number(item.price) * Number(item.quantity).toFixed(2),
+      })),
     };
 
     addInvoice(invoiceData);
