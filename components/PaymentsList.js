@@ -2,21 +2,32 @@ import Payment from './Payment';
 
 export default function PaymentsList({ invoices }) {
   const invoicesList = invoices.map(
-    ({ id, clientName, createdAt, total, status }) => (
+    ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
       <Payment
         key={id}
         id={id}
         clientName={clientName}
-        createdAt={createdAt}
-        total={total}
+        invoiceDate={invoiceDate}
+        paymentTerms={paymentTerms}
+        items={items}
         status={status}
       />
     )
   );
 
   return (
-    <main className="bg-darkPurple w-screen h-auto flex flex-col gap-4 px-6 pb-[105px]">
-      {invoicesList}
+    <main className="bg-darkPurple w-screen h-full flex flex-col gap-4 px-6 pb-[105px]">
+      {!invoices.length && (
+        <section className="h-auto flex flex-col items-center my-auto">
+          <img src="/assets/illustration-empty.svg" className="mb-10" />
+          <h2 className="text-2xl font-medium mb-6">There is nothing here</h2>
+          <p className="font-light">
+            Create an invoice by clicking the{' '}
+            <span className="font-medium">New</span> button and get started
+          </p>
+        </section>
+      )}
+      {invoices.length > 0 && invoicesList}
     </main>
   );
 }
