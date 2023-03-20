@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react';
 import FormFooter from './FormFooter';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 export default function NewInvoiceForm({ addInvoice }) {
   const streetInputRef = useRef();
   const cityInputRef = useRef();
