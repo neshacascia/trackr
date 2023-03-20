@@ -6,6 +6,21 @@ import NewInvoiceForm from '@/components/NewInvoiceForm';
 export default function NewPayment() {
   const router = useRouter();
 
+  async function addInvoiceHandler(enteredInvoiceData) {
+    const res = await fetch('/api/new-invoice', {
+      method: 'POST',
+      body: JSON.stringify(enteredInvoiceData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = res.json();
+    console.log(data);
+
+    router.push('/invoices');
+  }
+
   return (
     <main className="bg-darkPurple h-full flex flex-col gap-6 px-6">
       <button
@@ -21,7 +36,7 @@ export default function NewPayment() {
 
       <h2 className="text-white text-3xl">New Invoice</h2>
 
-      <NewInvoiceForm />
+      <NewInvoiceForm addInvoice={addInvoiceHandler} />
     </main>
   );
 }
