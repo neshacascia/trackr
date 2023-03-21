@@ -1,16 +1,49 @@
-import { useState } from 'react';
+import { MongoClient } from 'mongodb';
 import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
 
-import invoiceData from '../data.json';
-
-export default function Invoices() {
-  const [invoices, setInvoices] = useState(invoiceData);
-
+export default function Invoices(props) {
   return (
     <main className="text-white bg-darkPurple font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8">
-      <Header title="Invoices" invoices={invoices} />
-      <PaymentsList invoices={invoices} />
+      <Header title="Invoices" invoices={props.invoices} />
+      <PaymentsList invoices={props.invoices} />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  const client = await MongoClient.connect(
+    `${process.env.NEXT_PUBLIC_API_TOKEN}@invoices.hhtffnc.mongodb.net/?retryWrites=true&w=majority`
+  );
+
+  const db = client.db();
+  const invoicesCollections = db.collection('invoices');
+
+  const invoices = await invoicesCollections.find().toArray();
+
+  client.close();
+
+  return {
+    props: {
+      invoices: invoices.map(invoice => ({
+        id: invoice._id.toString(),
+        street: invoice.street,
+        city: invoice.city,
+        postal: invoice.postal,
+        country: invoice.country,
+        clientName: invoice.clientName,
+        clientEmail: invoice.clientEmail,
+        clientStreet: invoice.clientStreet,
+        clientCity: invoice.clientCity,
+        clientPostal: invoice.clientPostal,
+        clientCountry: invoice.clientCountry,
+        invoiceDate: invoice.invoiceDate,
+        paymentTerms: invoice.paymentTerms,
+        description: invoice.description,
+        status: invoice.status,
+        items: invoice.items,
+      })),
+    },
+    revalidate: 1,
+  };
 }
