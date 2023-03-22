@@ -327,7 +327,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                   onChange={e =>
                     updateItemValue(item.id, 'quantity', Number(e.target.value))
                   }
-                  className="text-white bg-mainPurple font-medium w-auto border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                  className="text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
                 />
               </label>
 
@@ -346,7 +346,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                   onChange={e =>
                     updateItemValue(item.id, 'price', Number(e.target.value))
                   }
-                  className="text-white bg-mainPurple border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                  className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
                 />
               </label>
 
