@@ -12,9 +12,7 @@ export default function Invoices(props) {
 }
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    `${process.env.NEXT_PUBLIC_API_TOKEN}@invoices.hhtffnc.mongodb.net/?retryWrites=true&w=majority`
-  );
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 
   const db = client.db();
   const invoicesCollections = db.collection('invoices');
