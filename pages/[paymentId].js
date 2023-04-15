@@ -2,11 +2,8 @@ import { MongoClient, ObjectId } from 'mongodb';
 import PaymentDetail from '../components/PaymentDetail';
 
 export default function PaymentDetails(props) {
-  return (
-    <>
-      <PaymentDetail paymentData={props} />
-    </>
-  );
+  const data = props.paymentData;
+  return <PaymentDetail data={data} />;
 }
 
 export async function getStaticPaths() {
