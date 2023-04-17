@@ -58,6 +58,21 @@ export default function PaymentDetail({ data }) {
     router.push('/invoices');
   }
 
+  async function deleteInvoiceHandler() {
+    const res = await fetch('/api/update-invoice', {
+      method: 'DELETE',
+      body: JSON.stringify(data.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseData = await res.json();
+    console.log(responseData);
+
+    router.push('/invoices');
+  }
+
   return (
     <>
       <main className="bg-darkPurple h-full flex flex-col gap-6 px-6 pb-14">
