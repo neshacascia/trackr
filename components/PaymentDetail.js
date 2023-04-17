@@ -44,8 +44,7 @@ export default function PaymentDetail({ data }) {
   }, 0);
 
   async function markAsPaidHandler() {
-    console.log('Updating status to Paid');
-    const res = await fetch('/api/update-status', {
+    const res = await fetch('/api/update-invoice', {
       method: 'POST',
       body: JSON.stringify(data.id),
       headers: {
@@ -53,11 +52,12 @@ export default function PaymentDetail({ data }) {
       },
     });
 
-    const data = await res.json();
-    console.log(data);
+    const responseData = await res.json();
+    console.log(responseData);
 
     router.push('/invoices');
   }
+
   return (
     <>
       <main className="bg-darkPurple h-full flex flex-col gap-6 px-6 pb-14">
@@ -162,6 +162,7 @@ export default function PaymentDetail({ data }) {
         </button>
         <button
           type="button"
+          onClick={deleteInvoiceHandler}
           className="text-white bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[18px]"
         >
           Delete
