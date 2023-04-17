@@ -43,6 +43,21 @@ export default function PaymentDetail({ data }) {
     return acc + Number(curr.total);
   }, 0);
 
+  async function markAsPaidHandler() {
+    console.log('Updating status to Paid');
+    const res = await fetch('/api/update-status', {
+      method: 'POST',
+      body: JSON.stringify(data.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    router.push('/invoices');
+  }
   return (
     <>
       <main className="bg-darkPurple h-full flex flex-col gap-6 px-6 pb-14">
@@ -118,8 +133,8 @@ export default function PaymentDetail({ data }) {
 
           <section>
             <div className="bg-borderPurple flex flex-col gap-6 rounded-t-lg p-6">
-              {data.items.map(item => (
-                <div className="flex justify-between items-center">
+              {data.items.map((item, ind) => (
+                <div key={ind} className="flex justify-between items-center">
                   <div className="flex flex-col">
                     <span>{item.itemName}</span>
                     <span className="text-grayPurple">{`${
@@ -151,7 +166,10 @@ export default function PaymentDetail({ data }) {
         >
           Delete
         </button>
-        <button className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]">
+        <button
+          onClick={markAsPaidHandler}
+          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+        >
           Mark as Paid
         </button>
       </footer>
