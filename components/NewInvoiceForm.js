@@ -57,6 +57,10 @@ export default function NewInvoiceForm({ addInvoice }) {
     );
   }
 
+  function deleteItem(id) {
+    setItems(items.filter(item => item.id !== id));
+  }
+
   function submitHandler(e) {
     e.preventDefault();
 
@@ -366,6 +370,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                     disabled
                   />
                   <FontAwesomeIcon
+                    onClick={() => deleteItem(item.id)}
                     icon={faTrash}
                     className="text-grayPurple text-lg"
                   ></FontAwesomeIcon>
