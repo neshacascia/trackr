@@ -37,7 +37,8 @@ export default function EditInvoice(props) {
       </button>
 
       <h2 className="text-white text-3xl">
-        Edit #{props.paymentData.id.slice(-6).toUpperCase()}
+        Edit <span className="text-boldGrayPurple">#</span>
+        {props.paymentData.id.slice(-6).toUpperCase()}
       </h2>
 
       <EditInvoiceForm
