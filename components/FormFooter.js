@@ -1,4 +1,4 @@
-export default function FormFooter() {
+export default function FormFooter({ saveAsDraftHandler }) {
   return (
     <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6 -mx-6">
       <button
@@ -9,6 +9,7 @@ export default function FormFooter() {
       </button>
       <button
         type="button"
+        onClick={saveAsDraftHandler}
         className="text-white bg-draftBtn font-medium w-full rounded-3xl py-4 px-[18px]"
       >
         Save as Draft

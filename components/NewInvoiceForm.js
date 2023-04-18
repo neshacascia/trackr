@@ -61,6 +61,35 @@ export default function NewInvoiceForm({ addInvoice }) {
     setItems(items.filter(item => item.id !== id));
   }
 
+  function saveAsDraftHandler(e) {
+    e.preventDefault();
+
+    const invoiceData = {
+      street: streetInputRef.current.value,
+      city: cityInputRef.current.value,
+      postal: postalInputRef.current.value,
+      country: countryInputRef.current.value,
+      clientName: clientNameInputRef.current.value,
+      clientEmail: clientEmailInputRef.current.value,
+      clientStreet: clientStreetInputRef.current.value,
+      clientCity: clientCityInputRef.current.value,
+      clientPostal: clientPostalInputRef.current.value,
+      clientCountry: clientCountryInputRef.current.value,
+      invoiceDate: invoiceDateInputRef.current.value,
+      paymentTerms: paymentTermsInputRef.current.value,
+      description: descriptionInputRef.current.value,
+      status: 'Draft',
+      items: items.map(item => ({
+        itemName: item.itemName,
+        quantity: item.quantity,
+        price: item.price,
+        total: Number(item.price) * Number(item.quantity).toFixed(2),
+      })),
+    };
+
+    addInvoice(invoiceData);
+  }
+
   function submitHandler(e) {
     e.preventDefault();
 
@@ -374,7 +403,7 @@ export default function NewInvoiceForm({ addInvoice }) {
         </button>
       </section>
 
-      <FormFooter />
+      <FormFooter saveAsDraftHandler={saveAsDraftHandler} />
     </form>
   );
 }
