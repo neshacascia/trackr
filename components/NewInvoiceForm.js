@@ -78,7 +78,7 @@ export default function NewInvoiceForm({ addInvoice }) {
       invoiceDate: invoiceDateInputRef.current.value,
       paymentTerms: paymentTermsInputRef.current.value,
       description: descriptionInputRef.current.value,
-      status: statusInputRef.current.value,
+      status: 'Pending',
       items: items.map(item => ({
         itemName: item.itemName,
         quantity: item.quantity,
@@ -272,21 +272,6 @@ export default function NewInvoiceForm({ addInvoice }) {
             className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
             ref={descriptionInputRef}
           />
-        </label>
-
-        <label
-          htmlFor="status"
-          className="font-light text-grayPurple flex flex-col"
-        >
-          Status
-          <select
-            id="status"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4"
-            ref={statusInputRef}
-          >
-            <option>Pending</option>
-            <option>Paid</option>
-          </select>
         </label>
       </section>
 
