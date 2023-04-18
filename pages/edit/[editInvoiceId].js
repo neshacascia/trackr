@@ -8,7 +8,18 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 export default function EditInvoice(props) {
   const router = useRouter();
 
-  async function updateInvoiceHandler(enteredInvoiceData) {
+  async function updateInvoiceHandler(invoiceData) {
+    const res = await fetch('/api/update-invoice', {
+      method: 'PUT',
+      body: JSON.stringify(invoiceData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
     router.back();
   }
 
