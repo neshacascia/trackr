@@ -1,10 +1,13 @@
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import FormFooter from './FormFooter';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function NewInvoiceForm({ addInvoice }) {
+  const router = useRouter();
+
   const streetInputRef = useRef();
   const cityInputRef = useRef();
   const postalInputRef = useRef();
@@ -403,7 +406,7 @@ export default function NewInvoiceForm({ addInvoice }) {
         </button>
       </section>
 
-      <FormFooter saveAsDraftHandler={saveAsDraftHandler} />
+      <FormFooter router={router} saveAsDraftHandler={saveAsDraftHandler} />
     </form>
   );
 }
