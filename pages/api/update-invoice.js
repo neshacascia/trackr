@@ -26,6 +26,16 @@ export default async function handler(req, res) {
     console.log(result);
 
     res.status(200).json({ message: 'Payment deleted!' });
+  } else if (req.method === 'PUT') {
+    const { id, ...updatedData } = req.body;
+
+    const result = await invoicesCollections.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: updatedData }
+    );
+    console.log(result);
+
+    res.status(201).json({ message: 'Invoice updated!' });
   }
   client.close();
 }
