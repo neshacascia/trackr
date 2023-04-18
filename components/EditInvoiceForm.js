@@ -58,7 +58,8 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   function submitHandler(e) {
     e.preventDefault();
 
-    const invoiceData = {
+    const data = {
+      id: invoiceData.id,
       street: streetInputRef.current.value,
       city: cityInputRef.current.value,
       postal: postalInputRef.current.value,
@@ -79,7 +80,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       })),
     };
 
-    updateInvoice(invoiceData);
+    updateInvoice(data);
   }
 
   return (
