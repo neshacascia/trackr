@@ -43,9 +43,13 @@ export default function PaymentDetail({ data }) {
     return acc + Number(curr.total);
   }, 0);
 
-  async function markAsPaidHandler() {
+  function editInvoiceHandler() {
+    router.push(`/edit/${data.id}`);
+  }
+
+  async function deleteInvoiceHandler() {
     const res = await fetch('/api/update-invoice', {
-      method: 'POST',
+      method: 'DELETE',
       body: JSON.stringify(data.id),
       headers: {
         'Content-Type': 'application/json',
@@ -58,9 +62,9 @@ export default function PaymentDetail({ data }) {
     router.push('/invoices');
   }
 
-  async function deleteInvoiceHandler() {
+  async function markAsPaidHandler() {
     const res = await fetch('/api/update-invoice', {
-      method: 'DELETE',
+      method: 'POST',
       body: JSON.stringify(data.id),
       headers: {
         'Content-Type': 'application/json',
@@ -171,6 +175,7 @@ export default function PaymentDetail({ data }) {
       <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6">
         <button
           type="button"
+          onClick={editInvoiceHandler}
           className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px]"
         >
           Edit
