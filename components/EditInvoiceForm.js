@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
+  const router = useRouter();
+
   const streetInputRef = useRef();
   const cityInputRef = useRef();
   const postalInputRef = useRef();
@@ -399,6 +402,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6 -mx-6">
         <button
           type="button"
+          onClick={() => router.back()}
           className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px]"
         >
           Cancel
