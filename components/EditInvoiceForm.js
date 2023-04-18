@@ -19,7 +19,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   const clientCountryInputRef = useRef();
   const paymentTermsInputRef = useRef();
   const descriptionInputRef = useRef();
-  const statusInputRef = useRef();
 
   const itemNameInputRef = useRef();
   const quantityInputRef = useRef();
@@ -72,7 +71,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       clientCountry: clientCountryInputRef.current.value,
       paymentTerms: paymentTermsInputRef.current.value,
       description: descriptionInputRef.current.value,
-      status: statusInputRef.current.value,
       items: items.map(item => ({
         itemName: item.itemName,
         quantity: item.quantity,
@@ -280,22 +278,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             defaultValue={invoiceData.description}
           />
         </label>
-
-        <label
-          htmlFor="status"
-          className="font-light text-grayPurple flex flex-col"
-        >
-          Status
-          <select
-            id="status"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4"
-            ref={statusInputRef}
-            defaultValue={invoiceData.status}
-          >
-            <option>Pending</option>
-            <option>Paid</option>
-          </select>
-        </label>
       </section>
 
       <section className="mt-16 mb-12">
@@ -303,8 +285,8 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           Item List
         </h3>
 
-        {items.map(item => (
-          <div key={item.id} className="w-full mb-12">
+        {items.map((item, ind) => (
+          <div key={ind} className="w-full mb-12">
             <label
               htmlFor={`item-${item.id}`}
               className="font-light text-grayPurple flex flex-col"
