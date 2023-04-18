@@ -77,6 +77,21 @@ export default function PaymentDetail({ data }) {
     router.push('/invoices');
   }
 
+  async function updateToPendingHandler() {
+    const res = await fetch('/api/new-invoice', {
+      method: 'PUT',
+      body: JSON.stringify(data.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const responseData = await res.json();
+    console.log(responseData);
+
+    router.push('/invoices');
+  }
+
   return (
     <>
       <main className="bg-darkPurple h-full flex flex-col gap-6 px-6 pb-14">
@@ -187,12 +202,19 @@ export default function PaymentDetail({ data }) {
         >
           Delete
         </button>
-        {data.status !== 'Paid' && (
+        {data.status !== 'Paid' && data.status !== 'Draft' ? (
           <button
             onClick={markAsPaidHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
           >
             Mark as Paid
+          </button>
+        ) : (
+          <button
+            onClick={updateToPendingHandler}
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+          >
+            Save & Send
           </button>
         )}
       </footer>
