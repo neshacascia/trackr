@@ -187,12 +187,14 @@ export default function PaymentDetail({ data }) {
         >
           Delete
         </button>
-        <button
-          onClick={markAsPaidHandler}
-          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
-        >
-          Mark as Paid
-        </button>
+        {data.status !== 'Paid' && (
+          <button
+            onClick={markAsPaidHandler}
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+          >
+            Mark as Paid
+          </button>
+        )}
       </footer>
     </>
   );
