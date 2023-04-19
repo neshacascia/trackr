@@ -48,7 +48,7 @@ export default function Payment({
   };
 
   return (
-    <div className="bg-mainPurple flex flex-col gap-6 rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple">
+    <div className="bg-mainPurple flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple">
       <Link href={`/${id}`}>
         <div className="flex justify-between">
           <span className="font-medium">
