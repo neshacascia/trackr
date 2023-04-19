@@ -55,6 +55,10 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     );
   }
 
+  function deleteItem(id) {
+    setItems(items.filter(item => item.id !== id));
+  }
+
   function submitHandler(e) {
     e.preventDefault();
 
@@ -364,6 +368,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                     disabled
                   />
                   <FontAwesomeIcon
+                    onClick={() => deleteItem(item.id)}
                     icon={faTrash}
                     className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
                   ></FontAwesomeIcon>
