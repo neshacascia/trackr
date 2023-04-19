@@ -376,7 +376,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
         <button
           onClick={addNewItem}
           type="button"
-          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16"
+          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft"
         >
           + Add New Item
         </button>
@@ -386,14 +386,14 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+          className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverGrayPurple"
         >
           Cancel
         </button>
         <button
           type="submit"
           onClick={submitHandler}
-          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
         >
           Save Changes
         </button>
