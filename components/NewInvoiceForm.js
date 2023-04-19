@@ -134,7 +134,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={streetInputRef}
           />
         </label>
@@ -148,7 +148,7 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
               ref={cityInputRef}
             />
           </label>
@@ -161,7 +161,7 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
               ref={postalInputRef}
             />
           </label>
@@ -175,7 +175,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={countryInputRef}
           />
         </label>
@@ -191,7 +191,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="name"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={clientNameInputRef}
           />
         </label>
@@ -204,7 +204,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="email"
             id="email"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={clientEmailInputRef}
           />
         </label>
@@ -217,7 +217,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={clientStreetInputRef}
           />
         </label>
@@ -231,7 +231,7 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
               ref={clientCityInputRef}
             />
           </label>
@@ -244,7 +244,7 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
               ref={clientPostalInputRef}
             />
           </label>
@@ -258,7 +258,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={clientCountryInputRef}
           />
         </label>
@@ -271,7 +271,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="date"
             id="invoice-date"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple"
             ref={invoiceDateInputRef}
           />
         </label>
@@ -283,7 +283,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           Payment Terms
           <select
             id="terms"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple"
             ref={paymentTermsInputRef}
           >
             <option>Net 1 Day</option>
@@ -301,7 +301,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="desc"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
             ref={descriptionInputRef}
           />
         </label>
@@ -328,7 +328,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                 onChange={e =>
                   updateItemValue(item.id, 'itemName', e.target.value)
                 }
-                className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
               />
             </label>
 
@@ -348,7 +348,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                   onChange={e =>
                     updateItemValue(item.id, 'quantity', Number(e.target.value))
                   }
-                  className="text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                  className="text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
                 />
               </label>
 
@@ -367,7 +367,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                   onChange={e =>
                     updateItemValue(item.id, 'price', Number(e.target.value))
                   }
-                  className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+                  className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
                 />
               </label>
 
