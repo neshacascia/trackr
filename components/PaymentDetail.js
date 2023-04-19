@@ -204,14 +204,15 @@ export default function PaymentDetail({ data }) {
         >
           Delete
         </button>
-        {data.status !== 'Paid' && data.status !== 'Draft' ? (
+        {data.status === 'Pending' && (
           <button
             onClick={markAsPaidHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
           >
             Mark as Paid
           </button>
-        ) : (
+        )}
+        {data.status === 'Draft' && (
           <button
             onClick={updateToPendingHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
