@@ -280,16 +280,18 @@ export default function NewInvoiceForm({ addInvoice }) {
           className="font-light text-grayPurple flex flex-col"
         >
           Payment Terms
-          <select
-            id="terms"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple"
-            ref={paymentTermsInputRef}
-          >
-            <option>Net 1 Day</option>
-            <option>Net 7 Days</option>
-            <option>Net 14 Days</option>
-            <option>Net 30 Days</option>
-          </select>
+          <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[31px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
+            <select
+              id="terms"
+              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple"
+              ref={paymentTermsInputRef}
+            >
+              <option>Net 1 Day</option>
+              <option>Net 7 Days</option>
+              <option>Net 14 Days</option>
+              <option>Net 30 Days</option>
+            </select>
+          </div>
         </label>
 
         <label
