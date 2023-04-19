@@ -11,13 +11,13 @@ export default function FormFooter({ router, saveAsDraftHandler }) {
       <button
         type="button"
         onClick={saveAsDraftHandler}
-        className="text-white bg-draftBtn font-medium w-full rounded-3xl py-4 px-[18px]"
+        className="text-white bg-draftBtn font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverGrayPurple"
       >
         Save as Draft
       </button>
       <button
         type="submit"
-        className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+        className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
       >
         Save & Send
       </button>

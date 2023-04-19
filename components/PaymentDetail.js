@@ -191,28 +191,28 @@ export default function PaymentDetail({ data }) {
         <button
           type="button"
           onClick={editInvoiceHandler}
-          className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+          className="text-draft bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:text-detailPurple hover:bg-white"
         >
           Edit
         </button>
         <button
           type="button"
           onClick={deleteInvoiceHandler}
-          className="text-white bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[18px]"
+          className="text-white bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverRed"
         >
           Delete
         </button>
         {data.status !== 'Paid' && data.status !== 'Draft' ? (
           <button
             onClick={markAsPaidHandler}
-            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
           >
             Mark as Paid
           </button>
         ) : (
           <button
             onClick={updateToPendingHandler}
-            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
           >
             Save & Send
           </button>

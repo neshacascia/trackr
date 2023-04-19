@@ -28,7 +28,7 @@ export default function Header({ title, invoices }) {
 
       <button
         onClick={() => router.push('/new-invoice')}
-        className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2"
+        className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2 hover:bg-hoverPurple"
       >
         <FontAwesomeIcon
           icon={faPlus}

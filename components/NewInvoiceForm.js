@@ -400,7 +400,7 @@ export default function NewInvoiceForm({ addInvoice }) {
         <button
           onClick={addNewItem}
           type="button"
-          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16"
+          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft"
         >
           + Add New Item
         </button>
