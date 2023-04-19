@@ -33,7 +33,9 @@ export default function EditInvoice(props) {
           icon={faAngleLeft}
           className="text-brightPurple text-lg"
         ></FontAwesomeIcon>{' '}
-        <p className="text-white font-medium pt-[2px]">Go back</p>
+        <p className="text-white font-medium pt-[2px] hover:text-grayPurple">
+          Go back
+        </p>
       </button>
 
       <h2 className="text-white text-3xl">

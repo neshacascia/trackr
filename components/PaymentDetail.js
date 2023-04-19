@@ -103,7 +103,9 @@ export default function PaymentDetail({ data }) {
             icon={faAngleLeft}
             className="text-brightPurple text-lg"
           ></FontAwesomeIcon>{' '}
-          <p className="text-white font-medium pt-[2px]">Go back</p>
+          <p className="text-white font-medium pt-[2px] hover:text-grayPurple">
+            Go back
+          </p>
         </button>
 
         <section className="bg-mainPurple h-[91px] flex items-center justify-between rounded-lg px-6">
