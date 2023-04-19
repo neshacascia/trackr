@@ -271,7 +271,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="date"
             id="invoice-date"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer"
             ref={invoiceDateInputRef}
           />
         </label>
@@ -283,7 +283,7 @@ export default function NewInvoiceForm({ addInvoice }) {
           Payment Terms
           <select
             id="terms"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer"
             ref={paymentTermsInputRef}
           >
             <option>Net 1 Day</option>
@@ -389,7 +389,7 @@ export default function NewInvoiceForm({ addInvoice }) {
                   <FontAwesomeIcon
                     onClick={() => deleteItem(item.id)}
                     icon={faTrash}
-                    className="text-grayPurple text-lg"
+                    className="text-grayPurple text-lg cursor-pointer"
                   ></FontAwesomeIcon>
                 </div>
               </label>

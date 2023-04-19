@@ -255,7 +255,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           Payment Terms
           <select
             id="terms"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer"
             ref={paymentTermsInputRef}
             defaultValue={invoiceData.paymentTerms}
           >
@@ -365,7 +365,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   />
                   <FontAwesomeIcon
                     icon={faTrash}
-                    className="text-grayPurple text-lg"
+                    className="text-grayPurple text-lg cursor-pointer"
                   ></FontAwesomeIcon>
                 </div>
               </label>
