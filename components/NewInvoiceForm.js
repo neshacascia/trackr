@@ -21,7 +21,6 @@ export default function NewInvoiceForm({ addInvoice }) {
   const invoiceDateInputRef = useRef();
   const paymentTermsInputRef = useRef();
   const descriptionInputRef = useRef();
-  const statusInputRef = useRef();
 
   const itemNameInputRef = useRef();
   const quantityInputRef = useRef();
