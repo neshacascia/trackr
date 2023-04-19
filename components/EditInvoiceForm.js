@@ -236,13 +236,13 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
 
         <label
           htmlFor="invoice-date"
-          className="font-light text-grayPurple flex flex-col"
+          className="font-light text-grayPurple flex flex-col opacity-50"
         >
           Invoice Date
           <input
             type="date"
             id="invoice-date"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4"
+            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
             defaultValue={invoiceData.invoiceDate}
             disabled
           />
