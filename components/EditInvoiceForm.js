@@ -365,7 +365,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   />
                   <FontAwesomeIcon
                     icon={faTrash}
-                    className="text-grayPurple text-lg cursor-pointer"
+                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
                   ></FontAwesomeIcon>
                 </div>
               </label>
