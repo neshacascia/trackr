@@ -173,11 +173,11 @@ export default function PaymentDetail({ data }) {
                 <div key={ind} className="flex justify-between items-center">
                   <div className="flex flex-col">
                     <span>{item.itemName}</span>
-                    <span className="text-grayPurple">{`${
-                      item.quantity
-                    } x $${item.price.toFixed(2)}`}</span>
+                    <span className="text-grayPurple">{`${item.quantity} x ${
+                      item.price ? item.price.toFixed(2) : ''
+                    }`}</span>
                   </div>
-                  <span>${item.total.toFixed(2)}</span>
+                  <span>${item.total?.toFixed(2)}</span>
                 </div>
               ))}
             </div>
