@@ -95,30 +95,44 @@ export default function NewInvoiceForm({ addInvoice }) {
   function submitHandler(e) {
     e.preventDefault();
 
-    const invoiceData = {
-      street: streetInputRef.current.value,
-      city: cityInputRef.current.value,
-      postal: postalInputRef.current.value,
-      country: countryInputRef.current.value,
-      clientName: clientNameInputRef.current.value,
-      clientEmail: clientEmailInputRef.current.value,
-      clientStreet: clientStreetInputRef.current.value,
-      clientCity: clientCityInputRef.current.value,
-      clientPostal: clientPostalInputRef.current.value,
-      clientCountry: clientCountryInputRef.current.value,
-      invoiceDate: invoiceDateInputRef.current.value,
-      paymentTerms: paymentTermsInputRef.current.value,
-      description: descriptionInputRef.current.value,
-      status: 'Pending',
-      items: items.map(item => ({
-        itemName: item.itemName,
-        quantity: item.quantity,
-        price: item.price,
-        total: Number(item.price) * Number(item.quantity).toFixed(2),
-      })),
-    };
+    if (
+      streetInputRef.current.value.trim() === '' ||
+      cityInputRef.current.value.trim() === '' ||
+      postalInputRef.current.value.trim() === '' ||
+      countryInputRef.current.value.trim() === '' ||
+      clientNameInputRef.current.value.trim() === '' ||
+      clientEmailInputRef.current.value.trim() === '' ||
+      invoiceDateInputRef.current.value.trim() === '' ||
+      paymentTermsInputRef.current.value.trim() === '' ||
+      descriptionInputRef.current.value.trim() === ''
+    ) {
+      return;
+    } else {
+      const invoiceData = {
+        street: streetInputRef.current.value,
+        city: cityInputRef.current.value,
+        postal: postalInputRef.current.value,
+        country: countryInputRef.current.value,
+        clientName: clientNameInputRef.current.value,
+        clientEmail: clientEmailInputRef.current.value,
+        clientStreet: clientStreetInputRef.current.value,
+        clientCity: clientCityInputRef.current.value,
+        clientPostal: clientPostalInputRef.current.value,
+        clientCountry: clientCountryInputRef.current.value,
+        invoiceDate: invoiceDateInputRef.current.value,
+        paymentTerms: paymentTermsInputRef.current.value,
+        description: descriptionInputRef.current.value,
+        status: 'Pending',
+        items: items.map(item => ({
+          itemName: item.itemName,
+          quantity: item.quantity,
+          price: item.price,
+          total: Number(item.price) * Number(item.quantity).toFixed(2),
+        })),
+      };
 
-    addInvoice(invoiceData);
+      addInvoice(invoiceData);
+    }
   }
 
   return (
