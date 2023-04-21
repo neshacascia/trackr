@@ -181,7 +181,9 @@ export default function NewInvoiceForm({ addInvoice }) {
         <h4 className="text-brightPurple">Bill From</h4>
         <label
           htmlFor="address"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            streetInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Street Address
@@ -192,7 +194,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !streetInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={streetInputRef}
           />
         </label>
@@ -200,7 +204,9 @@ export default function NewInvoiceForm({ addInvoice }) {
         <div className="flex gap-6">
           <label
             htmlFor="city"
-            className="font-light text-grayPurple flex flex-col"
+            className={`${
+              cityInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            } font-light flex flex-col`}
           >
             <div className="flex justify-between">
               City
@@ -211,14 +217,18 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !cityInputValidation ? 'border-deleteBtn' : ''
+              }`}
               ref={cityInputRef}
             />
           </label>
 
           <label
             htmlFor="postal-code"
-            className="font-light text-grayPurple flex flex-col"
+            className={`${
+              postalInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            } font-light flex flex-col`}
           >
             <div className="flex justify-between">
               Postal Code
@@ -229,7 +239,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !postalInputValidation ? 'border-deleteBtn' : ''
+              }`}
               ref={postalInputRef}
             />
           </label>
@@ -237,7 +249,9 @@ export default function NewInvoiceForm({ addInvoice }) {
 
         <label
           htmlFor="country"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            countryInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Country
@@ -248,7 +262,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !countryInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={countryInputRef}
           />
         </label>
@@ -258,7 +274,9 @@ export default function NewInvoiceForm({ addInvoice }) {
         <h4 className="text-brightPurple">Bill To</h4>
         <label
           htmlFor="name"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            clientNameInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Client's Name
@@ -269,14 +287,18 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="name"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !clientNameInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={clientNameInputRef}
           />
         </label>
 
         <label
           htmlFor="email"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            clientEmailInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Client's Email
@@ -287,7 +309,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="email"
             id="email"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !clientEmailInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={clientEmailInputRef}
           />
         </label>
@@ -348,7 +372,9 @@ export default function NewInvoiceForm({ addInvoice }) {
 
         <label
           htmlFor="invoice-date"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            invoiceDateInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Invoice Date
@@ -359,14 +385,18 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="date"
             id="invoice-date"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+              !invoiceDateInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={invoiceDateInputRef}
           />
         </label>
 
         <label
           htmlFor="terms"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            paymentTermsInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Payment Terms
@@ -377,7 +407,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[28px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
             <select
               id="terms"
-              className="text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+                !paymentTermsInputValidation ? 'border-deleteBtn' : ''
+              }`}
               ref={paymentTermsInputRef}
             >
               <option>Net 1 Day</option>
@@ -390,7 +422,9 @@ export default function NewInvoiceForm({ addInvoice }) {
 
         <label
           htmlFor="desc"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            descriptionInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Project Description
@@ -401,7 +435,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="desc"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !descriptionInputValidation ? 'border-deleteBtn' : ''
+            }`}
             ref={descriptionInputRef}
           />
         </label>
