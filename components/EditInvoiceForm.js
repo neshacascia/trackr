@@ -27,10 +27,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     useState(false);
   const [clientEmailInputTouched, setClientEmailInputTouched] = useState(false);
 
-  const [invoiceDateInputValidation, setInvoiceDateInputValidation] =
-    useState(false);
-  const [invoiceDateInputTouched, setInvoiceDateInputTouched] = useState(false);
-
   const [paymentTermsInputValidation, setPaymentTermsInputValidation] =
     useState(false);
   const [paymentTermsInputTouched, setPaymentTermsInputTouched] =
@@ -116,7 +112,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     setCountryInputTouched(true);
     setClientNameInputTouched(true);
     setClientEmailInputTouched(true);
-    setInvoiceDateInputTouched(true);
     setPaymentTermsInputTouched(true);
     setDescriptionInputTouched(true);
 
@@ -138,9 +133,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     } else if (clientEmailInputRef.current.value.trim() === '') {
       setClientEmailInputValidation(false);
       return;
-    } else if (invoiceDateInputRef.current.value.trim() === '') {
-      setInvoiceDateInputValidation(false);
-      return;
     } else if (paymentTermsInputRef.current.value.trim() === '') {
       setPaymentTermsInputValidation(false);
       return;
@@ -154,7 +146,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       setCountryInputValidation(true);
       setClientNameInputValidation(true);
       setClientEmailInputValidation(true);
-      setInvoiceDateInputValidation(true);
       setPaymentTermsInputValidation(true);
       setDescriptionInputValidation(true);
 
