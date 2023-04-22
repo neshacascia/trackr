@@ -9,19 +9,37 @@ export default function NewInvoiceForm({ addInvoice }) {
   const router = useRouter();
 
   const [streetInputValidation, setStreetInputValidation] = useState(false);
+  const [streetInputTouched, setStreetInputTouched] = useState(false);
+
   const [cityInputValidation, setCityInputValidation] = useState(false);
+  const [cityInputTouched, setCityInputTouched] = useState(false);
+
   const [postalInputValidation, setPostalInputValidation] = useState(false);
+  const [postalInputTouched, setPostalInputTouched] = useState(false);
+
   const [countryInputValidation, setCountryInputValidation] = useState(false);
+  const [countryInputTouched, setCountryInputTouched] = useState(false);
+
   const [clientNameInputValidation, setClientNameInputValidation] =
     useState(false);
+  const [clientNameInputTouched, setClientNameInputTouched] = useState(false);
+
   const [clientEmailInputValidation, setClientEmailInputValidation] =
     useState(false);
+  const [clientEmailInputTouched, setClientEmailInputTouched] = useState(false);
+
   const [invoiceDateInputValidation, setInvoiceDateInputValidation] =
     useState(false);
+  const [invoiceDateInputTouched, setInvoiceDateInputTouched] = useState(false);
+
   const [paymentTermsInputValidation, setPaymentTermsInputValidation] =
     useState(false);
+  const [paymentTermsInputTouched, setPaymentTermsInputTouched] =
+    useState(false);
+
   const [descriptionInputValidation, setDescriptionInputValidation] =
     useState(false);
+  const [descriptionInputTouched, setDescriptionInputTouched] = useState(false);
 
   const streetInputRef = useRef();
   const cityInputRef = useRef();
@@ -110,6 +128,16 @@ export default function NewInvoiceForm({ addInvoice }) {
   function submitHandler(e) {
     e.preventDefault();
 
+    setStreetInputTouched(true);
+    setCityInputTouched(true);
+    setPostalInputTouched(true);
+    setCountryInputTouched(true);
+    setClientNameInputTouched(true);
+    setClientEmailInputTouched(true);
+    setInvoiceDateInputTouched(true);
+    setPaymentTermsInputTouched(true);
+    setDescriptionInputTouched(true);
+
     if (streetInputRef.current.value.trim() === '') {
       setStreetInputValidation(false);
       return;
@@ -182,12 +210,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="address"
           className={`${
-            streetInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !streetInputValidation && streetInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Street Address
-            {!streetInputValidation && (
+            {!streetInputValidation && streetInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -195,7 +225,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="text"
             id="address"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !streetInputValidation ? 'border-deleteBtn' : ''
+              !streetInputValidation && streetInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={streetInputRef}
           />
@@ -205,12 +237,14 @@ export default function NewInvoiceForm({ addInvoice }) {
           <label
             htmlFor="city"
             className={`${
-              cityInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+              !cityInputValidation && cityInputTouched
+                ? 'text-deleteBtn'
+                : 'text-grayPurple'
             } font-light flex flex-col`}
           >
             <div className="flex justify-between">
               City
-              {!cityInputValidation && (
+              {!cityInputValidation && cityInputTouched && (
                 <p className="text-deleteBtn font-medium">can't be empty</p>
               )}
             </div>
@@ -218,7 +252,9 @@ export default function NewInvoiceForm({ addInvoice }) {
               type="text"
               id="city"
               className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-                !cityInputValidation ? 'border-deleteBtn' : ''
+                !cityInputValidation && cityInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
               }`}
               ref={cityInputRef}
             />
@@ -227,12 +263,14 @@ export default function NewInvoiceForm({ addInvoice }) {
           <label
             htmlFor="postal-code"
             className={`${
-              postalInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+              !postalInputValidation && postalInputTouched
+                ? 'text-deleteBtn'
+                : 'text-grayPurple'
             } font-light flex flex-col`}
           >
             <div className="flex justify-between">
               Postal Code
-              {!postalInputValidation && (
+              {!postalInputValidation && postalInputTouched && (
                 <p className="text-deleteBtn font-medium">can't be empty</p>
               )}
             </div>
@@ -240,7 +278,9 @@ export default function NewInvoiceForm({ addInvoice }) {
               type="text"
               id="postal-code"
               className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-                !postalInputValidation ? 'border-deleteBtn' : ''
+                !postalInputValidation && postalInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
               }`}
               ref={postalInputRef}
             />
@@ -250,12 +290,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="country"
           className={`${
-            countryInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !countryInputValidation && countryInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Country
-            {!countryInputValidation && (
+            {!countryInputValidation && countryInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -263,7 +305,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="text"
             id="country"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !countryInputValidation ? 'border-deleteBtn' : ''
+              !countryInputValidation && countryInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={countryInputRef}
           />
@@ -275,12 +319,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="name"
           className={`${
-            clientNameInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !clientNameInputValidation && clientNameInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Client's Name
-            {!clientNameInputValidation && (
+            {!clientNameInputValidation && clientNameInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -288,7 +334,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="text"
             id="name"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !clientNameInputValidation ? 'border-deleteBtn' : ''
+              !clientNameInputValidation && clientNameInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={clientNameInputRef}
           />
@@ -297,12 +345,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="email"
           className={`${
-            clientEmailInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !clientEmailInputValidation && clientEmailInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Client's Email
-            {!clientEmailInputValidation && (
+            {!clientEmailInputValidation && clientEmailInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -310,7 +360,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="email"
             id="email"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !clientEmailInputValidation ? 'border-deleteBtn' : ''
+              !clientEmailInputValidation && clientEmailInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={clientEmailInputRef}
           />
@@ -373,12 +425,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="invoice-date"
           className={`${
-            invoiceDateInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !invoiceDateInputValidation && invoiceDateInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Invoice Date
-            {!invoiceDateInputValidation && (
+            {!invoiceDateInputValidation && invoiceDateInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -386,7 +440,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="date"
             id="invoice-date"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
-              !invoiceDateInputValidation ? 'border-deleteBtn' : ''
+              !invoiceDateInputValidation && invoiceDateInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={invoiceDateInputRef}
           />
@@ -395,12 +451,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="terms"
           className={`${
-            paymentTermsInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !paymentTermsInputValidation && paymentTermsInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Payment Terms
-            {!paymentTermsInputValidation && (
+            {!paymentTermsInputValidation && paymentTermsInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -408,7 +466,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             <select
               id="terms"
               className={`text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
-                !paymentTermsInputValidation ? 'border-deleteBtn' : ''
+                !paymentTermsInputValidation && paymentTermsInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
               }`}
               ref={paymentTermsInputRef}
             >
@@ -423,12 +483,14 @@ export default function NewInvoiceForm({ addInvoice }) {
         <label
           htmlFor="desc"
           className={`${
-            descriptionInputValidation ? 'text-grayPurple' : 'text-deleteBtn'
+            !descriptionInputValidation && descriptionInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Project Description
-            {!descriptionInputValidation && (
+            {!descriptionInputValidation && descriptionInputTouched && (
               <p className="text-deleteBtn font-medium">can't be empty</p>
             )}
           </div>
@@ -436,7 +498,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             type="text"
             id="desc"
             className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !descriptionInputValidation ? 'border-deleteBtn' : ''
+              !descriptionInputValidation && descriptionInputTouched
+                ? 'border-deleteBtn'
+                : ''
             }`}
             ref={descriptionInputRef}
           />
