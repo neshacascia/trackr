@@ -194,7 +194,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             !streetInputValidation && streetInputTouched
               ? 'text-deleteBtn'
               : 'text-grayPurple'
-          }font-light flex flex-col`}
+          } font-light flex flex-col`}
         >
           <div className="flex justify-between">
             Street Address
@@ -493,7 +493,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[31px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
             <select
               id="terms"
-              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
                 !paymentTermsInputValidation && paymentTermsInputTouched
                   ? 'border-deleteBtn'
                   : ''
