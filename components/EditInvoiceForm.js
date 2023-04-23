@@ -7,6 +7,39 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   const router = useRouter();
 
+  const [streetInputValidation, setStreetInputValidation] = useState(false);
+  const [streetInputTouched, setStreetInputTouched] = useState(false);
+
+  const [cityInputValidation, setCityInputValidation] = useState(false);
+  const [cityInputTouched, setCityInputTouched] = useState(false);
+
+  const [postalInputValidation, setPostalInputValidation] = useState(false);
+  const [postalInputTouched, setPostalInputTouched] = useState(false);
+
+  const [countryInputValidation, setCountryInputValidation] = useState(false);
+  const [countryInputTouched, setCountryInputTouched] = useState(false);
+
+  const [clientNameInputValidation, setClientNameInputValidation] =
+    useState(false);
+  const [clientNameInputTouched, setClientNameInputTouched] = useState(false);
+
+  const [clientEmailInputValidation, setClientEmailInputValidation] =
+    useState(false);
+  const [clientEmailInputTouched, setClientEmailInputTouched] = useState(false);
+
+  const [invoiceDateInputValidation, setInvoiceDateInputValidation] =
+    useState(false);
+  const [invoiceDateInputTouched, setInvoiceDateInputTouched] = useState(false);
+
+  const [paymentTermsInputValidation, setPaymentTermsInputValidation] =
+    useState(false);
+  const [paymentTermsInputTouched, setPaymentTermsInputTouched] =
+    useState(false);
+
+  const [descriptionInputValidation, setDescriptionInputValidation] =
+    useState(false);
+  const [descriptionInputTouched, setDescriptionInputTouched] = useState(false);
+
   const streetInputRef = useRef();
   const cityInputRef = useRef();
   const postalInputRef = useRef();
@@ -59,32 +92,96 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     setItems(items.filter(item => item.id !== id));
   }
 
+  function inputBlurHandler(setInputTouched, inputRef, setInputValidation) {
+    setInputTouched(true);
+
+    if (inputRef.current.value.trim() === '') {
+      setInputValidation(false);
+      return;
+    }
+  }
+
+  function changeHandler(e, setInputValidation) {
+    if (e.target.value.trim() !== '') {
+      setInputValidation(true);
+    }
+  }
+
   function submitHandler(e) {
     e.preventDefault();
 
-    const data = {
-      id: invoiceData.id,
-      street: streetInputRef.current.value,
-      city: cityInputRef.current.value,
-      postal: postalInputRef.current.value,
-      country: countryInputRef.current.value,
-      clientName: clientNameInputRef.current.value,
-      clientEmail: clientEmailInputRef.current.value,
-      clientStreet: clientStreetInputRef.current.value,
-      clientCity: clientCityInputRef.current.value,
-      clientPostal: clientPostalInputRef.current.value,
-      clientCountry: clientCountryInputRef.current.value,
-      paymentTerms: paymentTermsInputRef.current.value,
-      description: descriptionInputRef.current.value,
-      items: items.map(item => ({
-        itemName: item.itemName,
-        quantity: item.quantity,
-        price: item.price,
-        total: Number(item.price) * Number(item.quantity).toFixed(2),
-      })),
-    };
+    setStreetInputTouched(true);
+    setCityInputTouched(true);
+    setPostalInputTouched(true);
+    setCountryInputTouched(true);
+    setClientNameInputTouched(true);
+    setClientEmailInputTouched(true);
+    setInvoiceDateInputTouched(true);
+    setPaymentTermsInputTouched(true);
+    setDescriptionInputTouched(true);
 
-    updateInvoice(data);
+    if (streetInputRef.current.value.trim() === '') {
+      setStreetInputValidation(false);
+      return;
+    } else if (cityInputRef.current.value.trim() === '') {
+      setCityInputValidation(false);
+      return;
+    } else if (postalInputRef.current.value.trim() === '') {
+      setPostalInputValidation(false);
+      return;
+    } else if (countryInputRef.current.value.trim() === '') {
+      setCountryInputValidation(false);
+      return;
+    } else if (clientNameInputRef.current.value.trim() === '') {
+      setClientNameInputValidation(false);
+      return;
+    } else if (clientEmailInputRef.current.value.trim() === '') {
+      setClientEmailInputValidation(false);
+      return;
+    } else if (invoiceDateInputRef.current.value.trim() === '') {
+      setInvoiceDateInputValidation(false);
+      return;
+    } else if (paymentTermsInputRef.current.value.trim() === '') {
+      setPaymentTermsInputValidation(false);
+      return;
+    } else if (descriptionInputRef.current.value.trim() === '') {
+      setDescriptionInputValidation(false);
+      return;
+    } else {
+      setStreetInputValidation(true);
+      setCityInputValidation(true);
+      setPostalInputValidation(true);
+      setCountryInputValidation(true);
+      setClientNameInputValidation(true);
+      setClientEmailInputValidation(true);
+      setInvoiceDateInputValidation(true);
+      setPaymentTermsInputValidation(true);
+      setDescriptionInputValidation(true);
+
+      const data = {
+        id: invoiceData.id,
+        street: streetInputRef.current.value,
+        city: cityInputRef.current.value,
+        postal: postalInputRef.current.value,
+        country: countryInputRef.current.value,
+        clientName: clientNameInputRef.current.value,
+        clientEmail: clientEmailInputRef.current.value,
+        clientStreet: clientStreetInputRef.current.value,
+        clientCity: clientCityInputRef.current.value,
+        clientPostal: clientPostalInputRef.current.value,
+        clientCountry: clientCountryInputRef.current.value,
+        paymentTerms: paymentTermsInputRef.current.value,
+        description: descriptionInputRef.current.value,
+        items: items.map(item => ({
+          itemName: item.itemName,
+          quantity: item.quantity,
+          price: item.price,
+          total: Number(item.price) * Number(item.quantity).toFixed(2),
+        })),
+      };
+
+      updateInvoice(data);
+    }
   }
 
   return (
@@ -93,59 +190,144 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
         <h4 className="text-brightPurple">Bill From</h4>
         <label
           htmlFor="address"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !streetInputValidation && streetInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          }font-light flex flex-col`}
         >
-          Street Address
+          <div className="flex justify-between">
+            Street Address
+            {!streetInputValidation && streetInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !streetInputValidation && streetInputTouched
+                ? 'border-deleteBtn'
+                : ''
+            }`}
             ref={streetInputRef}
             defaultValue={invoiceData.street}
+            onBlur={e =>
+              inputBlurHandler(
+                setStreetInputTouched,
+                streetInputRef,
+                setStreetInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setStreetInputValidation)}
           />
         </label>
 
         <div className="flex gap-6">
           <label
             htmlFor="city"
-            className="font-light text-grayPurple flex flex-col"
+            className={`${
+              !cityInputValidation && cityInputTouched
+                ? 'text-deleteBtn'
+                : 'text-grayPurple'
+            } font-lightflex flex-col`}
           >
-            City
+            <div className="flex justify-between">
+              City
+              {!cityInputValidation && cityInputTouched && (
+                <p className="text-deleteBtn font-medium">can't be empty</p>
+              )}
+            </div>
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !cityInputValidation && cityInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
+              }`}
               ref={cityInputRef}
               defaultValue={invoiceData.city}
+              onBlur={e =>
+                inputBlurHandler(
+                  setCityInputTouched,
+                  cityInputRef,
+                  setCityInputValidation
+                )
+              }
+              onChange={e => changeHandler(e, setCityInputValidation)}
             />
           </label>
 
           <label
             htmlFor="postal-code"
-            className="font-light text-grayPurple flex flex-col"
+            className={`${
+              !postalInputValidation && postalInputTouched
+                ? 'text-deleteBtn'
+                : 'text-grayPurple'
+            } font-light flex flex-col`}
           >
-            Postal Code
+            <div className="flex justify-between">
+              Postal Code
+              {!postalInputValidation && postalInputTouched && (
+                <p className="text-deleteBtn font-medium">can't be empty</p>
+              )}
+            </div>
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !postalInputValidation && postalInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
+              }`}
               ref={postalInputRef}
               defaultValue={invoiceData.postal}
+              onBlur={e =>
+                inputBlurHandler(
+                  setPostalInputTouched,
+                  postalInputRef,
+                  setPostalInputValidation
+                )
+              }
+              Postal
+              onChange={e => changeHandler(e, setPostalInputValidation)}
             />
           </label>
         </div>
 
         <label
           htmlFor="country"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !countryInputValidation && countryInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          } font-light flex flex-col`}
         >
-          Country
+          <div className="flex justify-between">
+            Country
+            {!countryInputValidation && countryInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !countryInputValidation && countryInputTouched
+                ? 'border-deleteBtn'
+                : ''
+            }`}
             ref={countryInputRef}
             defaultValue={invoiceData.country}
+            onBlur={e =>
+              inputBlurHandler(
+                setCountryInputTouched,
+                countryInputRef,
+                setCountryInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setCountryInputValidation)}
           />
         </label>
       </section>
@@ -154,29 +336,71 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
         <h4 className="text-brightPurple">Bill To</h4>
         <label
           htmlFor="name"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !clientNameInputValidation && clientNameInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          } font-light flex flex-col`}
         >
-          Client's Name
+          <div className="flex justify-between">
+            Client's Name
+            {!clientNameInputValidation && clientNameInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <input
             type="text"
             id="name"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !clientNameInputValidation && clientNameInputTouched
+                ? 'border-deleteBtn'
+                : ''
+            }`}
             ref={clientNameInputRef}
             defaultValue={invoiceData.clientName}
+            onBlur={e =>
+              inputBlurHandler(
+                setClientNameInputTouched,
+                clientNameInputRef,
+                setClientNameInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setClientNameInputValidation)}
           />
         </label>
 
         <label
           htmlFor="email"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !clientEmailInputValidation && clientEmailInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          } font-light flex flex-col`}
         >
-          Client's Email
+          <div className="flex justify-between">
+            Client's Email
+            {!clientEmailInputValidation && clientEmailInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <input
             type="email"
             id="email"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !clientEmailInputValidation && clientEmailInputTouched
+                ? 'border-deleteBtn'
+                : ''
+            }`}
             ref={clientEmailInputRef}
             defaultValue={invoiceData.clientEmail}
+            onBlur={e =>
+              inputBlurHandler(
+                setClientEmailInputTouched,
+                clientEmailInputRef,
+                setClientEmailInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setClientEmailInputValidation)}
           />
         </label>
 
@@ -254,15 +478,36 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
 
         <label
           htmlFor="terms"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !paymentTermsInputValidation && paymentTermsInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          } font-light flex flex-col`}
         >
-          Payment Terms
+          <div className="flex justify-between">
+            Payment Terms
+            {!paymentTermsInputValidation && paymentTermsInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[31px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
             <select
               id="terms"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+                !paymentTermsInputValidation && paymentTermsInputTouched
+                  ? 'border-deleteBtn'
+                  : ''
+              }`}
               ref={paymentTermsInputRef}
               defaultValue={invoiceData.paymentTerms}
+              onBlur={e =>
+                inputBlurHandler(
+                  setPaymentTermsInputTouched,
+                  paymentTermsInputRef,
+                  setPaymentTermsInputValidation
+                )
+              }
+              onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
             >
               <option>Net 1 Day</option>
               <option>Net 7 Days</option>
@@ -274,15 +519,36 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
 
         <label
           htmlFor="desc"
-          className="font-light text-grayPurple flex flex-col"
+          className={`${
+            !descriptionInputValidation && descriptionInputTouched
+              ? 'text-deleteBtn'
+              : 'text-grayPurple'
+          } font-light flex flex-col`}
         >
-          Project Description
+          <div className="flex justify-between">
+            Project Description
+            {!descriptionInputValidation && descriptionInputTouched && (
+              <p className="text-deleteBtn font-medium">can't be empty</p>
+            )}
+          </div>
           <input
             type="text"
             id="desc"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              !descriptionInputValidation && descriptionInputTouched
+                ? 'border-deleteBtn'
+                : ''
+            }`}
             ref={descriptionInputRef}
             defaultValue={invoiceData.description}
+            onBlur={e =>
+              inputBlurHandler(
+                setDescriptionInputTouched,
+                descriptionInputRef,
+                setDescriptionInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setDescriptionInputValidation)}
           />
         </label>
       </section>
