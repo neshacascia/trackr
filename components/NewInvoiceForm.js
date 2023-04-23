@@ -96,6 +96,21 @@ export default function NewInvoiceForm({ addInvoice }) {
     setItems(items.filter(item => item.id !== id));
   }
 
+  function inputBlurHandler(setInputTouched, inputRef, setInputValidation) {
+    setInputTouched(true);
+
+    if (inputRef.current.value.trim() === '') {
+      setInputValidation(false);
+      return;
+    }
+  }
+
+  function changeHandler(e, setInputValidation) {
+    if (e.target.value.trim() !== '') {
+      setInputValidation(true);
+    }
+  }
+
   function saveAsDraftHandler(e) {
     e.preventDefault();
 
@@ -230,6 +245,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={streetInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setStreetInputTouched,
+                streetInputRef,
+                setStreetInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setStreetInputValidation)}
           />
         </label>
 
@@ -257,6 +280,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                   : ''
               }`}
               ref={cityInputRef}
+              onBlur={e =>
+                inputBlurHandler(
+                  setCityInputTouched,
+                  cityInputRef,
+                  setCityInputValidation
+                )
+              }
+              onChange={e => changeHandler(e, setCityInputValidation)}
             />
           </label>
 
@@ -283,6 +314,15 @@ export default function NewInvoiceForm({ addInvoice }) {
                   : ''
               }`}
               ref={postalInputRef}
+              onBlur={e =>
+                inputBlurHandler(
+                  setPostalInputTouched,
+                  postalInputRef,
+                  setPostalInputValidation
+                )
+              }
+              Postal
+              onChange={e => changeHandler(e, setPostalInputValidation)}
             />
           </label>
         </div>
@@ -310,6 +350,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={countryInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setCountryInputTouched,
+                countryInputRef,
+                setCountryInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setCountryInputValidation)}
           />
         </label>
       </section>
@@ -339,6 +387,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={clientNameInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setClientNameInputTouched,
+                clientNameInputRef,
+                setClientNameInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setClientNameInputValidation)}
           />
         </label>
 
@@ -365,6 +421,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={clientEmailInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setClientEmailInputTouched,
+                clientEmailInputRef,
+                setClientEmailInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setClientEmailInputValidation)}
           />
         </label>
 
@@ -445,6 +509,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={invoiceDateInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setInvoiceDateInputTouched,
+                invoiceDateInputRef,
+                setInvoiceDateInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setInvoiceDateInputValidation)}
           />
         </label>
 
@@ -471,6 +543,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                   : ''
               }`}
               ref={paymentTermsInputRef}
+              onBlur={e =>
+                inputBlurHandler(
+                  setPaymentTermsInputTouched,
+                  paymentTermsInputRef,
+                  setPaymentTermsInputValidation
+                )
+              }
+              onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
             >
               <option>Net 1 Day</option>
               <option>Net 7 Days</option>
@@ -503,6 +583,14 @@ export default function NewInvoiceForm({ addInvoice }) {
                 : ''
             }`}
             ref={descriptionInputRef}
+            onBlur={e =>
+              inputBlurHandler(
+                setDescriptionInputTouched,
+                descriptionInputRef,
+                setDescriptionInputValidation
+              )
+            }
+            onChange={e => changeHandler(e, setDescriptionInputValidation)}
           />
         </label>
       </section>
