@@ -36,6 +36,15 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     useState(false);
   const [descriptionInputTouched, setDescriptionInputTouched] = useState(false);
 
+  const [itemNameInputValidation, setItemNameInputValidation] = useState(false);
+  const [itemNameInputTouched, setItemNameInputTouched] = useState(false);
+
+  const [quantityInputValidation, setQuantityInputValidation] = useState(false);
+  const [quantityInputTouched, setQuantityInputTouched] = useState(false);
+
+  const [priceInputValidation, setPriceInputValidation] = useState(false);
+  const [priceInputTouched, setPriceInputTouched] = useState(false);
+
   const streetInputRef = useRef();
   const cityInputRef = useRef();
   const postalInputRef = useRef();
@@ -91,7 +100,10 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   function inputBlurHandler(setInputTouched, inputRef, setInputValidation) {
     setInputTouched(true);
 
-    if (inputRef.current.value.trim() === '') {
+    if (typeof inputRef === 'number' && inputRef === '') {
+      setInputValidation(false);
+      return;
+    } else if (inputRef.current.value.trim() === '') {
       setInputValidation(false);
       return;
     }
@@ -101,6 +113,15 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     if (e.target.value.trim() !== '') {
       setInputValidation(true);
     }
+  }
+
+  function itemChangeHandler(id, key, value, setInputValidation) {
+    if (typeof value === 'number') {
+      setInputValidation(true);
+    } else if (value.trim() !== '') {
+      setInputValidation(true);
+    }
+    updateItemValue(id, key, value);
   }
 
   function submitHandler(e) {
@@ -114,6 +135,9 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     setClientEmailInputTouched(true);
     setPaymentTermsInputTouched(true);
     setDescriptionInputTouched(true);
+    setItemNameInputTouched(true);
+    setQuantityInputTouched(true);
+    setPriceInputTouched(true);
 
     if (streetInputRef.current.value.trim() === '') {
       setStreetInputValidation(false);
@@ -139,6 +163,15 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
     } else if (descriptionInputRef.current.value.trim() === '') {
       setDescriptionInputValidation(false);
       return;
+    } else if (itemNameInputRef.current.value.trim() === '') {
+      setItemNameInputValidation(false);
+      return;
+    } else if (quantityInputRef.current.value.trim() === '') {
+      setQuantityInputValidation(false);
+      return;
+    } else if (priceInputRef.current.value.trim() === '') {
+      setPriceInputValidation(false);
+      return;
     } else {
       setStreetInputValidation(true);
       setCityInputValidation(true);
@@ -148,6 +181,9 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       setClientEmailInputValidation(true);
       setPaymentTermsInputValidation(true);
       setDescriptionInputValidation(true);
+      setItemNameInputValidation(true);
+      setQuantityInputValidation(true);
+      setPriceInputValidation(true);
 
       const data = {
         id: invoiceData.id,
@@ -552,9 +588,18 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <div key={ind} className="w-full mb-12">
             <label
               htmlFor={`item-${item.id}`}
-              className="font-light text-grayPurple flex flex-col"
+              className={`${
+                !itemNameInputValidation && itemNameInputTouched
+                  ? 'text-deleteBtn'
+                  : 'text-grayPurple'
+              } font-light flex flex-col`}
             >
-              Item Name
+              <div className="flex justify-between">
+                Item Name
+                {!itemNameInputValidation && itemNameInputTouched && (
+                  <p className="text-deleteBtn">can't be empty</p>
+                )}
+              </div>
               <input
                 type="text"
                 id={`item-${item.id}`}
@@ -562,19 +607,44 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                 ref={itemNameInputRef}
                 value={item.itemName}
                 defaultValue={invoiceData.itemName}
-                onChange={e =>
-                  updateItemValue(item.id, 'itemName', e.target.value)
+                className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !itemNameInputValidation && itemNameInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setItemNameInputTouched,
+                    itemNameInputRef,
+                    setItemNameInputValidation
+                  )
                 }
-                className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+                onChange={e =>
+                  itemChangeHandler(
+                    item.id,
+                    'itemName',
+                    e.target.value,
+                    setItemNameInputValidation
+                  )
+                }
               />
             </label>
 
             <div className="flex justify-between mt-6">
               <label
                 htmlFor={`qty-${item.id}`}
-                className="font-light text-grayPurple w-[64px] flex flex-col"
+                className={`${
+                  !quantityInputValidation && quantityInputTouched
+                    ? 'text-deleteBtn'
+                    : 'text-grayPurple'
+                } font-light w-[64px] flex flex-col`}
               >
-                Qty.
+                <div className="flex flex-col">
+                  Qty.
+                  {!quantityInputValidation && quantityInputTouched && (
+                    <p className="text-deleteBtn">can't be empty</p>
+                  )}
+                </div>
                 <input
                   type="number"
                   id={`qty-${item.id}`}
@@ -583,18 +653,43 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   ref={quantityInputRef}
                   value={item.quantity}
                   defaultValue={invoiceData.quantity}
-                  onChange={e =>
-                    updateItemValue(item.id, 'quantity', Number(e.target.value))
+                  className={`text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                    !quantityInputValidation && quantityInputTouched
+                      ? 'border-deleteBtn'
+                      : ''
+                  }`}
+                  onBlur={e =>
+                    inputBlurHandler(
+                      setQuantityInputTouched,
+                      quantityInputRef,
+                      setQuantityInputValidation
+                    )
                   }
-                  className="text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+                  onChange={e =>
+                    itemChangeHandler(
+                      item.id,
+                      'quantity',
+                      Number(e.target.value),
+                      setQuantityInputValidation
+                    )
+                  }
                 />
               </label>
 
               <label
                 htmlFor="price"
-                className="font-light text-grayPurple w-[100px] flex flex-col"
+                className={`${
+                  !priceInputValidation && priceInputTouched
+                    ? 'text-deleteBtn'
+                    : 'text-grayPurple'
+                } font-light w-[100px] flex flex-col`}
               >
-                Price
+                <div className="flex flex-col">
+                  Price
+                  {!priceInputValidation && priceInputTouched && (
+                    <p className="text-deleteBtn">can't be empty</p>
+                  )}
+                </div>
                 <input
                   type="number"
                   id={`price-${item.id}`}
@@ -603,10 +698,26 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   ref={priceInputRef}
                   value={item.price}
                   defaultValue={invoiceData.price}
-                  onChange={e =>
-                    updateItemValue(item.id, 'price', Number(e.target.value))
+                  className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                    !priceInputValidation && priceInputTouched
+                      ? 'border-deleteBtn'
+                      : ''
+                  }`}
+                  onBlur={e =>
+                    inputBlurHandler(
+                      setPriceInputTouched,
+                      priceInputRef,
+                      setPriceInputValidation
+                    )
                   }
-                  className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+                  onChange={e =>
+                    itemChangeHandler(
+                      item.id,
+                      'price',
+                      Number(e.target.value),
+                      setPriceInputValidation
+                    )
+                  }
                 />
               </label>
 
