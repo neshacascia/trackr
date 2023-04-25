@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -46,6 +49,8 @@ export default function PaymentDetail({ data }) {
   function editInvoiceHandler() {
     router.push(`/edit/${data.id}`);
   }
+
+  const [deleteInvoice, setDeleteInvoice] = useState(false);
 
   async function deleteInvoiceHandler() {
     const res = await fetch('/api/update-invoice', {
@@ -199,7 +204,7 @@ export default function PaymentDetail({ data }) {
         </button>
         <button
           type="button"
-          onClick={deleteInvoiceHandler}
+          onClick={() => setDeleteInvoice(true)}
           className="text-white bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverRed"
         >
           Delete
@@ -221,6 +226,12 @@ export default function PaymentDetail({ data }) {
           </button>
         )}
       </footer>
+      <DeleteConfirmationModal
+        deleteInvoice={deleteInvoice}
+        id={data.id}
+        setDeleteInvoice={setDeleteInvoice}
+        deleteInvoiceHandler={deleteInvoiceHandler}
+      />
     </>
   );
 }
