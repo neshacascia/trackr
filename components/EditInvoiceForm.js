@@ -257,7 +257,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
               !cityInputValidation && cityInputTouched
                 ? 'text-deleteBtn'
                 : 'text-grayPurple'
-            } font-lightflex flex-col`}
+            } font-light flex flex-col`}
           >
             <div className="flex justify-between">
               City
