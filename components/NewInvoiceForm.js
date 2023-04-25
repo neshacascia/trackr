@@ -364,7 +364,6 @@ export default function NewInvoiceForm({ addInvoice }) {
                   setPostalInputValidation
                 )
               }
-              Postal
               onChange={e => changeHandler(e, setPostalInputValidation)}
             />
           </label>

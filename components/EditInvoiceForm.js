@@ -281,7 +281,6 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   setPostalInputValidation
                 )
               }
-              Postal
               onChange={e => changeHandler(e, setPostalInputValidation)}
             />
           </label>
