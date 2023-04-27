@@ -6,9 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function MobileMenuModal() {
-  const { toggleMenu } = useContext(Context);
-
-  console.log(toggleMenu);
+  const { toggleMenu, closeMobileMenu } = useContext(Context);
 
   return (
     <>
@@ -17,6 +15,7 @@ export default function MobileMenuModal() {
           <div className="text-white bg-mainPurple w-[60%] h-screen flex flex-col justify-center items-center">
             <FontAwesomeIcon
               icon={faXmark}
+              onClick={closeMobileMenu}
               className="text-xl absolute right-[45%] top-[5%]"
             ></FontAwesomeIcon>
 

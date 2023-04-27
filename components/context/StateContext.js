@@ -9,8 +9,12 @@ function ContextProvider(props) {
     setToggleMenu(true);
   }
 
+  function closeMobileMenu() {
+    setToggleMenu(false);
+  }
+
   return (
-    <Context.Provider value={{ toggleMenu, openMobileMenu }}>
+    <Context.Provider value={{ toggleMenu, openMobileMenu, closeMobileMenu }}>
       {props.children}
     </Context.Provider>
   );
