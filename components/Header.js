@@ -31,13 +31,11 @@ export default function Header({ title, invoices }) {
         </p>
       </div>
 
-      <div className="flex items-center gap-3 mr-5">
-        <label
-          onClick={() => setDisplayFilters(prevState => !prevState)}
-          className="font-medium"
-        >
-          Filter
-        </label>
+      <div
+        onClick={() => setDisplayFilters(prevState => !prevState)}
+        className="flex items-center gap-3 mr-5 hover:cursor-pointer"
+      >
+        <label className="font-medium hover:cursor-pointer">Filter</label>
         {displayFilters ? (
           <FontAwesomeIcon
             icon={faAngleUp}
