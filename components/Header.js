@@ -35,7 +35,9 @@ export default function Header({ title, invoices }) {
         onClick={() => setDisplayFilters(prevState => !prevState)}
         className="flex items-center gap-3 mr-5 hover:cursor-pointer"
       >
-        <label className="font-medium hover:cursor-pointer">Filter</label>
+        <label className="font-medium hover:cursor-pointer hover:text-grayPurple">
+          Filter
+        </label>
         {displayFilters ? (
           <FontAwesomeIcon
             icon={faAngleUp}
