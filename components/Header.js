@@ -16,8 +16,6 @@ export default function Header({ title, invoices }) {
 
   const { setFilterInvoices } = useContext(Context);
 
-  function filterInvoices() {}
-
   return (
     <header className="w-screen h-11 flex items-center px-6">
       <div className="mr-auto">
@@ -31,24 +29,26 @@ export default function Header({ title, invoices }) {
         </p>
       </div>
 
-      <div
-        onClick={() => setDisplayFilters(prevState => !prevState)}
-        className="flex items-center gap-3 mr-5 hover:cursor-pointer"
-      >
-        <label className="font-medium hover:cursor-pointer hover:text-grayPurple">
-          Filter
-        </label>
-        {displayFilters ? (
-          <FontAwesomeIcon
-            icon={faAngleUp}
-            className="text-brightPurple"
-          ></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon
-            icon={faAngleDown}
-            className="text-brightPurple"
-          ></FontAwesomeIcon>
-        )}
+      <div className="flex items-center gap-3 mr-5 hover:cursor-pointer">
+        <div
+          onClick={() => setDisplayFilters(prevState => !prevState)}
+          className="flex items-center gap-3"
+        >
+          <label className="font-medium hover:cursor-pointer hover:text-grayPurple">
+            Filter
+          </label>
+          {displayFilters ? (
+            <FontAwesomeIcon
+              icon={faAngleUp}
+              className="text-brightPurple"
+            ></FontAwesomeIcon>
+          ) : (
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              className="text-brightPurple"
+            ></FontAwesomeIcon>
+          )}
+        </div>
 
         {displayFilters && (
           <div className="bg-borderPurple w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6">
@@ -60,6 +60,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="draft"
                 value="Draft"
+                onClick={e => setFilterInvoices(e.target.value)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
@@ -74,6 +75,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="pending"
                 value="Pending"
+                onClick={e => setFilterInvoices(e.target.value)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
@@ -88,6 +90,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="paid"
                 value="Paid"
+                onClick={e => setFilterInvoices(e.target.value)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
