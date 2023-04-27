@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="bg-nav bg-no-repeat w-20 h-full">
         <FontAwesomeIcon
           icon={faBars}
-          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer"
+          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
           onClick={openMobileMenu}
         ></FontAwesomeIcon>
       </div>
@@ -24,17 +24,26 @@ export default function Navbar() {
 
       <ul className="hidden md:flex mr-auto gap-10">
         <li>
-          <Link href="/" className="text-lg font-normal tracking-wide">
+          <Link
+            href="/"
+            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+          >
             home
           </Link>
         </li>
         <li>
-          <Link href="/invoices" className="text-lg font-normal tracking-wide">
+          <Link
+            href="/invoices"
+            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+          >
             invoices
           </Link>
         </li>
         <li>
-          <Link href="/expenses" className="text-lg font-normal tracking-wide">
+          <Link
+            href="/expenses"
+            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+          >
             expenses
           </Link>
         </li>

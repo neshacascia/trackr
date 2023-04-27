@@ -16,22 +16,34 @@ export default function MobileMenuModal() {
             <FontAwesomeIcon
               icon={faXmark}
               onClick={closeMobileMenu}
-              className="text-xl absolute right-[45%] top-[5%] cursor-pointer"
+              className="text-xl absolute right-[45%] top-[5%] cursor-pointer hover:text-grayPurple"
             ></FontAwesomeIcon>
 
             <ul className="text-2xl flex flex-col gap-6">
               <li>
-                <Link href="/" onClick={closeMobileMenu}>
+                <Link
+                  href="/"
+                  onClick={closeMobileMenu}
+                  className="hover:text-grayPurple"
+                >
                   home
                 </Link>
               </li>
               <li>
-                <Link href="/invoices" onClick={closeMobileMenu}>
+                <Link
+                  href="/invoices"
+                  onClick={closeMobileMenu}
+                  className="hover:text-grayPurple"
+                >
                   invoices
                 </Link>
               </li>
               <li>
-                <Link href="/expenses" onClick={closeMobileMenu}>
+                <Link
+                  href="/expenses"
+                  onClick={closeMobileMenu}
+                  className="hover:text-grayPurple"
+                >
                   expenses
                 </Link>
               </li>
