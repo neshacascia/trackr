@@ -21,13 +21,19 @@ export default function MobileMenuModal() {
 
             <ul className="text-2xl flex flex-col gap-6">
               <li>
-                <Link href="/">home</Link>
+                <Link href="/" onClick={closeMobileMenu}>
+                  home
+                </Link>
               </li>
               <li>
-                <Link href="/invoices">invoices</Link>
+                <Link href="/invoices" onClick={closeMobileMenu}>
+                  invoices
+                </Link>
               </li>
               <li>
-                <Link href="/expenses">expenses</Link>
+                <Link href="/expenses" onClick={closeMobileMenu}>
+                  expenses
+                </Link>
               </li>
             </ul>
           </div>
