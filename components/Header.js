@@ -3,7 +3,11 @@ import { useContext, useState } from 'react';
 import { Context } from './context/StateContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faAngleDown,
+  faAngleUp,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Header({ title, invoices }) {
   const router = useRouter();
@@ -28,14 +32,23 @@ export default function Header({ title, invoices }) {
       </div>
 
       <div className="flex items-center gap-3 mr-5">
-        <label onClick={() => setDisplayFilters(true)} className="font-medium">
+        <label
+          onClick={() => setDisplayFilters(prevState => !prevState)}
+          className="font-medium"
+        >
           Filter
         </label>
-
-        <FontAwesomeIcon
-          icon={faAngleDown}
-          className="text-brightPurple"
-        ></FontAwesomeIcon>
+        {displayFilters ? (
+          <FontAwesomeIcon
+            icon={faAngleUp}
+            className="text-brightPurple"
+          ></FontAwesomeIcon>
+        ) : (
+          <FontAwesomeIcon
+            icon={faAngleDown}
+            className="text-brightPurple"
+          ></FontAwesomeIcon>
+        )}
 
         {displayFilters && (
           <div className="bg-borderPurple w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6">
