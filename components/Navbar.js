@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="bg-nav bg-no-repeat w-20 h-full">
         <FontAwesomeIcon
           icon={faBars}
-          className="text-white text-2xl pl-5 py-[22px] md:hidden"
+          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer"
           onClick={openMobileMenu}
         ></FontAwesomeIcon>
       </div>

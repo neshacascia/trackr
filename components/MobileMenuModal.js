@@ -16,7 +16,7 @@ export default function MobileMenuModal() {
             <FontAwesomeIcon
               icon={faXmark}
               onClick={closeMobileMenu}
-              className="text-xl absolute right-[45%] top-[5%]"
+              className="text-xl absolute right-[45%] top-[5%] cursor-pointer"
             ></FontAwesomeIcon>
 
             <ul className="text-2xl flex flex-col gap-6">
