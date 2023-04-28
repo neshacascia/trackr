@@ -347,6 +347,7 @@ export default function PaymentDetail({ data }) {
         id={data.id}
         setDeleteInvoice={setDeleteInvoice}
         deleteInvoiceHandler={deleteInvoiceHandler}
+        isDarkMode={isDarkMode}
       />
     </>
   );

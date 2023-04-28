@@ -1,5 +1,6 @@
 export default function DeleteConfirmationModal({
   id,
+  isDarkMode,
   deleteInvoice,
   setDeleteInvoice,
   deleteInvoiceHandler,
@@ -12,9 +13,17 @@ export default function DeleteConfirmationModal({
     <>
       {deleteInvoice && (
         <div className="bg-[rgba(0,0,0,0.4)] h-screen flex justify-center items-center fixed inset-0 z-50">
-          <div className="bg-mainPurple flex flex-col rounded-[8px] p-8 mx-6">
+          <div
+            className={`${
+              isDarkMode ? 'bg-mainPurple' : 'bg-white'
+            } flex flex-col rounded-[8px] p-8 mx-6`}
+          >
             <div className="text-left mb-6">
-              <h1 className="text-white text-xl font-bold mb-2">
+              <h1
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } text-xl font-bold mb-2`}
+              >
                 Confirm Deletion
               </h1>
               <p className="text-grayPurple">
@@ -26,7 +35,9 @@ export default function DeleteConfirmationModal({
             <div className="text-white flex place-self-end gap-8 ">
               <button
                 onClick={cancelDeletion}
-                className="bg-borderPurple font-medium w-full rounded-3xl py-4 px-[24px] hover:bg-hoverGrayPurple"
+                className={`${
+                  isDarkMode ? 'bg-borderPurple' : 'text-detailPurple bg-grey'
+                } font-medium w-full rounded-3xl py-4 px-[24px] hover:bg-hoverGrayPurple`}
               >
                 Cancel
               </button>
