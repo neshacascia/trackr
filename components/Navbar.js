@@ -3,10 +3,10 @@ import { Context } from './context/StateContext';
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { openMobileMenu } = useContext(Context);
+  const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
 
   return (
     <nav className="text-white bg-mainPurple h-[72px] flex items-center">
@@ -49,10 +49,19 @@ export default function Navbar() {
         </li>
       </ul>
 
-      <FontAwesomeIcon
-        icon={faSun}
-        className="text-lightPurple text-lg"
-      ></FontAwesomeIcon>
+      {isDarkMode ? (
+        <FontAwesomeIcon
+          icon={faSun}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg"
+        ></FontAwesomeIcon>
+      ) : (
+        <FontAwesomeIcon
+          icon={faMoon}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg"
+        ></FontAwesomeIcon>
+      )}
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
