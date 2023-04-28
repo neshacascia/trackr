@@ -14,7 +14,17 @@ export default function Header({ title, invoices }) {
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
-  const { setFilterInvoices } = useContext(Context);
+  const { filterInvoices, setFilterInvoices } = useContext(Context);
+
+  function filterInvoicesHandler(e) {
+    if (!filterInvoices.includes(e.target.value)) {
+      setFilterInvoices(prevState => [...prevState, e.target.value]);
+    } else {
+      setFilterInvoices(prevState =>
+        prevState.filter(item => item !== e.target.value)
+      );
+    }
+  }
 
   return (
     <header className="w-screen h-11 flex items-center px-6">
@@ -60,7 +70,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="draft"
                 value="Draft"
-                onClick={e => setFilterInvoices(e.target.value)}
+                onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
@@ -75,7 +85,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="pending"
                 value="Pending"
-                onClick={e => setFilterInvoices(e.target.value)}
+                onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
@@ -90,7 +100,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="paid"
                 value="Paid"
-                onClick={e => setFilterInvoices(e.target.value)}
+                onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
