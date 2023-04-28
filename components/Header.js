@@ -14,7 +14,7 @@ export default function Header({ title, invoices }) {
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
-  const { filterInvoices, setFilterInvoices } = useContext(Context);
+  const { isDarkMode, filterInvoices, setFilterInvoices } = useContext(Context);
 
   function filterInvoicesHandler(e) {
     if (!filterInvoices.includes(e.target.value)) {
@@ -30,7 +30,11 @@ export default function Header({ title, invoices }) {
     <header className="w-screen h-11 flex items-center px-6">
       <div className="mr-auto">
         <h2 className="text-2xl font-medium">{title}</h2>
-        <p className="font-light">
+        <p
+          className={`${
+            isDarkMode ? 'text-white' : 'text-grayPurple'
+          } font-light`}
+        >
           {invoices.length === 0
             ? 'No ' + title.toLowerCase()
             : invoices.length === 1
@@ -118,7 +122,7 @@ export default function Header({ title, invoices }) {
           icon={faPlus}
           className="text-brightPurple bg-white rounded-full p-2"
         ></FontAwesomeIcon>
-        <span className="pt-[1px] pr-2.5">New</span>
+        <span className="text-white pt-[1px] pr-2.5">New</span>
       </button>
     </header>
   );
