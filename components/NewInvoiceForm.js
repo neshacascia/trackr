@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
+import { useState, useRef, useContext } from 'react';
+import { Context } from './context/StateContext';
 import FormFooter from './FormFooter';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +8,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function NewInvoiceForm({ addInvoice }) {
   const router = useRouter();
+
+  const { isDarkMode } = useContext(Context);
 
   const [streetInputValidation, setStreetInputValidation] = useState(false);
   const [streetInputTouched, setStreetInputTouched] = useState(false);
@@ -270,7 +273,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !streetInputValidation && streetInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -282,7 +287,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="address"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !streetInputValidation && streetInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -305,7 +314,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             className={`${
               !cityInputValidation && cityInputTouched
                 ? 'text-deleteBtn'
-                : 'text-grayPurple'
+                : isDarkMode
+                ? 'text-grayPurple'
+                : 'text-detailPurple'
             } font-light flex flex-col`}
           >
             <div className="flex justify-between">
@@ -317,7 +328,11 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="city"
-              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !cityInputValidation && cityInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -339,7 +354,9 @@ export default function NewInvoiceForm({ addInvoice }) {
             className={`${
               !postalInputValidation && postalInputTouched
                 ? 'text-deleteBtn'
-                : 'text-grayPurple'
+                : isDarkMode
+                ? 'text-grayPurple'
+                : 'text-detailPurple'
             } font-light flex flex-col`}
           >
             <div className="flex justify-between">
@@ -351,7 +368,11 @@ export default function NewInvoiceForm({ addInvoice }) {
             <input
               type="text"
               id="postal-code"
-              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !postalInputValidation && postalInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -374,7 +395,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !countryInputValidation && countryInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -386,7 +409,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="country"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !countryInputValidation && countryInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -411,7 +438,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !clientNameInputValidation && clientNameInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -423,7 +452,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="name"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !clientNameInputValidation && clientNameInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -445,7 +478,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !clientEmailInputValidation && clientEmailInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -457,7 +492,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="email"
             id="email"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !clientEmailInputValidation && clientEmailInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -476,13 +515,19 @@ export default function NewInvoiceForm({ addInvoice }) {
 
         <label
           htmlFor="address"
-          className="font-light text-grayPurple flex flex-col"
+          className={`font-light ${
+            isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+          } flex flex-col`}
         >
           Street Address
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
             ref={clientStreetInputRef}
           />
         </label>
@@ -490,26 +535,38 @@ export default function NewInvoiceForm({ addInvoice }) {
         <div className="flex gap-6">
           <label
             htmlFor="city"
-            className="font-light text-grayPurple flex flex-col"
+            className={`font-light ${
+              isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+            } flex flex-col`}
           >
             City
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
               ref={clientCityInputRef}
             />
           </label>
 
           <label
             htmlFor="postal-code"
-            className="font-light text-grayPurple flex flex-col"
+            className={`font-light ${
+              isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+            } flex flex-col`}
           >
             Postal Code
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
               ref={clientPostalInputRef}
             />
           </label>
@@ -517,13 +574,19 @@ export default function NewInvoiceForm({ addInvoice }) {
 
         <label
           htmlFor="country"
-          className="font-light text-grayPurple flex flex-col"
+          className={`font-light ${
+            isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+          } flex flex-col`}
         >
           Country
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
             ref={clientCountryInputRef}
           />
         </label>
@@ -533,7 +596,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !invoiceDateInputValidation && invoiceDateInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -545,7 +610,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="date"
             id="invoice-date"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
               !invoiceDateInputValidation && invoiceDateInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -567,7 +636,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !paymentTermsInputValidation && paymentTermsInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -579,7 +650,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[28px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
             <select
               id="terms"
-              className={`text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } text-base font-medium w-full border-[1px] rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
                 !paymentTermsInputValidation && paymentTermsInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -607,7 +682,9 @@ export default function NewInvoiceForm({ addInvoice }) {
           className={`${
             !descriptionInputValidation && descriptionInputTouched
               ? 'text-deleteBtn'
-              : 'text-grayPurple'
+              : isDarkMode
+              ? 'text-grayPurple'
+              : 'text-detailPurple'
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
@@ -619,7 +696,11 @@ export default function NewInvoiceForm({ addInvoice }) {
           <input
             type="text"
             id="desc"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !descriptionInputValidation && descriptionInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -649,7 +730,9 @@ export default function NewInvoiceForm({ addInvoice }) {
               className={`${
                 !itemNameInputValidation && itemNameInputTouched
                   ? 'text-deleteBtn'
-                  : 'text-grayPurple'
+                  : isDarkMode
+                  ? 'text-grayPurple'
+                  : 'text-detailPurple'
               } font-light flex flex-col`}
             >
               <div className="flex justify-between">
@@ -664,7 +747,11 @@ export default function NewInvoiceForm({ addInvoice }) {
                 name="itemName"
                 ref={itemNameInputRef}
                 value={item.itemName}
-                className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                   !itemNameInputValidation && itemNameInputTouched
                     ? 'border-deleteBtn'
                     : ''
@@ -693,7 +780,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                 className={`${
                   !quantityInputValidation && quantityInputTouched
                     ? 'text-deleteBtn'
-                    : 'text-grayPurple'
+                    : isDarkMode
+                    ? 'text-grayPurple'
+                    : 'text-detailPurple'
                 } font-light w-[64px] flex flex-col`}
               >
                 <div className="flex flex-col">
@@ -709,7 +798,11 @@ export default function NewInvoiceForm({ addInvoice }) {
                   placeholder="0"
                   ref={quantityInputRef}
                   value={item.quantity}
-                  className={`text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  className={`${
+                    isDarkMode
+                      ? 'text-white bg-mainPurple border-borderPurple'
+                      : 'text-lightText bg-white border-draft'
+                  } font-medium w-[100%] border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                     !quantityInputValidation && quantityInputTouched
                       ? 'border-deleteBtn'
                       : ''
@@ -737,7 +830,9 @@ export default function NewInvoiceForm({ addInvoice }) {
                 className={`${
                   !priceInputValidation && priceInputTouched
                     ? 'text-deleteBtn'
-                    : 'text-grayPurple'
+                    : isDarkMode
+                    ? 'text-grayPurple'
+                    : 'text-detailPurple'
                 } font-light w-[100px] flex flex-col`}
               >
                 <div className="flex flex-col">
@@ -753,7 +848,11 @@ export default function NewInvoiceForm({ addInvoice }) {
                   placeholder="0"
                   ref={priceInputRef}
                   value={item.price}
-                  className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  className={`${
+                    isDarkMode
+                      ? 'text-white bg-mainPurple border-borderPurple'
+                      : 'text-lightText bg-white border-draft'
+                  } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                     !priceInputValidation && priceInputTouched
                       ? 'border-deleteBtn'
                       : ''
@@ -776,7 +875,11 @@ export default function NewInvoiceForm({ addInvoice }) {
                 />
               </label>
 
-              <label className="font-light text-grayPurple flex flex-col">
+              <label
+                className={`font-light ${
+                  isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+                } flex flex-col`}
+              >
                 Total
                 <div>
                   <input
@@ -805,13 +908,21 @@ export default function NewInvoiceForm({ addInvoice }) {
         <button
           onClick={addNewItem}
           type="button"
-          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft"
+          className={`${
+            isDarkMode
+              ? 'text-grayPurple bg-borderPurple'
+              : 'text-detailPurple bg-grey'
+          } w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft`}
         >
           + Add New Item
         </button>
       </section>
 
-      <FormFooter router={router} saveAsDraftHandler={saveAsDraftHandler} />
+      <FormFooter
+        router={router}
+        saveAsDraftHandler={saveAsDraftHandler}
+        isDarkMode={isDarkMode}
+      />
     </form>
   );
 }

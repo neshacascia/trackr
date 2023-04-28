@@ -1,10 +1,18 @@
-export default function FormFooter({ router, saveAsDraftHandler }) {
+export default function FormFooter({ isDarkMode, router, saveAsDraftHandler }) {
   return (
-    <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6 -mx-6">
+    <footer
+      className={`${
+        isDarkMode ? 'bg-mainPurple' : 'bg-white'
+      } h-[91px] flex items-center gap-2 px-6 -mx-6`}
+    >
       <button
         type="button"
         onClick={() => router.back()}
-        className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px]"
+        className={`${
+          isDarkMode
+            ? 'text-white bg-borderPurple'
+            : 'text-detailPurple bg-grey'
+        } font-medium w-full rounded-3xl py-4 px-[18px]`}
       >
         Discard
       </button>
