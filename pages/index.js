@@ -1,6 +1,10 @@
 import Head from 'next/head';
+import { useContext } from 'react';
+import { Context } from '@/components/context/StateContext';
 
 export default function Home() {
+  const { isDarkMode } = useContext(Context);
+
   return (
     <>
       <Head>
@@ -9,7 +13,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="bg-darkPurple w-screen h-screen"></main>
+      <main
+        className={`${
+          isDarkMode ? 'bg-darkPurple' : 'lightBg'
+        } w-screen h-screen`}
+      ></main>
     </>
   );
 }
