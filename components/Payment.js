@@ -85,7 +85,7 @@ export default function Payment({
           <div>
             <p
               className={`${
-                isDarkMode ? 'text-white' : 'text-detailPurple'
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
               } font-light`}
             >
               Due {formattedDate}
