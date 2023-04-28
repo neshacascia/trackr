@@ -13,7 +13,7 @@ function ContextProvider(props) {
     setToggleMenu(false);
   }
 
-  const [filterInvoices, setFilterInvoices] = useState();
+  const [filterInvoices, setFilterInvoices] = useState([]);
 
   return (
     <Context.Provider
