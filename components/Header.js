@@ -72,7 +72,7 @@ export default function Header({ title, invoices }) {
           >
             <label
               htmlFor="draft"
-              className="block relative pl-9 cursor-pointer"
+              className="font-medium block relative pl-9 cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -91,7 +91,7 @@ export default function Header({ title, invoices }) {
 
             <label
               htmlFor="pending"
-              className="block relative pl-9 cursor-pointer"
+              className="font-medium block relative pl-9 cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -110,7 +110,7 @@ export default function Header({ title, invoices }) {
 
             <label
               htmlFor="paid"
-              className="block relative pl-9 cursor-pointer"
+              className="font-medium block relative pl-9 cursor-pointer"
             >
               <input
                 type="checkbox"
