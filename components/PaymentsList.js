@@ -56,7 +56,7 @@ export default function PaymentsList({ invoices }) {
           </h2>
           <p
             className={`${
-              isDarkMode ? 'lilacPurple' : 'grayPurple'
+              isDarkMode ? 'text-lilacPurple' : 'text-grayPurple'
             } font-light`}
           >
             Create an invoice by clicking the{' '}
