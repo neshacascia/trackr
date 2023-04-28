@@ -1,10 +1,18 @@
 import { MongoClient } from 'mongodb';
+import { useContext } from 'react';
+import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
 
 export default function Invoices(props) {
+  const { isDarkMode } = useContext(Context);
+
   return (
-    <main className="text-white bg-darkPurple font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8">
+    <main
+      className={`${
+        isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
+      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8`}
+    >
       <Header title="Invoices" invoices={props.invoices} />
       <PaymentsList invoices={props.invoices} />
     </main>
@@ -42,6 +50,6 @@ export async function getStaticProps() {
         items: invoice.items,
       })),
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }
