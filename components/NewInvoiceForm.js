@@ -264,7 +264,7 @@ export default function NewInvoiceForm({ addInvoice }) {
   return (
     <form className="text-white" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
-        <h4 className="text-brightPurple">Bill From</h4>
+        <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
           htmlFor="address"
           className={`${
@@ -405,7 +405,7 @@ export default function NewInvoiceForm({ addInvoice }) {
       </section>
 
       <section className="flex flex-col gap-6">
-        <h4 className="text-brightPurple">Bill To</h4>
+        <h4 className="text-brightPurple font-medium">Bill To</h4>
         <label
           htmlFor="name"
           className={`${
