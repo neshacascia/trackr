@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { useContext } from 'react';
+import { Context } from './context/StateContext';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,6 +13,8 @@ export default function Payment({
   items,
   status,
 }) {
+  const { isDarkMode } = useContext(Context);
+
   const date = new Date(invoiceDate);
 
   let paymentPeriod;
@@ -42,25 +47,49 @@ export default function Payment({
 
   const currentStatus = status[0].toLowerCase() + status.slice(1);
   const statusColours = {
-    paid: 'bg-bgPaid text-paid',
-    pending: 'bg-bgPending text-pending',
-    draft: 'bg-bgDraft text-draft',
+    paid: 'text-paid bg-bgPaid',
+    pending: 'text-pending bg-bgPending',
+    draft: `${
+      isDarkMode ? 'bg-bgDraft text-draft' : 'text-draftLight bg-bgDraftLight'
+    }`,
   };
 
   return (
-    <div className="bg-mainPurple flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple">
+    <div
+      className={`${
+        isDarkMode ? 'bg-mainPurple' : 'bg-white'
+      } flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple`}
+    >
       <Link href={`/${id}`}>
         <div className="flex justify-between">
           <span className="font-medium">
-            <span className="text-lightPurple">#</span>
+            <span
+              className={`${
+                isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+              }`}
+            >
+              #
+            </span>
             {id.slice(-6).toUpperCase()}
           </span>
-          <p className="font-light">{clientName}</p>
+          <p
+            className={`${
+              isDarkMode ? 'text-white' : 'text-grayerPurple'
+            } font-light`}
+          >
+            {clientName}
+          </p>
         </div>
 
         <div className="flex justify-between items-center">
           <div>
-            <p className="font-light">Due {formattedDate}</p>
+            <p
+              className={`${
+                isDarkMode ? 'text-white' : 'text-detailPurple'
+              } font-light`}
+            >
+              Due {formattedDate}
+            </p>
             <span className="text-lg font-medium">${totals.toFixed(2)}</span>
           </div>
 
