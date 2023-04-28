@@ -1,10 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
+export default function EditInvoiceForm({
+  updateInvoice,
+  invoiceData,
+  isDarkMode,
+}) {
   const router = useRouter();
 
   const [streetInputValidation, setStreetInputValidation] = useState(false);
@@ -214,7 +218,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   return (
     <form className="text-white" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
-        <h4 className="text-brightPurple">Bill From</h4>
+        <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
           htmlFor="address"
           className={`${
@@ -359,7 +363,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       </section>
 
       <section className="flex flex-col gap-6">
-        <h4 className="text-brightPurple">Bill To</h4>
+        <h4 className="text-brightPurple font-medium">Bill To</h4>
         <label
           htmlFor="name"
           className={`${
