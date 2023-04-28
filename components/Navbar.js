@@ -57,7 +57,7 @@ export default function Navbar() {
         <FontAwesomeIcon
           icon={faSun}
           onClick={toggleDarkMode}
-          className="text-lightPurple text-lg"
+          className="text-lightPurple text-lg cursor-pointer"
         ></FontAwesomeIcon>
       ) : (
         <FontAwesomeIcon
@@ -65,7 +65,7 @@ export default function Navbar() {
           onClick={toggleDarkMode}
           className={`${
             isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
-          } text-lg`}
+          } text-lg cursor-pointer`}
         ></FontAwesomeIcon>
       )}
 
