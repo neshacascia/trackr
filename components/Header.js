@@ -65,7 +65,11 @@ export default function Header({ title, invoices }) {
         </div>
 
         {displayFilters && (
-          <div className="bg-borderPurple w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6">
+          <div
+            className={`${
+              isDarkMode ? 'bg-borderPurple' : 'text-lightText bg-white'
+            } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6`}
+          >
             <label
               htmlFor="draft"
               className="block relative pl-9 cursor-pointer"
@@ -77,7 +81,11 @@ export default function Header({ title, invoices }) {
                 onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
-              <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
+              <span
+                className={`${
+                  isDarkMode ? 'bg-mainPurple' : 'bg-draft'
+                } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
+              ></span>
               Draft
             </label>
 
@@ -92,7 +100,11 @@ export default function Header({ title, invoices }) {
                 onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
-              <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
+              <span
+                className={`${
+                  isDarkMode ? 'bg-mainPurple' : 'bg-draft'
+                } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
+              ></span>
               Pending
             </label>
 
@@ -107,7 +119,11 @@ export default function Header({ title, invoices }) {
                 onClick={e => filterInvoicesHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
-              <span className="bg-mainPurple w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark"></span>
+              <span
+                className={`${
+                  isDarkMode ? 'bg-mainPurple' : 'bg-draft'
+                } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
+              ></span>
               Paid
             </label>
           </div>
