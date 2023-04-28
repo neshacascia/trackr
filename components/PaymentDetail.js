@@ -119,8 +119,10 @@ export default function PaymentDetail({ data }) {
           ></FontAwesomeIcon>{' '}
           <p
             className={`${
-              isDarkMode ? 'text-white' : 'lightText'
-            } font-medium pt-[2px] hover:text-grayPurple`}
+              isDarkMode
+                ? 'text-white hover:text-grayPurple'
+                : 'lightText hover:text-detailPurple'
+            } font-medium pt-[2px]`}
           >
             Go back
           </p>
@@ -312,9 +314,9 @@ export default function PaymentDetail({ data }) {
           onClick={editInvoiceHandler}
           className={`${
             isDarkMode
-              ? 'text-draft bg-borderPurple'
-              : 'text-detailPurple bg-grey'
-          } font-medium w-full rounded-3xl py-4 px-[18px] hover:text-detailPurple hover:bg-white`}
+              ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-white'
+              : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+          } font-medium w-full rounded-3xl py-4 px-[18px]`}
         >
           Edit
         </button>

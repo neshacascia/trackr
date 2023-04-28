@@ -834,9 +834,9 @@ export default function EditInvoiceForm({
           onClick={() => router.back()}
           className={`${
             isDarkMode
-              ? 'text-grayPurple bg-borderPurple'
-              : 'text-detailPurple bg-grey'
-          } font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverGrayPurple`}
+              ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
+              : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+          } font-medium w-full rounded-3xl py-4 px-[18px]`}
         >
           Cancel
         </button>

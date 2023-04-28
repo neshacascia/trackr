@@ -43,7 +43,9 @@ export default function EditInvoice(props) {
         ></FontAwesomeIcon>{' '}
         <p
           className={`${
-            isDarkMode ? 'text-white' : 'text-lightText'
+            isDarkMode
+              ? 'text-white hover:text-grayPurple'
+              : 'lightText hover:text-detailPurple'
           } font-medium pt-[2px] hover:text-grayPurple`}
         >
           Go back

@@ -36,8 +36,10 @@ export default function DeleteConfirmationModal({
               <button
                 onClick={cancelDeletion}
                 className={`${
-                  isDarkMode ? 'bg-borderPurple' : 'text-detailPurple bg-grey'
-                } font-medium w-full rounded-3xl py-4 px-[24px] hover:bg-hoverGrayPurple`}
+                  isDarkMode
+                    ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
+                    : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+                } font-medium w-full rounded-3xl py-4 px-[24px]`}
               >
                 Cancel
               </button>
