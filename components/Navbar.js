@@ -9,7 +9,11 @@ export default function Navbar() {
   const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
 
   return (
-    <nav className="text-white bg-mainPurple h-[72px] flex items-center">
+    <nav
+      className={`text-white ${
+        isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
+      } h-[72px] flex items-center`}
+    >
       <div className="bg-nav bg-no-repeat w-20 h-full">
         <FontAwesomeIcon
           icon={faBars}
@@ -59,7 +63,9 @@ export default function Navbar() {
         <FontAwesomeIcon
           icon={faMoon}
           onClick={toggleDarkMode}
-          className="text-lightPurple text-lg"
+          className={`${
+            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+          } text-lg`}
         ></FontAwesomeIcon>
       )}
 
