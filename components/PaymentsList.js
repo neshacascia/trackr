@@ -1,19 +1,42 @@
+import { useContext } from 'react';
+import { Context } from './context/StateContext';
 import Payment from './Payment';
 
 export default function PaymentsList({ invoices }) {
-  const invoicesList = invoices.map(
-    ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
-      <Payment
-        key={id}
-        id={id}
-        clientName={clientName}
-        invoiceDate={invoiceDate}
-        paymentTerms={paymentTerms}
-        items={items}
-        status={status}
-      />
-    )
+  const { filterInvoices } = useContext(Context);
+
+  const filteredInvoices = invoices.filter(invoice =>
+    filterInvoices.includes(invoice.status)
   );
+
+  const invoicesList =
+    filteredInvoices.length === 0
+      ? invoices.map(
+          ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
+            <Payment
+              key={id}
+              id={id}
+              clientName={clientName}
+              invoiceDate={invoiceDate}
+              paymentTerms={paymentTerms}
+              items={items}
+              status={status}
+            />
+          )
+        )
+      : filteredInvoices.map(
+          ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
+            <Payment
+              key={id}
+              id={id}
+              clientName={clientName}
+              invoiceDate={invoiceDate}
+              paymentTerms={paymentTerms}
+              items={items}
+              status={status}
+            />
+          )
+        );
 
   return (
     <main className="bg-darkPurple w-screen h-full flex flex-col gap-4 px-6 pb-[105px]">
