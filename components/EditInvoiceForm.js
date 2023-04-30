@@ -110,6 +110,8 @@ export default function EditInvoiceForm({
     } else if (inputRef.current.value.trim() === '') {
       setInputValidation(false);
       return;
+    } else {
+      setInputTouched(false);
     }
   }
 
