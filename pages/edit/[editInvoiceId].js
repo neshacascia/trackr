@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { Context } from '@/components/context/StateContext';
 import EditInvoiceForm from '@/components/EditInvoiceForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +9,8 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditInvoice(props) {
   const router = useRouter();
+
+  const { isDarkMode } = useContext(Context);
 
   async function updateInvoiceHandler(invoiceData) {
     const res = await fetch('/api/update-invoice', {
@@ -24,7 +28,11 @@ export default function EditInvoice(props) {
   }
 
   return (
-    <main className="bg-darkPurple h-full flex flex-col gap-6 px-6">
+    <main
+      className={`${
+        isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+      } h-full flex flex-col gap-6 px-6`}
+    >
       <button
         onClick={() => router.back()}
         className="flex items-center gap-6 pt-8"
@@ -33,19 +41,37 @@ export default function EditInvoice(props) {
           icon={faAngleLeft}
           className="text-brightPurple text-lg"
         ></FontAwesomeIcon>{' '}
-        <p className="text-white font-medium pt-[2px] hover:text-grayPurple">
+        <p
+          className={`${
+            isDarkMode
+              ? 'text-white hover:text-grayPurple'
+              : 'lightText hover:text-detailPurple'
+          } font-medium pt-[2px] hover:text-grayPurple`}
+        >
           Go back
         </p>
       </button>
 
-      <h2 className="text-white text-3xl">
-        Edit <span className="text-boldGrayPurple">#</span>
+      <h2
+        className={`${
+          isDarkMode ? 'text-white' : 'text-lightText'
+        } text-3xl font-medium`}
+      >
+        Edit{' '}
+        <span
+          className={`${
+            isDarkMode ? 'text-boldGrayPurple' : 'text-grayPurple'
+          }`}
+        >
+          #
+        </span>
         {props.paymentData.id.slice(-6).toUpperCase()}
       </h2>
 
       <EditInvoiceForm
         updateInvoice={updateInvoiceHandler}
         invoiceData={props.paymentData}
+        isDarkMode={isDarkMode}
       />
     </main>
   );
@@ -104,5 +130,6 @@ export async function getStaticProps(context) {
         items: selectedPayment.items,
       },
     },
+    revalidate: 30,
   };
 }

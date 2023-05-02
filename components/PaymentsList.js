@@ -3,7 +3,7 @@ import { Context } from './context/StateContext';
 import Payment from './Payment';
 
 export default function PaymentsList({ invoices }) {
-  const { filterInvoices } = useContext(Context);
+  const { filterInvoices, isDarkMode } = useContext(Context);
 
   const filteredInvoices = invoices.filter(invoice =>
     filterInvoices.includes(invoice.status)
@@ -39,12 +39,26 @@ export default function PaymentsList({ invoices }) {
         );
 
   return (
-    <main className="bg-darkPurple w-screen h-full flex flex-col gap-4 px-6 pb-[105px]">
+    <main
+      className={`${
+        isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+      } w-screen h-full flex flex-col gap-4 px-6 pb-[105px]`}
+    >
       {!invoices.length && (
         <section className="h-auto flex flex-col items-center my-auto">
           <img src="/assets/illustration-empty.svg" className="mb-10" />
-          <h2 className="text-2xl font-medium mb-6">There is nothing here</h2>
-          <p className="font-light">
+          <h2
+            className={`${
+              isDarkMode ? 'text-white' : 'text-lightText'
+            } text-2xl font-medium mb-6`}
+          >
+            There is nothing here
+          </h2>
+          <p
+            className={`${
+              isDarkMode ? 'text-lilacPurple' : 'text-grayPurple'
+            } font-light`}
+          >
             Create an invoice by clicking the{' '}
             <span className="font-medium">New</span> button and get started
           </p>

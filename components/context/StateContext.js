@@ -15,6 +15,12 @@ function ContextProvider(props) {
 
   const [filterInvoices, setFilterInvoices] = useState([]);
 
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  function toggleDarkMode() {
+    setIsDarkMode(prevState => !prevState);
+  }
+
   return (
     <Context.Provider
       value={{
@@ -23,6 +29,8 @@ function ContextProvider(props) {
         closeMobileMenu,
         filterInvoices,
         setFilterInvoices,
+        isDarkMode,
+        toggleDarkMode,
       }}
     >
       {props.children}

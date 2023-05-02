@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Context } from './context/StateContext';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,11 +9,15 @@ import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 export default function PaymentDetail({ data }) {
   const router = useRouter();
 
+  const { isDarkMode } = useContext(Context);
+
   const currentStatus = data.status[0].toLowerCase() + data.status.slice(1);
   const statusColours = {
     paid: 'bg-bgPaid text-paid',
     pending: 'bg-bgPending text-pending',
-    draft: 'bg-bgDraft text-draft',
+    draft: `${
+      isDarkMode ? 'bg-bgDraft text-draft' : 'text-draftLight bg-bgDraftLight'
+    }`,
   };
 
   const date = new Date(data.invoiceDate);
@@ -99,7 +104,11 @@ export default function PaymentDetail({ data }) {
 
   return (
     <>
-      <main className="bg-darkPurple h-full flex flex-col gap-6 px-6 pb-14">
+      <main
+        className={`${
+          isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+        } h-full flex flex-col gap-6 px-6 pb-14`}
+      >
         <button
           onClick={() => router.push('/invoices')}
           className="flex items-center gap-6 pt-8"
@@ -108,13 +117,29 @@ export default function PaymentDetail({ data }) {
             icon={faAngleLeft}
             className="text-brightPurple text-lg"
           ></FontAwesomeIcon>{' '}
-          <p className="text-white font-medium pt-[2px] hover:text-grayPurple">
+          <p
+            className={`${
+              isDarkMode
+                ? 'text-white hover:text-grayPurple'
+                : 'lightText hover:text-detailPurple'
+            } font-medium pt-[2px]`}
+          >
             Go back
           </p>
         </button>
 
-        <section className="bg-mainPurple h-[91px] flex items-center justify-between rounded-lg px-6">
-          <span className="text-white font-light py-10">Status</span>
+        <section
+          className={`${
+            isDarkMode ? 'bg-mainPurple' : 'bg-white'
+          } h-[91px] flex items-center justify-between rounded-lg px-6`}
+        >
+          <span
+            className={`${
+              isDarkMode ? 'text-white' : 'text-grayerPurple'
+            } font-light py-10`}
+          >
+            Status
+          </span>
           <div
             className={`${statusColours[currentStatus]} flex items-center gap-2 rounded-md py-2.5 px-7`}
           >
@@ -126,16 +151,34 @@ export default function PaymentDetail({ data }) {
           </div>
         </section>
 
-        <section className="text-white bg-mainPurple flex flex-col gap-[30px] rounded-lg p-6">
+        <section
+          className={`text-white ${
+            isDarkMode ? 'bg-mainPurple' : 'bg-white'
+          } flex flex-col gap-[30px] rounded-lg p-6`}
+        >
           <div className="flex flex-col">
-            <span>
+            <span
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } font-medium`}
+            >
               <span className="text-detailPurple font-medium">#</span>
               {data.id.slice(-6).toUpperCase()}
             </span>
-            <span className="font-light">{data.description}</span>
+            <span
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } font-light`}
+            >
+              {data.description}
+            </span>
           </div>
 
-          <div className="font-light flex flex-col">
+          <div
+            className={`${
+              isDarkMode ? 'text-draft' : 'text-detailPurple'
+            } font-light flex flex-col`}
+          >
             <span>{data.street}</span>
             <span>{data.city}</span>
             <span>{data.postal}</span>
@@ -145,19 +188,57 @@ export default function PaymentDetail({ data }) {
           <div className="flex gap-10">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col">
-                <span className="font-light mb-3">Invoice Date</span>
-                <span className="text-[19px] font-medium">{invoiceDate}</span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Invoice Date
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {invoiceDate}
+                </span>
               </div>
 
               <div className="flex flex-col">
-                <span className="font-light mb-3">Payment Due</span>
-                <span className="text-[19px] font-medium">{formattedDate}</span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Payment Due
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {formattedDate}
+                </span>
               </div>
             </div>
 
-            <div className="flex flex-col">
-              <span className="font-light mb-3">Bill To</span>
-              <span className="text-[19px] font-medium mb-2">
+            <div
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } flex flex-col`}
+            >
+              <span
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light mb-3`}
+              >
+                Bill To
+              </span>
+              <span
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } text-[19px] font-medium mb-2`}
+              >
                 {data.clientName}
               </span>
               <span className="font-light">{data.clientStreet}</span>
@@ -168,17 +249,42 @@ export default function PaymentDetail({ data }) {
           </div>
 
           <div className="flex flex-col">
-            <span className="font-light mb-3">Sent to</span>
-            <span className="text-[19px] font-medium">{data.clientEmail}</span>
+            <span
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } font-light mb-3`}
+            >
+              Sent to
+            </span>
+            <span
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-[19px] font-medium`}
+            >
+              {data.clientEmail}
+            </span>
           </div>
 
           <section>
-            <div className="bg-borderPurple flex flex-col gap-6 rounded-t-lg p-6">
+            <div
+              className={`${
+                isDarkMode ? 'bg-borderPurple' : 'bg-grey'
+              } flex flex-col gap-6 rounded-t-lg p-6`}
+            >
               {data.items.map((item, ind) => (
-                <div key={ind} className="flex justify-between items-center">
+                <div
+                  key={ind}
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } font-medium flex justify-between items-center`}
+                >
                   <div className="flex flex-col">
                     <span>{item.itemName}</span>
-                    <span className="text-grayPurple">{`${item.quantity} x ${
+                    <span
+                      className={`${
+                        isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+                      }`}
+                    >{`${item.quantity} x ${
                       item.price ? item.price.toFixed(2) : ''
                     }`}</span>
                   </div>
@@ -186,7 +292,11 @@ export default function PaymentDetail({ data }) {
                 </div>
               ))}
             </div>
-            <div className="bg-black flex justify-between items-center rounded-b-lg px-6 py-[30px]">
+            <div
+              className={`${
+                isDarkMode ? 'bg-black' : 'bg-draftLight'
+              } flex justify-between items-center rounded-b-lg px-6 py-[30px]`}
+            >
               <span className="font-light">Amount Due</span>
               <span className="text-2xl font-medium">${totals.toFixed(2)}</span>
             </div>
@@ -194,11 +304,19 @@ export default function PaymentDetail({ data }) {
         </section>
       </main>
 
-      <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6">
+      <footer
+        className={`${
+          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        } h-[91px] flex items-center gap-2 px-6`}
+      >
         <button
           type="button"
           onClick={editInvoiceHandler}
-          className="text-draft bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:text-detailPurple hover:bg-white"
+          className={`${
+            isDarkMode
+              ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-white'
+              : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+          } font-medium w-full rounded-3xl py-4 px-[18px]`}
         >
           Edit
         </button>
@@ -231,6 +349,7 @@ export default function PaymentDetail({ data }) {
         id={data.id}
         setDeleteInvoice={setDeleteInvoice}
         deleteInvoiceHandler={deleteInvoiceHandler}
+        isDarkMode={isDarkMode}
       />
     </>
   );

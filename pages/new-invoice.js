@@ -1,10 +1,15 @@
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { Context } from '@/components/context/StateContext';
+import NewInvoiceForm from '@/components/NewInvoiceForm';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import NewInvoiceForm from '@/components/NewInvoiceForm';
 
 export default function NewPayment() {
   const router = useRouter();
+
+  const { isDarkMode } = useContext(Context);
 
   async function addInvoiceHandler(enteredInvoiceData) {
     const res = await fetch('/api/new-invoice', {
@@ -22,7 +27,11 @@ export default function NewPayment() {
   }
 
   return (
-    <main className="bg-darkPurple h-full flex flex-col gap-6 px-6">
+    <main
+      className={`${
+        isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+      } h-full flex flex-col gap-6 px-6`}
+    >
       <button
         onClick={() => router.push('/invoices')}
         className="flex items-center gap-6 pt-8"
@@ -31,12 +40,22 @@ export default function NewPayment() {
           icon={faAngleLeft}
           className="text-brightPurple text-lg"
         ></FontAwesomeIcon>{' '}
-        <p className="text-white font-medium pt-[2px] hover:text-grayPurple">
+        <p
+          className={`${
+            isDarkMode ? 'text-white' : 'text-lightText'
+          } font-medium pt-[2px] hover:text-grayPurple`}
+        >
           Go back
         </p>
       </button>
 
-      <h2 className="text-white text-3xl">New Invoice</h2>
+      <h2
+        className={`${
+          isDarkMode ? 'text-white' : 'text-lightText'
+        } text-3xl font-medium`}
+      >
+        New Invoice
+      </h2>
 
       <NewInvoiceForm addInvoice={addInvoiceHandler} />
     </main>

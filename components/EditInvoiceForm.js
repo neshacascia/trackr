@@ -1,10 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
+export default function EditInvoiceForm({
+  updateInvoice,
+  invoiceData,
+  isDarkMode,
+}) {
   const router = useRouter();
 
   const [streetInputValidation, setStreetInputValidation] = useState(false);
@@ -214,7 +218,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
   return (
     <form className="text-white" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
-        <h4 className="text-brightPurple">Bill From</h4>
+        <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
           htmlFor="address"
           className={`${
@@ -232,7 +236,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="address"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !streetInputValidation && streetInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -268,7 +276,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             <input
               type="text"
               id="city"
-              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !cityInputValidation && cityInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -303,7 +315,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             <input
               type="text"
               id="postal-code"
-              className={`text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !postalInputValidation && postalInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -339,7 +355,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="country"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !countryInputValidation && countryInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -359,7 +379,7 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
       </section>
 
       <section className="flex flex-col gap-6">
-        <h4 className="text-brightPurple">Bill To</h4>
+        <h4 className="text-brightPurple font-medium">Bill To</h4>
         <label
           htmlFor="name"
           className={`${
@@ -377,7 +397,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="name"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !clientNameInputValidation && clientNameInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -412,7 +436,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="email"
             id="email"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !clientEmailInputValidation && clientEmailInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -438,7 +466,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="address"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
             ref={clientStreetInputRef}
             defaultValue={invoiceData.clientStreet}
           />
@@ -453,7 +485,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             <input
               type="text"
               id="city"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
               ref={clientCityInputRef}
               defaultValue={invoiceData.clientCity}
             />
@@ -467,7 +503,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
             <input
               type="text"
               id="postal-code"
-              className="text-white bg-mainPurple font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
               ref={clientPostalInputRef}
               defaultValue={invoiceData.clientPostal}
             />
@@ -482,7 +522,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="country"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple"
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
             ref={clientCountryInputRef}
             defaultValue={invoiceData.clientCountry}
           />
@@ -519,7 +563,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[31px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
             <select
               id="terms"
-              className={`text-white bg-mainPurple text-base font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+              className={`${
+                isDarkMode
+                  ? 'text-white bg-mainPurple border-borderPurple'
+                  : 'text-lightText bg-white border-draft'
+              } text-base font-medium w-full border-[1px] rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
                 !paymentTermsInputValidation && paymentTermsInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -560,7 +608,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
           <input
             type="text"
             id="desc"
-            className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            className={`${
+              isDarkMode
+                ? 'text-white bg-mainPurple border-borderPurple'
+                : 'text-lightText bg-white border-draft'
+            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !descriptionInputValidation && descriptionInputTouched
                 ? 'border-deleteBtn'
                 : ''
@@ -607,7 +659,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                 ref={itemNameInputRef}
                 value={item.itemName}
                 defaultValue={invoiceData.itemName}
-                className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                   !itemNameInputValidation && itemNameInputTouched
                     ? 'border-deleteBtn'
                     : ''
@@ -653,7 +709,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   ref={quantityInputRef}
                   value={item.quantity}
                   defaultValue={invoiceData.quantity}
-                  className={`text-white bg-mainPurple font-medium w-[100%] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  className={`${
+                    isDarkMode
+                      ? 'text-white bg-mainPurple border-borderPurple'
+                      : 'text-lightText bg-white border-draft'
+                  } font-medium w-[100%] border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                     !quantityInputValidation && quantityInputTouched
                       ? 'border-deleteBtn'
                       : ''
@@ -698,7 +758,11 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
                   ref={priceInputRef}
                   value={item.price}
                   defaultValue={invoiceData.price}
-                  className={`text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  className={`${
+                    isDarkMode
+                      ? 'text-white bg-mainPurple border-borderPurple'
+                      : 'text-lightText bg-white border-draft'
+                  } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                     !priceInputValidation && priceInputTouched
                       ? 'border-deleteBtn'
                       : ''
@@ -750,17 +814,29 @@ export default function EditInvoiceForm({ updateInvoice, invoiceData }) {
         <button
           onClick={addNewItem}
           type="button"
-          className="text-grayPurple bg-borderPurple w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft"
+          className={`${
+            isDarkMode
+              ? 'text-grayPurple bg-borderPurple'
+              : 'text-detailPurple bg-grey'
+          } w-full font-medium rounded-3xl py-4 px-[108px] mt-12 mb-16 hover:bg-draft`}
         >
           + Add New Item
         </button>
       </section>
 
-      <footer className="bg-mainPurple h-[91px] flex items-center gap-2 px-6 -mx-6">
+      <footer
+        className={`${
+          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        } h-[91px] flex items-center gap-2 px-6 -mx-6`}
+      >
         <button
           type="button"
           onClick={() => router.back()}
-          className="text-white bg-borderPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverGrayPurple"
+          className={`${
+            isDarkMode
+              ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
+              : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+          } font-medium w-full rounded-3xl py-4 px-[18px]`}
         >
           Cancel
         </button>

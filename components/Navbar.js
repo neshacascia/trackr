@@ -3,13 +3,17 @@ import { Context } from './context/StateContext';
 import Link from 'next/link';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { openMobileMenu } = useContext(Context);
+  const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
 
   return (
-    <nav className="text-white bg-mainPurple h-[72px] flex items-center">
+    <nav
+      className={`text-white ${
+        isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
+      } h-[72px] flex items-center`}
+    >
       <div className="bg-nav bg-no-repeat w-20 h-full">
         <FontAwesomeIcon
           icon={faBars}
@@ -49,10 +53,21 @@ export default function Navbar() {
         </li>
       </ul>
 
-      <FontAwesomeIcon
-        icon={faSun}
-        className="text-lightPurple text-lg"
-      ></FontAwesomeIcon>
+      {isDarkMode ? (
+        <FontAwesomeIcon
+          icon={faSun}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg cursor-pointer"
+        ></FontAwesomeIcon>
+      ) : (
+        <FontAwesomeIcon
+          icon={faMoon}
+          onClick={toggleDarkMode}
+          className={`${
+            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+          } text-lg cursor-pointer`}
+        ></FontAwesomeIcon>
+      )}
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 

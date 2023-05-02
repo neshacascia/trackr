@@ -6,13 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 export default function MobileMenuModal() {
-  const { toggleMenu, closeMobileMenu } = useContext(Context);
+  const { isDarkMode, toggleMenu, closeMobileMenu } = useContext(Context);
 
   return (
     <>
       {toggleMenu && (
         <div className="bg-[rgba(0,0,0,0.4)] h-screen fixed inset-0 z-50">
-          <div className="text-white bg-mainPurple w-[60%] h-screen flex flex-col justify-center items-center">
+          <div
+            className={`text-white ${
+              isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
+            } w-[60%] h-screen flex flex-col justify-center items-center`}
+          >
             <FontAwesomeIcon
               icon={faXmark}
               onClick={closeMobileMenu}
