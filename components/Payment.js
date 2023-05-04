@@ -6,12 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function Payment({
+  type,
   id,
   clientName,
   invoiceDate,
   paymentTerms,
   items,
   status,
+  expenseName,
+  expenseDue,
+  amount,
 }) {
   const { isDarkMode } = useContext(Context);
 
@@ -41,11 +45,15 @@ export default function Payment({
 
   const formattedDate = paymentDueDate.toLocaleDateString('en-US', options);
 
-  const totals = Array.from(items).reduce((acc, curr) => {
-    return acc + Number(curr.total);
-  }, 0);
+  const totals =
+    type === 'invoices'
+      ? Array.from(items).reduce((acc, curr) => {
+          return acc + Number(curr.total);
+        }, 0)
+      : amount;
 
-  const currentStatus = status[0].toLowerCase() + status.slice(1);
+  const currentStatus =
+    type === 'invoices' ? status[0].toLowerCase() + status.slice(1) : '';
   const statusColours = {
     paid: 'text-paid bg-bgPaid',
     pending: 'text-pending bg-bgPending',
@@ -77,7 +85,7 @@ export default function Payment({
               isDarkMode ? 'text-white' : 'text-grayerPurple'
             } font-light`}
           >
-            {clientName}
+            {type === 'invoices' ? clientName : expenseName}
           </p>
         </div>
 
@@ -88,7 +96,7 @@ export default function Payment({
                 isDarkMode ? 'text-draft' : 'text-detailPurple'
               } font-light`}
             >
-              Due {formattedDate}
+              Due {type === 'invoices' ? formattedDate : expenseDue}
             </p>
             <span className="text-lg font-medium">${totals.toFixed(2)}</span>
           </div>
