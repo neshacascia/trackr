@@ -6,7 +6,7 @@ import PaymentsList from '@/components/PaymentsList';
 const expenses = [
   {
     id: 'abcd7aj924',
-    item: 'Gas',
+    expenseName: 'Gas',
     amount: 100.0,
     expenseDue: '2021-08-19',
   },
