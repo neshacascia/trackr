@@ -9,7 +9,7 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Header({ title, invoices }) {
+export default function Header({ title, payments }) {
   const router = useRouter();
 
   const [displayFilters, setDisplayFilters] = useState(false);
@@ -26,6 +26,14 @@ export default function Header({ title, invoices }) {
     }
   }
 
+  function createNewPayment() {
+    if (title === 'Invoices') {
+      router.push('/new-invoice');
+    } else {
+      router.push('/new-expense');
+    }
+  }
+
   return (
     <header className="w-screen h-11 flex items-center px-6">
       <div className="mr-auto">
@@ -35,11 +43,11 @@ export default function Header({ title, invoices }) {
             isDarkMode ? 'text-white' : 'text-grayPurple'
           } font-light`}
         >
-          {invoices.length === 0
+          {payments.length === 0
             ? 'No ' + title.toLowerCase()
-            : invoices.length === 1
-            ? invoices.length + ' ' + title.toLowerCase().slice(0, -1)
-            : invoices.length + ' ' + title.toLowerCase()}
+            : payments.length === 1
+            ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
+            : payments.length + ' ' + title.toLowerCase()}
         </p>
       </div>
 
@@ -70,24 +78,28 @@ export default function Header({ title, invoices }) {
               isDarkMode ? 'bg-borderPurple' : 'text-lightText bg-white'
             } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6`}
           >
-            <label
-              htmlFor="draft"
-              className="font-medium block relative pl-9 cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                id="draft"
-                value="Draft"
-                onClick={e => filterInvoicesHandler(e)}
-                className="absolute w-0 h-0 cursor-pointer checkbox"
-              />
-              <span
-                className={`${
-                  isDarkMode ? 'bg-mainPurple' : 'bg-draft'
-                } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
-              ></span>
-              Draft
-            </label>
+            {title === 'Invoices' ? (
+              <label
+                htmlFor="draft"
+                className="font-medium block relative pl-9 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  id="draft"
+                  value="Draft"
+                  onClick={e => filterInvoicesHandler(e)}
+                  className="absolute w-0 h-0 cursor-pointer checkbox"
+                />
+                <span
+                  className={`${
+                    isDarkMode ? 'bg-mainPurple' : 'bg-draft'
+                  } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
+                ></span>
+                Draft
+              </label>
+            ) : (
+              ''
+            )}
 
             <label
               htmlFor="pending"
@@ -131,7 +143,7 @@ export default function Header({ title, invoices }) {
       </div>
 
       <button
-        onClick={() => router.push('/new-invoice')}
+        onClick={createNewPayment}
         className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2 hover:bg-hoverPurple"
       >
         <FontAwesomeIcon
