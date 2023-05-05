@@ -22,7 +22,6 @@ export default function NewExpenseForm({ addExpense }) {
     useState(false);
 
   const merchantInputRef = useRef();
-  const merchantEmailInputRef = useRef();
   const accountTypeInputRef = useRef();
   const accountNumberInputRef = useRef();
   const referenceNumberInputRef = useRef();
@@ -72,7 +71,6 @@ export default function NewExpenseForm({ addExpense }) {
 
       const expenseData = {
         merchant: merchantInputRef.current.value,
-        merchantEmail: merchantEmailInputRef.current.value,
         referenceNo: referenceNumberInputRef.current.value,
         accountNo: accountNumberInputRef.current.value,
         accountType: accountTypeInputRef.current.value,
@@ -128,25 +126,6 @@ export default function NewExpenseForm({ addExpense }) {
               )
             }
             onChange={e => changeHandler(e, setMerchantInputValidation)}
-          />
-        </label>
-
-        <label
-          htmlFor="email"
-          className={`font-light ${
-            isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-          } flex flex-col`}
-        >
-          <div className="flex justify-between">Email</div>
-          <input
-            type="email"
-            id="email"
-            className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-            ref={merchantEmailInputRef}
           />
         </label>
 
