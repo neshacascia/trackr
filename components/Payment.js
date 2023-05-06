@@ -13,9 +13,9 @@ export default function Payment({
   paymentTerms,
   items,
   status,
-  expenseName,
-  expenseDue,
-  amount,
+  merchant,
+  expenseDueDate,
+  expenseAmount,
 }) {
   const { isDarkMode } = useContext(Context);
 
@@ -45,15 +45,22 @@ export default function Payment({
 
   const formattedDate = paymentDueDate.toLocaleDateString('en-US', options);
 
+  const expenseDateObj = new Date(`${expenseDueDate}T00:00:00.000Z`);
+  const formattedExpenseDate = expenseDateObj.toLocaleString('default', {
+    timeZone: 'UTC',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   const totals =
     type === 'invoices'
       ? Array.from(items).reduce((acc, curr) => {
           return acc + Number(curr.total);
         }, 0)
-      : amount;
+      : Number(expenseAmount);
 
-  const currentStatus =
-    type === 'invoices' ? status[0].toLowerCase() + status.slice(1) : '';
+  const currentStatus = status[0].toLowerCase() + status.slice(1);
   const statusColours = {
     paid: 'text-paid bg-bgPaid',
     pending: 'text-pending bg-bgPending',
@@ -85,7 +92,7 @@ export default function Payment({
               isDarkMode ? 'text-white' : 'text-grayerPurple'
             } font-light`}
           >
-            {type === 'invoices' ? clientName : expenseName}
+            {type === 'invoices' ? clientName : merchant}
           </p>
         </div>
 
@@ -96,7 +103,7 @@ export default function Payment({
                 isDarkMode ? 'text-draft' : 'text-detailPurple'
               } font-light`}
             >
-              Due {type === 'invoices' ? formattedDate : expenseDue}
+              Due {type === 'invoices' ? formattedDate : formattedExpenseDate}
             </p>
             <span className="text-lg font-medium">${totals.toFixed(2)}</span>
           </div>
