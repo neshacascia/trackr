@@ -36,7 +36,7 @@ export default function FormFooter({
         type="submit"
         className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
       >
-        Save & Send
+        {type === 'invoices' ? 'Save & Send' : 'Save'}
       </button>
     </footer>
   );
