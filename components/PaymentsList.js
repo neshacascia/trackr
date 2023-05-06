@@ -41,14 +41,15 @@ export default function PaymentsList({ type, invoices, expenses }) {
         );
 
   const expensesList = expenses?.map(
-    ({ id, expenseName, expenseDue, amount }) => (
+    ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
       <Payment
         type={type}
         key={id}
         id={id}
-        expenseName={expenseName}
-        expenseDue={expenseDue}
-        amount={amount}
+        merchant={merchant}
+        expenseDueDate={expenseDueDate}
+        expenseAmount={expenseAmount}
+        status={status}
       />
     )
   );
