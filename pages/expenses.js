@@ -34,7 +34,6 @@ export async function getStaticProps() {
       expenses: expenses.map(expense => ({
         id: expense._id.toString(),
         merchant: expense.merchant,
-        merchantEmail: expense.merchantEmail,
         referenceNo: expense.referenceNo,
         accountNo: expense.accountNo,
         expenseAmount: expense.expenseAmount,
