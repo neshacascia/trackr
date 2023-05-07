@@ -18,5 +18,13 @@ export default async function handler(req, res) {
     console.log(result);
 
     res.status(200).json({ message: 'Expense status updated!' });
+  } else if (req.method === 'DELETE') {
+    const result = await expensesCollections.deleteOne({
+      _id: new ObjectId(expenseId),
+    });
+
+    console.log(result);
+
+    res.status(200).json({ message: 'Expense deleted!' });
   }
 }
