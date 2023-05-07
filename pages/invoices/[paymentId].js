@@ -1,9 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import PaymentDetail from '../components/PaymentDetail';
+import PaymentDetail from '../../components/PaymentDetail';
 
 export default function PaymentDetails(props) {
   const data = props.paymentData;
-  return <PaymentDetail data={data} />;
+  return <PaymentDetail type="invoices" data={data} />;
 }
 
 export async function getStaticPaths() {
@@ -59,5 +59,6 @@ export async function getStaticProps(context) {
         items: selectedPayment.items,
       },
     },
+    revalidate: 10,
   };
 }
