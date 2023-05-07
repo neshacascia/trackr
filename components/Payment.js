@@ -75,7 +75,9 @@ export default function Payment({
         isDarkMode ? 'bg-mainPurple' : 'bg-white'
       } flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple`}
     >
-      <Link href={`/${id}`}>
+      <Link
+        href={`${type === 'invoices' ? `/invoices/${id}` : `/expenses/${id}`}`}
+      >
         <div className="flex justify-between">
           <span className="font-medium">
             <span
