@@ -80,20 +80,18 @@ export default function PaymentDetail({ type, data, expenseData }) {
   const [deleteInvoice, setDeleteInvoice] = useState(false);
 
   async function deleteInvoiceHandler() {
-    if (type === 'invoices') {
-      const res = await fetch('/api/update-invoice', {
-        method: 'DELETE',
-        body: JSON.stringify(data.id),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
+      method: 'DELETE',
+      body: JSON.stringify(data?.id || expenseData.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      const responseData = await res.json();
-      console.log(responseData);
+    const responseData = await res.json();
+    console.log(responseData);
 
-      router.push('/invoices');
-    }
+    router.push(`/${type}`);
   }
 
   async function markAsPaidHandler() {
