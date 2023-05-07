@@ -97,20 +97,18 @@ export default function PaymentDetail({ type, data, expenseData }) {
   }
 
   async function markAsPaidHandler() {
-    if (type === 'invoices') {
-      const res = await fetch('/api/update-invoice', {
-        method: 'POST',
-        body: JSON.stringify(data.id),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
+      method: 'POST',
+      body: JSON.stringify(data?.id || expenseData.id),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      const responseData = await res.json();
-      console.log(responseData);
+    const responseData = await res.json();
+    console.log(responseData);
 
-      router.push('/invoices');
-    }
+    router.push(`/${type}`);
   }
 
   async function updateToPendingHandler() {
@@ -388,15 +386,22 @@ export default function PaymentDetail({ type, data, expenseData }) {
         >
           Delete
         </button>
-        {data?.status === 'Pending' ||
-          (expenseData?.status === 'Pending' && (
-            <button
-              onClick={markAsPaidHandler}
-              className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
-            >
-              Mark as Paid
-            </button>
-          ))}
+        {data?.status === 'Pending' && (
+          <button
+            onClick={markAsPaidHandler}
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+          >
+            Mark as Paid
+          </button>
+        )}
+        {expenseData?.status === 'Pending' && (
+          <button
+            onClick={markAsPaidHandler}
+            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+          >
+            Mark as Paid
+          </button>
+        )}
         {data?.status === 'Draft' && (
           <button
             onClick={updateToPendingHandler}
