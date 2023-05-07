@@ -6,12 +6,14 @@ import DeleteConfirmationModal from './DeleteConfirmationModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function PaymentDetail({ data }) {
+export default function PaymentDetail({ type, data, expenseData }) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
 
-  const currentStatus = data.status[0].toLowerCase() + data.status.slice(1);
+  const currentStatus =
+    data?.status[0].toLowerCase() + data?.status.slice(1) ||
+    expenseData.status[0].toLowerCase() + expenseData.status.slice(1);
   const statusColours = {
     paid: 'bg-bgPaid text-paid',
     pending: 'bg-bgPending text-pending',
@@ -20,23 +22,26 @@ export default function PaymentDetail({ data }) {
     }`,
   };
 
-  const date = new Date(data.invoiceDate);
+  const date = type === 'invoices' ? new Date(data.invoiceDate) : '';
 
   let paymentPeriod;
 
-  if (data.paymentTerms === 'Net 1 Day') {
-    paymentPeriod = 1;
-  } else if (data.paymentTerms === 'Net 7 Days') {
-    paymentPeriod = 7;
-  } else if (data.paymentTerms === 'Net 14 Days') {
-    paymentPeriod = 14;
-  } else {
-    paymentPeriod = 30;
+  if (type === 'invoices') {
+    if (data.paymentTerms === 'Net 1 Day') {
+      paymentPeriod = 1;
+    } else if (data.paymentTerms === 'Net 7 Days') {
+      paymentPeriod = 7;
+    } else if (data.paymentTerms === 'Net 14 Days') {
+      paymentPeriod = 14;
+    } else {
+      paymentPeriod = 30;
+    }
   }
 
-  const paymentDueDate = new Date(
-    date.getTime() + paymentPeriod * 25 * 60 * 60 * 1000
-  );
+  const paymentDueDate =
+    type === 'invoices'
+      ? new Date(date.getTime() + paymentPeriod * 25 * 60 * 60 * 1000)
+      : '';
 
   const options = {
     day: 'numeric',
@@ -44,62 +49,85 @@ export default function PaymentDetail({ data }) {
     year: 'numeric',
   };
 
-  const invoiceDate = date.toLocaleDateString('en-US', options);
-  const formattedDate = paymentDueDate.toLocaleDateString('en-US', options);
+  const invoiceDate =
+    type === 'invoices' ? date.toLocaleDateString('en-US', options) : '';
+  const formattedDate =
+    type === 'invoices'
+      ? paymentDueDate.toLocaleDateString('en-US', options)
+      : '';
 
-  const totals = Array.from(data.items).reduce((acc, curr) => {
-    return acc + Number(curr.total);
-  }, 0);
+  const expenseDateObj = new Date(
+    `${expenseData?.expenseDueDate}T00:00:00.000Z`
+  );
+  const formattedExpenseDate = expenseDateObj.toLocaleString('default', {
+    timeZone: 'UTC',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  const totals =
+    type === 'invoices'
+      ? Array.from(data.items).reduce((acc, curr) => {
+          return acc + Number(curr.total);
+        }, 0)
+      : '';
 
   function editInvoiceHandler() {
-    router.push(`/edit/${data.id}`);
+    router.push(`/edit/${data?.id || expenseData.id}`);
   }
 
   const [deleteInvoice, setDeleteInvoice] = useState(false);
 
   async function deleteInvoiceHandler() {
-    const res = await fetch('/api/update-invoice', {
-      method: 'DELETE',
-      body: JSON.stringify(data.id),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    if (type === 'invoices') {
+      const res = await fetch('/api/update-invoice', {
+        method: 'DELETE',
+        body: JSON.stringify(data.id),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const responseData = await res.json();
-    console.log(responseData);
+      const responseData = await res.json();
+      console.log(responseData);
 
-    router.push('/invoices');
+      router.push('/invoices');
+    }
   }
 
   async function markAsPaidHandler() {
-    const res = await fetch('/api/update-invoice', {
-      method: 'POST',
-      body: JSON.stringify(data.id),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    if (type === 'invoices') {
+      const res = await fetch('/api/update-invoice', {
+        method: 'POST',
+        body: JSON.stringify(data.id),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const responseData = await res.json();
-    console.log(responseData);
+      const responseData = await res.json();
+      console.log(responseData);
 
-    router.push('/invoices');
+      router.push('/invoices');
+    }
   }
 
   async function updateToPendingHandler() {
-    const res = await fetch('/api/new-invoice', {
-      method: 'PUT',
-      body: JSON.stringify(data.id),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    if (type === 'invoices') {
+      const res = await fetch('/api/new-invoice', {
+        method: 'PUT',
+        body: JSON.stringify(data.id),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    const responseData = await res.json();
-    console.log(responseData);
+      const responseData = await res.json();
+      console.log(responseData);
 
-    router.push('/invoices');
+      router.push('/invoices');
+    }
   }
 
   return (
@@ -110,7 +138,7 @@ export default function PaymentDetail({ data }) {
         } h-full flex flex-col gap-6 px-6 pb-14`}
       >
         <button
-          onClick={() => router.push('/invoices')}
+          onClick={() => router.push(`/${type}`)}
           className="flex items-center gap-6 pt-8"
         >
           <FontAwesomeIcon
@@ -147,7 +175,9 @@ export default function PaymentDetail({ data }) {
               icon={faCircle}
               className="text-[10px]"
             ></FontAwesomeIcon>
-            <p className="font-medium pt-[1.5px]">{data.status}</p>
+            <p className="font-medium pt-[1.5px]">
+              {data?.status || expenseData.status}
+            </p>
           </div>
         </section>
 
@@ -163,46 +193,68 @@ export default function PaymentDetail({ data }) {
               } font-medium`}
             >
               <span className="text-detailPurple font-medium">#</span>
-              {data.id.slice(-6).toUpperCase()}
+              {data?.id.slice(-6).toUpperCase() || expenseData.referenceNo}
             </span>
             <span
               className={`${
                 isDarkMode ? 'text-draft' : 'text-detailPurple'
               } font-light`}
             >
-              {data.description}
+              {data?.description || expenseData.notes}
             </span>
           </div>
 
-          <div
-            className={`${
-              isDarkMode ? 'text-draft' : 'text-detailPurple'
-            } font-light flex flex-col`}
-          >
-            <span>{data.street}</span>
-            <span>{data.city}</span>
-            <span>{data.postal}</span>
-            <span>{data.country}</span>
-          </div>
+          {type === 'invoices' ? (
+            <div
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } font-light flex flex-col`}
+            >
+              <span>{data?.street}</span>
+              <span>{data?.city}</span>
+              <span>{data?.postal}</span>
+              <span>{data?.country}</span>
+            </div>
+          ) : (
+            <div
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } font-light flex flex-col`}
+            >
+              <span>Account Number</span>
+              <span
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } text-[19px] font-medium`}
+              >
+                {expenseData?.accountNo}
+              </span>
+            </div>
+          )}
 
           <div className="flex gap-10">
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col">
-                <span
-                  className={`${
-                    isDarkMode ? 'text-draft' : 'text-detailPurple'
-                  } font-light mb-3`}
-                >
-                  Invoice Date
-                </span>
-                <span
-                  className={`${
-                    isDarkMode ? 'text-white' : 'text-lightText'
-                  } text-[19px] font-medium`}
-                >
-                  {invoiceDate}
-                </span>
-              </div>
+              {type === 'invoices' ? (
+                <div className="flex flex-col">
+                  <span
+                    className={`${
+                      isDarkMode ? 'text-draft' : 'text-detailPurple'
+                    } font-light mb-3`}
+                  >
+                    Invoice Date
+                  </span>
+
+                  <span
+                    className={`${
+                      isDarkMode ? 'text-white' : 'text-lightText'
+                    } text-[19px] font-medium`}
+                  >
+                    {invoiceDate}
+                  </span>
+                </div>
+              ) : (
+                ''
+              )}
 
               <div className="flex flex-col">
                 <span
@@ -217,7 +269,7 @@ export default function PaymentDetail({ data }) {
                     isDarkMode ? 'text-white' : 'text-lightText'
                   } text-[19px] font-medium`}
                 >
-                  {formattedDate}
+                  {formattedDate || formattedExpenseDate}
                 </span>
               </div>
             </div>
@@ -239,31 +291,35 @@ export default function PaymentDetail({ data }) {
                   isDarkMode ? 'text-white' : 'text-lightText'
                 } text-[19px] font-medium mb-2`}
               >
-                {data.clientName}
+                {data?.clientName || expenseData.merchant}
               </span>
-              <span className="font-light">{data.clientStreet}</span>
-              <span className="font-light">{data.clientCity}</span>
-              <span className="font-light">{data.clientPostal}</span>
-              <span className="font-light">{data.clientCountry}</span>
+              <span className="font-light">{data?.clientStreet}</span>
+              <span className="font-light">{data?.clientCity}</span>
+              <span className="font-light">{data?.clientPostal}</span>
+              <span className="font-light">{data?.clientCountry}</span>
             </div>
           </div>
 
-          <div className="flex flex-col">
-            <span
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light mb-3`}
-            >
-              Sent to
-            </span>
-            <span
-              className={`${
-                isDarkMode ? 'text-white' : 'text-lightText'
-              } text-[19px] font-medium`}
-            >
-              {data.clientEmail}
-            </span>
-          </div>
+          {type === 'invoices' ? (
+            <div className="flex flex-col">
+              <span
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light mb-3`}
+              >
+                Sent to
+              </span>
+              <span
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } text-[19px] font-medium`}
+              >
+                {data.clientEmail}
+              </span>
+            </div>
+          ) : (
+            ''
+          )}
 
           <section>
             <div
@@ -271,7 +327,7 @@ export default function PaymentDetail({ data }) {
                 isDarkMode ? 'bg-borderPurple' : 'bg-grey'
               } flex flex-col gap-6 rounded-t-lg p-6`}
             >
-              {data.items.map((item, ind) => (
+              {data?.items.map((item, ind) => (
                 <div
                   key={ind}
                   className={`${
@@ -298,7 +354,12 @@ export default function PaymentDetail({ data }) {
               } flex justify-between items-center rounded-b-lg px-6 py-[30px]`}
             >
               <span className="font-light">Amount Due</span>
-              <span className="text-2xl font-medium">${totals.toFixed(2)}</span>
+              <span className="text-2xl font-medium">
+                $
+                {type === 'invoices'
+                  ? totals.toFixed(2)
+                  : expenseData.expenseAmount}
+              </span>
             </div>
           </section>
         </section>
@@ -327,15 +388,16 @@ export default function PaymentDetail({ data }) {
         >
           Delete
         </button>
-        {data.status === 'Pending' && (
-          <button
-            onClick={markAsPaidHandler}
-            className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
-          >
-            Mark as Paid
-          </button>
-        )}
-        {data.status === 'Draft' && (
+        {data?.status === 'Pending' ||
+          (expenseData?.status === 'Pending' && (
+            <button
+              onClick={markAsPaidHandler}
+              className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+            >
+              Mark as Paid
+            </button>
+          ))}
+        {data?.status === 'Draft' && (
           <button
             onClick={updateToPendingHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
@@ -346,7 +408,7 @@ export default function PaymentDetail({ data }) {
       </footer>
       <DeleteConfirmationModal
         deleteInvoice={deleteInvoice}
-        id={data.id}
+        id={data?.id || expenseData.id}
         setDeleteInvoice={setDeleteInvoice}
         deleteInvoiceHandler={deleteInvoiceHandler}
         isDarkMode={isDarkMode}
