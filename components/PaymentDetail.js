@@ -186,23 +186,27 @@ export default function PaymentDetail({ type, data, expenseData }) {
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
           } flex flex-col gap-[30px] rounded-lg p-6`}
         >
-          <div className="flex flex-col">
-            <span
-              className={`${
-                isDarkMode ? 'text-white' : 'text-lightText'
-              } font-medium`}
-            >
-              <span className="text-detailPurple font-medium">#</span>
-              {data?.id.slice(-6).toUpperCase() ||
-                expenseData.referenceNo.toUpperCase()}
-            </span>
-            <span
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light`}
-            >
-              {data?.description || expenseData.notes}
-            </span>
+          <div className="flex justify-between">
+            <div className="flex flex-col">
+              <span
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } font-medium`}
+              >
+                <span className="text-detailPurple font-medium">#</span>
+                {data?.id.slice(-6).toUpperCase() ||
+                  expenseData.referenceNo.toUpperCase()}
+              </span>
+              <span
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light`}
+              >
+                {data?.description || expenseData.notes}
+              </span>
+            </div>
+
+            <span className="font-light">{expenseData?.expenseCategory}</span>
           </div>
 
           {type === 'invoices' ? (
