@@ -14,6 +14,7 @@ function ContextProvider(props) {
   }
 
   const [filterInvoices, setFilterInvoices] = useState([]);
+  const [filterExpenses, setFilterExpenses] = useState([]);
 
   const [isDarkMode, setIsDarkMode] = useState(true);
 
@@ -29,6 +30,8 @@ function ContextProvider(props) {
         closeMobileMenu,
         filterInvoices,
         setFilterInvoices,
+        filterExpenses,
+        setFilterExpenses,
         isDarkMode,
         toggleDarkMode,
       }}

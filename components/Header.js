@@ -14,15 +14,31 @@ export default function Header({ title, payments }) {
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
-  const { isDarkMode, filterInvoices, setFilterInvoices } = useContext(Context);
+  const {
+    isDarkMode,
+    filterInvoices,
+    setFilterInvoices,
+    filterExpenses,
+    setFilterExpenses,
+  } = useContext(Context);
 
-  function filterInvoicesHandler(e) {
-    if (!filterInvoices.includes(e.target.value)) {
-      setFilterInvoices(prevState => [...prevState, e.target.value]);
+  function filterPaymentsHandler(e) {
+    if (title === 'Invoices') {
+      if (!filterInvoices.includes(e.target.value)) {
+        setFilterInvoices(prevState => [...prevState, e.target.value]);
+      } else {
+        setFilterInvoices(prevState =>
+          prevState.filter(item => item !== e.target.value)
+        );
+      }
     } else {
-      setFilterInvoices(prevState =>
-        prevState.filter(item => item !== e.target.value)
-      );
+      if (!filterExpenses.includes(e.target.value)) {
+        setFilterExpenses(prevState => [...prevState, e.target.value]);
+      } else {
+        setFilterExpenses(prevState =>
+          prevState.filter(item => item !== e.target.value)
+        );
+      }
     }
   }
 
@@ -87,7 +103,7 @@ export default function Header({ title, payments }) {
                   type="checkbox"
                   id="draft"
                   value="Draft"
-                  onClick={e => filterInvoicesHandler(e)}
+                  onClick={e => filterPaymentsHandler(e)}
                   className="absolute w-0 h-0 cursor-pointer checkbox"
                 />
                 <span
@@ -109,7 +125,7 @@ export default function Header({ title, payments }) {
                 type="checkbox"
                 id="pending"
                 value="Pending"
-                onClick={e => filterInvoicesHandler(e)}
+                onClick={e => filterPaymentsHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span
@@ -128,7 +144,7 @@ export default function Header({ title, payments }) {
                 type="checkbox"
                 id="paid"
                 value="Paid"
-                onClick={e => filterInvoicesHandler(e)}
+                onClick={e => filterPaymentsHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span

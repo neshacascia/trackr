@@ -3,15 +3,16 @@ import { Context } from './context/StateContext';
 import Payment from './Payment';
 
 export default function PaymentsList({ type, invoices, expenses }) {
-  const { filterInvoices, isDarkMode } = useContext(Context);
+  const { filterInvoices, filterExpenses, isDarkMode } = useContext(Context);
 
-  const filteredInvoices = invoices?.filter(invoice =>
-    filterInvoices.includes(invoice.status)
-  );
+  const filteredPayments =
+    type === 'invoices'
+      ? invoices?.filter(invoice => filterInvoices.includes(invoice.status))
+      : expenses?.filter(expense => filterExpenses.includes(expense.status));
 
   const invoicesList =
-    filteredInvoices?.length === 0
-      ? invoices.map(
+    filteredPayments?.length === 0
+      ? invoices?.map(
           ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
             <Payment
               type={type}
@@ -25,7 +26,7 @@ export default function PaymentsList({ type, invoices, expenses }) {
             />
           )
         )
-      : filteredInvoices?.map(
+      : filteredPayments?.map(
           ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
             <Payment
               type={type}
@@ -40,19 +41,34 @@ export default function PaymentsList({ type, invoices, expenses }) {
           )
         );
 
-  const expensesList = expenses?.map(
-    ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
-      <Payment
-        type={type}
-        key={id}
-        id={id}
-        merchant={merchant}
-        expenseDueDate={expenseDueDate}
-        expenseAmount={expenseAmount}
-        status={status}
-      />
-    )
-  );
+  const expensesList =
+    filteredPayments?.length === 0
+      ? expenses?.map(
+          ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
+            <Payment
+              type={type}
+              key={id}
+              id={id}
+              merchant={merchant}
+              expenseDueDate={expenseDueDate}
+              expenseAmount={expenseAmount}
+              status={status}
+            />
+          )
+        )
+      : filteredPayments?.map(
+          ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
+            <Payment
+              type={type}
+              key={id}
+              id={id}
+              merchant={merchant}
+              expenseDueDate={expenseDueDate}
+              expenseAmount={expenseAmount}
+              status={status}
+            />
+          )
+        );
 
   return (
     <main
