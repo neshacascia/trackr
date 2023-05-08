@@ -44,7 +44,7 @@ export default function Header({ title, payments }) {
 
   function createNewPayment() {
     if (title === 'Invoices') {
-      router.push('/new-invoice');
+      router.push('/invoices/new-invoice');
     } else {
       router.push('/new-expense');
     }
