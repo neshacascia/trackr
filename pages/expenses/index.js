@@ -36,6 +36,7 @@ export async function getStaticProps() {
         merchant: expense.merchant,
         referenceNo: expense.referenceNo,
         accountNo: expense.accountNo,
+        accountType: expense.accountType,
         expenseAmount: expense.expenseAmount,
         expenseDueDate: expense.expenseDueDate,
         expenseCategory: expense.expenseCategory,

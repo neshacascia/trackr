@@ -44,6 +44,7 @@ export async function getStaticProps(context) {
         merchant: selectedExpense.merchant,
         referenceNo: selectedExpense.referenceNo,
         accountNo: selectedExpense.accountNo,
+        accountType: selectedExpense.accountType,
         expenseAmount: selectedExpense.expenseAmount,
         expenseDueDate: selectedExpense.expenseDueDate,
         expenseCategory: selectedExpense.expenseCategory,
