@@ -73,8 +73,12 @@ export default function PaymentDetail({ type, data, expenseData }) {
         }, 0)
       : '';
 
-  function editInvoiceHandler() {
-    router.push(`/edit/${data?.id || expenseData.id}`);
+  function editPaymentHandler() {
+    if (type === 'invoices') {
+      router.push(`/invoices/edit/${data?.id}`);
+    } else {
+      router.push(`/expenses/edit/${expenseData.id}`);
+    }
   }
 
   const [deletePayment, setDeletePayment] = useState(false);
@@ -369,7 +373,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
       >
         <button
           type="button"
-          onClick={editInvoiceHandler}
+          onClick={editPaymentHandler}
           className={`${
             isDarkMode
               ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-white'
