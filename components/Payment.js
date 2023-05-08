@@ -14,6 +14,7 @@ export default function Payment({
   items,
   status,
   merchant,
+  referenceNo,
   expenseDueDate,
   expenseAmount,
 }) {
@@ -87,7 +88,7 @@ export default function Payment({
             >
               #
             </span>
-            {id.slice(-6).toUpperCase()}
+            {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}
           </span>
           <p
             className={`${

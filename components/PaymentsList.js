@@ -44,12 +44,20 @@ export default function PaymentsList({ type, invoices, expenses }) {
   const expensesList =
     filteredPayments?.length === 0
       ? expenses?.map(
-          ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
+          ({
+            id,
+            merchant,
+            referenceNo,
+            expenseDueDate,
+            expenseAmount,
+            status,
+          }) => (
             <Payment
               type={type}
               key={id}
               id={id}
               merchant={merchant}
+              referenceNo={referenceNo}
               expenseDueDate={expenseDueDate}
               expenseAmount={expenseAmount}
               status={status}
@@ -57,12 +65,20 @@ export default function PaymentsList({ type, invoices, expenses }) {
           )
         )
       : filteredPayments?.map(
-          ({ id, merchant, expenseDueDate, expenseAmount, status }) => (
+          ({
+            id,
+            merchant,
+            referenceNo,
+            expenseDueDate,
+            expenseAmount,
+            status,
+          }) => (
             <Payment
               type={type}
               key={id}
               id={id}
               merchant={merchant}
+              referenceNo={referenceNo}
               expenseDueDate={expenseDueDate}
               expenseAmount={expenseAmount}
               status={status}
