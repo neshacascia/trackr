@@ -207,7 +207,13 @@ export default function PaymentDetail({ type, data, expenseData }) {
               </span>
             </div>
 
-            <span className="font-light">{expenseData?.expenseCategory}</span>
+            <span
+              className={`${
+                isDarkMode ? 'text-draft' : 'text-detailPurple'
+              } font-light`}
+            >
+              {expenseData?.expenseCategory}
+            </span>
           </div>
 
           {type === 'invoices' ? (
