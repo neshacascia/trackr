@@ -77,9 +77,9 @@ export default function PaymentDetail({ type, data, expenseData }) {
     router.push(`/edit/${data?.id || expenseData.id}`);
   }
 
-  const [deleteInvoice, setDeleteInvoice] = useState(false);
+  const [deletePayment, setDeletePayment] = useState(false);
 
-  async function deleteInvoiceHandler() {
+  async function deletePaymentHandler() {
     const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
       method: 'DELETE',
       body: JSON.stringify(data?.id || expenseData.id),
@@ -379,7 +379,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
         </button>
         <button
           type="button"
-          onClick={() => setDeleteInvoice(true)}
+          onClick={() => setDeletePayment(true)}
           className="text-white bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverRed"
         >
           Delete
@@ -410,10 +410,10 @@ export default function PaymentDetail({ type, data, expenseData }) {
         )}
       </footer>
       <DeleteConfirmationModal
-        deleteInvoice={deleteInvoice}
+        deletePayment={deletePayment}
         id={data?.id || expenseData.id}
-        setDeleteInvoice={setDeleteInvoice}
-        deleteInvoiceHandler={deleteInvoiceHandler}
+        setDeletePayment={setDeletePayment}
+        deletePaymentHandler={deletePaymentHandler}
         isDarkMode={isDarkMode}
       />
     </>

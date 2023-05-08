@@ -1,17 +1,17 @@
 export default function DeleteConfirmationModal({
   id,
   isDarkMode,
-  deleteInvoice,
-  setDeleteInvoice,
-  deleteInvoiceHandler,
+  deletePayment,
+  setDeletePayment,
+  deletePaymentHandler,
 }) {
   function cancelDeletion() {
-    setDeleteInvoice(false);
+    setDeletePayment(false);
   }
 
   return (
     <>
-      {deleteInvoice && (
+      {deletePayment && (
         <div className="bg-[rgba(0,0,0,0.4)] h-screen flex justify-center items-center fixed inset-0 z-50">
           <div
             className={`${
@@ -44,7 +44,7 @@ export default function DeleteConfirmationModal({
                 Cancel
               </button>
               <button
-                onClick={deleteInvoiceHandler}
+                onClick={deletePaymentHandler}
                 className="bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[24px] hover:bg-hoverRed"
               >
                 Delete
