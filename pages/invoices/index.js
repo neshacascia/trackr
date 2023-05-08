@@ -13,8 +13,8 @@ export default function Invoices(props) {
         isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
       } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8`}
     >
-      <Header title="Invoices" invoices={props.invoices} />
-      <PaymentsList invoices={props.invoices} />
+      <Header title="Invoices" payments={props.invoices} />
+      <PaymentsList type="invoices" invoices={props.invoices} />
     </main>
   );
 }

@@ -6,12 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function Payment({
+  type,
   id,
   clientName,
   invoiceDate,
   paymentTerms,
   items,
   status,
+  merchant,
+  referenceNo,
+  expenseDueDate,
+  expenseAmount,
 }) {
   const { isDarkMode } = useContext(Context);
 
@@ -41,9 +46,20 @@ export default function Payment({
 
   const formattedDate = paymentDueDate.toLocaleDateString('en-US', options);
 
-  const totals = Array.from(items).reduce((acc, curr) => {
-    return acc + Number(curr.total);
-  }, 0);
+  const expenseDateObj = new Date(`${expenseDueDate}T00:00:00.000Z`);
+  const formattedExpenseDate = expenseDateObj.toLocaleString('default', {
+    timeZone: 'UTC',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  const totals =
+    type === 'invoices'
+      ? Array.from(items).reduce((acc, curr) => {
+          return acc + Number(curr.total);
+        }, 0)
+      : Number(expenseAmount);
 
   const currentStatus = status[0].toLowerCase() + status.slice(1);
   const statusColours = {
@@ -60,7 +76,9 @@ export default function Payment({
         isDarkMode ? 'bg-mainPurple' : 'bg-white'
       } flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple`}
     >
-      <Link href={`/${id}`}>
+      <Link
+        href={`${type === 'invoices' ? `/invoices/${id}` : `/expenses/${id}`}`}
+      >
         <div className="flex justify-between">
           <span className="font-medium">
             <span
@@ -70,14 +88,14 @@ export default function Payment({
             >
               #
             </span>
-            {id.slice(-6).toUpperCase()}
+            {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}
           </span>
           <p
             className={`${
               isDarkMode ? 'text-white' : 'text-grayerPurple'
             } font-light`}
           >
-            {clientName}
+            {type === 'invoices' ? clientName : merchant}
           </p>
         </div>
 
@@ -88,7 +106,7 @@ export default function Payment({
                 isDarkMode ? 'text-draft' : 'text-detailPurple'
               } font-light`}
             >
-              Due {formattedDate}
+              Due {type === 'invoices' ? formattedDate : formattedExpenseDate}
             </p>
             <span className="text-lg font-medium">${totals.toFixed(2)}</span>
           </div>

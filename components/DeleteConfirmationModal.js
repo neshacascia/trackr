@@ -1,17 +1,18 @@
 export default function DeleteConfirmationModal({
   id,
+  referenceNo,
   isDarkMode,
-  deleteInvoice,
-  setDeleteInvoice,
-  deleteInvoiceHandler,
+  deletePayment,
+  setDeletePayment,
+  deletePaymentHandler,
 }) {
   function cancelDeletion() {
-    setDeleteInvoice(false);
+    setDeletePayment(false);
   }
 
   return (
     <>
-      {deleteInvoice && (
+      {deletePayment && (
         <div className="bg-[rgba(0,0,0,0.4)] h-screen flex justify-center items-center fixed inset-0 z-50">
           <div
             className={`${
@@ -28,7 +29,8 @@ export default function DeleteConfirmationModal({
               </h1>
               <p className="text-grayPurple">
                 Are you sure you want to delete invoice #
-                {id.slice(-6).toUpperCase()}? This action cannot be undone.
+                {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}? This
+                action cannot be undone.
               </p>
             </div>
 
@@ -44,7 +46,7 @@ export default function DeleteConfirmationModal({
                 Cancel
               </button>
               <button
-                onClick={deleteInvoiceHandler}
+                onClick={deletePaymentHandler}
                 className="bg-deleteBtn font-medium w-full rounded-3xl py-4 px-[24px] hover:bg-hoverRed"
               >
                 Delete

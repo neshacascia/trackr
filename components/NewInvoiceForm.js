@@ -919,6 +919,7 @@ export default function NewInvoiceForm({ addInvoice }) {
       </section>
 
       <FormFooter
+        type="invoices"
         router={router}
         saveAsDraftHandler={saveAsDraftHandler}
         isDarkMode={isDarkMode}

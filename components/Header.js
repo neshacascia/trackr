@@ -9,20 +9,44 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Header({ title, invoices }) {
+export default function Header({ title, payments }) {
   const router = useRouter();
 
   const [displayFilters, setDisplayFilters] = useState(false);
 
-  const { isDarkMode, filterInvoices, setFilterInvoices } = useContext(Context);
+  const {
+    isDarkMode,
+    filterInvoices,
+    setFilterInvoices,
+    filterExpenses,
+    setFilterExpenses,
+  } = useContext(Context);
 
-  function filterInvoicesHandler(e) {
-    if (!filterInvoices.includes(e.target.value)) {
-      setFilterInvoices(prevState => [...prevState, e.target.value]);
+  function filterPaymentsHandler(e) {
+    if (title === 'Invoices') {
+      if (!filterInvoices.includes(e.target.value)) {
+        setFilterInvoices(prevState => [...prevState, e.target.value]);
+      } else {
+        setFilterInvoices(prevState =>
+          prevState.filter(item => item !== e.target.value)
+        );
+      }
     } else {
-      setFilterInvoices(prevState =>
-        prevState.filter(item => item !== e.target.value)
-      );
+      if (!filterExpenses.includes(e.target.value)) {
+        setFilterExpenses(prevState => [...prevState, e.target.value]);
+      } else {
+        setFilterExpenses(prevState =>
+          prevState.filter(item => item !== e.target.value)
+        );
+      }
+    }
+  }
+
+  function createNewPayment() {
+    if (title === 'Invoices') {
+      router.push('/invoices/new-invoice');
+    } else {
+      router.push('/new-expense');
     }
   }
 
@@ -35,11 +59,11 @@ export default function Header({ title, invoices }) {
             isDarkMode ? 'text-white' : 'text-grayPurple'
           } font-light`}
         >
-          {invoices.length === 0
+          {payments.length === 0
             ? 'No ' + title.toLowerCase()
-            : invoices.length === 1
-            ? invoices.length + ' ' + title.toLowerCase().slice(0, -1)
-            : invoices.length + ' ' + title.toLowerCase()}
+            : payments.length === 1
+            ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
+            : payments.length + ' ' + title.toLowerCase()}
         </p>
       </div>
 
@@ -70,24 +94,28 @@ export default function Header({ title, invoices }) {
               isDarkMode ? 'bg-borderPurple' : 'text-lightText bg-white'
             } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6`}
           >
-            <label
-              htmlFor="draft"
-              className="font-medium block relative pl-9 cursor-pointer"
-            >
-              <input
-                type="checkbox"
-                id="draft"
-                value="Draft"
-                onClick={e => filterInvoicesHandler(e)}
-                className="absolute w-0 h-0 cursor-pointer checkbox"
-              />
-              <span
-                className={`${
-                  isDarkMode ? 'bg-mainPurple' : 'bg-draft'
-                } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
-              ></span>
-              Draft
-            </label>
+            {title === 'Invoices' ? (
+              <label
+                htmlFor="draft"
+                className="font-medium block relative pl-9 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  id="draft"
+                  value="Draft"
+                  onClick={e => filterPaymentsHandler(e)}
+                  className="absolute w-0 h-0 cursor-pointer checkbox"
+                />
+                <span
+                  className={`${
+                    isDarkMode ? 'bg-mainPurple' : 'bg-draft'
+                  } w-5 h-5 absolute top-0 left-0 rounded-sm border-[1px] border-transparent hover:border-brightPurple checkmark`}
+                ></span>
+                Draft
+              </label>
+            ) : (
+              ''
+            )}
 
             <label
               htmlFor="pending"
@@ -97,7 +125,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="pending"
                 value="Pending"
-                onClick={e => filterInvoicesHandler(e)}
+                onClick={e => filterPaymentsHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span
@@ -116,7 +144,7 @@ export default function Header({ title, invoices }) {
                 type="checkbox"
                 id="paid"
                 value="Paid"
-                onClick={e => filterInvoicesHandler(e)}
+                onClick={e => filterPaymentsHandler(e)}
                 className="absolute w-0 h-0 cursor-pointer checkbox"
               />
               <span
@@ -131,7 +159,7 @@ export default function Header({ title, invoices }) {
       </div>
 
       <button
-        onClick={() => router.push('/new-invoice')}
+        onClick={createNewPayment}
         className="bg-brightPurple font-medium flex items-center gap-2 rounded-3xl p-2 hover:bg-hoverPurple"
       >
         <FontAwesomeIcon
