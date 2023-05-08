@@ -195,7 +195,8 @@ export default function PaymentDetail({ type, data, expenseData }) {
               >
                 <span className="text-detailPurple font-medium">#</span>
                 {data?.id.slice(-6).toUpperCase() ||
-                  expenseData.referenceNo.toUpperCase()}
+                  expenseData.referenceNo.toUpperCase() ||
+                  expenseData.id.slice(-6).toUpperCase()}
               </span>
               <span
                 className={`${
