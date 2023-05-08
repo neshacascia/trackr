@@ -328,26 +328,36 @@ export default function PaymentDetail({ type, data, expenseData }) {
                 isDarkMode ? 'bg-borderPurple' : 'bg-grey'
               } flex flex-col gap-6 rounded-t-lg p-6`}
             >
-              {data?.items.map((item, ind) => (
+              {type === 'invoices' ? (
+                data?.items.map((item, ind) => (
+                  <div
+                    key={ind}
+                    className={`${
+                      isDarkMode ? 'text-white' : 'text-lightText'
+                    } font-medium flex justify-between items-center`}
+                  >
+                    <div className="flex flex-col">
+                      <span>{item.itemName}</span>
+                      <span
+                        className={`${
+                          isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+                        }`}
+                      >{`${item.quantity} x ${
+                        item.price ? item.price.toFixed(2) : ''
+                      }`}</span>
+                    </div>
+                    <span>${item.total?.toFixed(2)}</span>
+                  </div>
+                ))
+              ) : (
                 <div
-                  key={ind}
                   className={`${
                     isDarkMode ? 'text-white' : 'text-lightText'
                   } font-medium flex justify-between items-center`}
                 >
-                  <div className="flex flex-col">
-                    <span>{item.itemName}</span>
-                    <span
-                      className={`${
-                        isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-                      }`}
-                    >{`${item.quantity} x ${
-                      item.price ? item.price.toFixed(2) : ''
-                    }`}</span>
-                  </div>
-                  <span>${item.total?.toFixed(2)}</span>
+                  {expenseData.accountType}
                 </div>
-              ))}
+              )}
             </div>
             <div
               className={`${
