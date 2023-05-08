@@ -189,7 +189,8 @@ export default function PaymentDetail({ type, data, expenseData }) {
               } font-medium`}
             >
               <span className="text-detailPurple font-medium">#</span>
-              {data?.id.slice(-6).toUpperCase() || expenseData.referenceNo}
+              {data?.id.slice(-6).toUpperCase() ||
+                expenseData.referenceNo.toUpperCase()}
             </span>
             <span
               className={`${
@@ -412,6 +413,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
       <DeleteConfirmationModal
         deletePayment={deletePayment}
         id={data?.id || expenseData.id}
+        referenceNo={expenseData?.referenceNo}
         setDeletePayment={setDeletePayment}
         deletePaymentHandler={deletePaymentHandler}
         isDarkMode={isDarkMode}

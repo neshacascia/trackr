@@ -1,5 +1,6 @@
 export default function DeleteConfirmationModal({
   id,
+  referenceNo,
   isDarkMode,
   deletePayment,
   setDeletePayment,
@@ -28,7 +29,8 @@ export default function DeleteConfirmationModal({
               </h1>
               <p className="text-grayPurple">
                 Are you sure you want to delete invoice #
-                {id.slice(-6).toUpperCase()}? This action cannot be undone.
+                {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}? This
+                action cannot be undone.
               </p>
             </div>
 
