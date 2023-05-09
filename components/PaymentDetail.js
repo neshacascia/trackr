@@ -135,11 +135,11 @@ export default function PaymentDetail({ type, data, expenseData }) {
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-        } h-full flex flex-col gap-6 px-6 pb-14`}
+        } h-full flex flex-col gap-6 px-6 pb-14 md:px-12 md:pb-[135px]`}
       >
         <button
           onClick={() => router.push(`/${type}`)}
-          className="flex items-center gap-6 pt-8"
+          className="flex items-center gap-6 pt-8 md:pt-12 md:pb-3"
         >
           <FontAwesomeIcon
             icon={faAngleLeft}
@@ -159,25 +159,73 @@ export default function PaymentDetail({ type, data, expenseData }) {
         <section
           className={`${
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
-          } h-[91px] flex items-center justify-between rounded-lg px-6`}
+          } h-[91px] w-full flex items-center justify-between rounded-lg px-6 md:justify-between`}
         >
-          <span
-            className={`${
-              isDarkMode ? 'text-white' : 'text-grayerPurple'
-            } font-light py-10`}
-          >
-            Status
-          </span>
-          <div
-            className={`${statusColours[currentStatus]} flex items-center gap-2 rounded-md py-2.5 px-7`}
-          >
-            <FontAwesomeIcon
-              icon={faCircle}
-              className="text-[10px]"
-            ></FontAwesomeIcon>
-            <p className="font-medium pt-[1.5px]">
-              {data?.status || expenseData.status}
-            </p>
+          <div className="w-full flex justify-between items-center md:justify-start md:gap-4">
+            <span
+              className={`${
+                isDarkMode ? 'text-white' : 'text-grayerPurple'
+              } font-light py-10 md:text-grayerPurple`}
+            >
+              Status
+            </span>
+
+            <div
+              className={`${statusColours[currentStatus]} w-[104px] flex justify-center items-center gap-2 rounded-md py-2.5 px-7`}
+            >
+              <FontAwesomeIcon
+                icon={faCircle}
+                className="text-[10px]"
+              ></FontAwesomeIcon>
+              <p className="font-medium pt-[1.5px]">
+                {data?.status || expenseData.status}
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              type="button"
+              onClick={editPaymentHandler}
+              className={`${
+                isDarkMode
+                  ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-white'
+                  : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+              } font-medium w-[73px] rounded-3xl pt-[17px] pb-4 px-6`}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => setDeletePayment(true)}
+              className="text-white bg-deleteBtn font-medium w-[89px] rounded-3xl pt-[17px] pb-4 px-6 hover:bg-hoverRed"
+            >
+              Delete
+            </button>
+            {data?.status === 'Pending' && (
+              <button
+                onClick={markAsPaidHandler}
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Mark as Paid
+              </button>
+            )}
+            {expenseData?.status === 'Pending' && (
+              <button
+                onClick={markAsPaidHandler}
+                className="text-white bg-brightPurple font-medium w-full rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Mark as Paid
+              </button>
+            )}
+            {data?.status === 'Draft' && (
+              <button
+                onClick={updateToPendingHandler}
+                className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Save & Send
+              </button>
+            )}
           </div>
         </section>
 
@@ -390,7 +438,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
       <footer
         className={`${
           isDarkMode ? 'bg-mainPurple' : 'bg-white'
-        } h-[91px] flex items-center gap-2 px-6`}
+        } h-[91px] flex items-center gap-2 px-6 md:hidden`}
       >
         <button
           type="button"
