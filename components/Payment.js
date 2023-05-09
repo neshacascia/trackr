@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Context } from './context/StateContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function Payment({
   type,
@@ -71,15 +71,73 @@ export default function Payment({
   };
 
   return (
-    <div
-      className={`${
-        isDarkMode ? 'bg-mainPurple' : 'bg-white'
-      } flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple`}
-    >
-      <Link
-        href={`${type === 'invoices' ? `/invoices/${id}` : `/expenses/${id}`}`}
+    <>
+      <div
+        className={`${
+          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        } flex flex-col gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple md:hidden`}
       >
-        <div className="flex justify-between">
+        <Link
+          href={`${
+            type === 'invoices' ? `/invoices/${id}` : `/expenses/${id}`
+          }`}
+        >
+          <div className="flex justify-between">
+            <span className="font-medium">
+              <span
+                className={`${
+                  isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+                }`}
+              >
+                #
+              </span>
+              {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}
+            </span>
+            <p
+              className={`${
+                isDarkMode ? 'text-white' : 'text-grayerPurple'
+              } font-light`}
+            >
+              {type === 'invoices' ? clientName : merchant}
+            </p>
+          </div>
+
+          <div className="flex justify-between items-center">
+            <div>
+              <p
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light`}
+              >
+                Due {type === 'invoices' ? formattedDate : formattedExpenseDate}
+              </p>
+              <span className="text-lg font-medium">${totals.toFixed(2)}</span>
+            </div>
+
+            <div
+              className={`${statusColours[currentStatus]} flex items-center gap-2 rounded-md py-2.5 px-7`}
+            >
+              <FontAwesomeIcon
+                icon={faCircle}
+                className="text-[10px]"
+              ></FontAwesomeIcon>
+              <p className="font-medium pt-[1.5px]">{status}</p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div
+        className={`${
+          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        } gap-6 border-[1px] border-transparent rounded-lg px-6 py-6 hover:border-[1px] hover:border-brightPurple hidden md:flex`}
+      >
+        <Link
+          href={`${
+            type === 'invoices' ? `/invoices/${id}` : `/expenses/${id}`
+          }`}
+          className="flex items-center justify-between w-full"
+        >
           <span className="font-medium">
             <span
               className={`${
@@ -90,6 +148,14 @@ export default function Payment({
             </span>
             {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}
           </span>
+
+          <p
+            className={`${
+              isDarkMode ? 'text-draft' : 'text-detailPurple'
+            } font-light`}
+          >
+            Due {type === 'invoices' ? formattedDate : formattedExpenseDate}
+          </p>
           <p
             className={`${
               isDarkMode ? 'text-white' : 'text-grayerPurple'
@@ -97,22 +163,10 @@ export default function Payment({
           >
             {type === 'invoices' ? clientName : merchant}
           </p>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <div>
-            <p
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light`}
-            >
-              Due {type === 'invoices' ? formattedDate : formattedExpenseDate}
-            </p>
-            <span className="text-lg font-medium">${totals.toFixed(2)}</span>
-          </div>
+          <span className="text-lg font-medium">${totals.toFixed(2)}</span>
 
           <div
-            className={`${statusColours[currentStatus]} flex items-center gap-2 rounded-md py-2.5 px-7`}
+            className={`${statusColours[currentStatus]} w-[104px] flex justify-center items-center gap-2 rounded-md py-2.5 px-7 -mr-5`}
           >
             <FontAwesomeIcon
               icon={faCircle}
@@ -120,8 +174,13 @@ export default function Payment({
             ></FontAwesomeIcon>
             <p className="font-medium pt-[1.5px]">{status}</p>
           </div>
-        </div>
-      </Link>
-    </div>
+
+          <FontAwesomeIcon
+            icon={faAngleRight}
+            className="text-brightPurple"
+          ></FontAwesomeIcon>
+        </Link>
+      </div>
+    </>
   );
 }
