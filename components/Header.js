@@ -51,14 +51,15 @@ export default function Header({ title, payments }) {
   }
 
   return (
-    <header className="w-screen h-11 flex items-center px-6">
+    <header className="w-screen h-11 flex items-center px-6 md:px-12">
       <div className="mr-auto">
-        <h2 className="text-2xl font-medium">{title}</h2>
+        <h2 className="text-2xl font-medium md:text-3xl">{title}</h2>
         <p
           className={`${
             isDarkMode ? 'text-white' : 'text-grayPurple'
           } font-light`}
         >
+          <span className="hidden md:inline">There are </span>
           {payments.length === 0
             ? 'No ' + title.toLowerCase()
             : payments.length === 1
@@ -73,7 +74,7 @@ export default function Header({ title, payments }) {
           className="flex items-center gap-3"
         >
           <label className="font-medium hover:cursor-pointer hover:text-grayPurple">
-            Filter
+            Filter <p className="hidden md:inline-block">by status</p>
           </label>
           {displayFilters ? (
             <FontAwesomeIcon
@@ -166,7 +167,9 @@ export default function Header({ title, payments }) {
           icon={faPlus}
           className="text-brightPurple bg-white rounded-full p-2"
         ></FontAwesomeIcon>
-        <span className="text-white pt-[1px] pr-2.5">New</span>
+        <span className="text-white pt-[1px] pr-2.5">
+          New <p className="hidden md:inline-block">{title.slice(0, -1)}</p>
+        </span>
       </button>
     </header>
   );
