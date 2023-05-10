@@ -82,6 +82,10 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
       };
 
       addExpense(expenseData);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 
