@@ -6,6 +6,7 @@ import EditInvoiceForm from './EditInvoiceForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
+import EditExpenseForm from './EditExpenseForm';
 
 export default function PaymentDetail({
   type,
@@ -594,6 +595,38 @@ export default function PaymentDetail({
               showModal={showModal}
               setShowModal={setShowModal}
               updateInvoice={updateInvoice}
+            />
+          </div>
+        </div>
+      )}
+      {showModal && window.innerWidth >= 768 && type === 'expenses' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              Edit{' '}
+              <span
+                className={`${
+                  isDarkMode ? 'text-boldGrayPurple' : 'text-grayPurple'
+                }`}
+              >
+                #
+              </span>
+              {expenseData.id.slice(-6).toUpperCase()}
+            </h2>
+            <EditExpenseForm
+              data={expenseData}
+              isDarkMode={isDarkMode}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
           </div>
         </div>
