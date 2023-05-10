@@ -266,7 +266,7 @@ export default function PaymentDetail({
                 <span
                   className={`${
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
-                  } font-light mb-10`}
+                  } font-light md:mb-10`}
                 >
                   {data?.description || expenseData?.notes}
                 </span>
@@ -296,7 +296,7 @@ export default function PaymentDetail({
               <div
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light flex flex-col mb-8 md:hidden`}
+                } font-light flex flex-col my-8 md:hidden`}
               >
                 <span>Account Number</span>
                 <span
@@ -334,20 +334,22 @@ export default function PaymentDetail({
                 ''
               )}
 
-              <div
-                className={`hidden ${
-                  isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light md:flex flex-col mb-8`}
-              >
-                <span>Account Number</span>
-                <span
-                  className={`${
-                    isDarkMode ? 'text-white' : 'text-lightText'
-                  } text-[19px] font-medium`}
+              {type === 'expenses' && (
+                <div
+                  className={`hidden ${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light md:flex flex-col mb-8`}
                 >
-                  {expenseData?.accountNo}
-                </span>
-              </div>
+                  <span>Account Number</span>
+                  <span
+                    className={`${
+                      isDarkMode ? 'text-white' : 'text-lightText'
+                    } text-[19px] font-medium`}
+                  >
+                    {expenseData?.accountNo}
+                  </span>
+                </div>
+              )}
 
               <div className="flex flex-col md:hidden">
                 <span
