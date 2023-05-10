@@ -50,7 +50,11 @@ export default function Header({ title, payments, setShowModal }) {
         router.push('/invoices/new-invoice');
       }
     } else {
-      router.push('/new-expense');
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push('/expenses/new-expense');
+      }
     }
   }
 

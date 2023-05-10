@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
@@ -7,13 +7,19 @@ import PaymentsList from '@/components/PaymentsList';
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main
       className={`${
         isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
       } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-[72px]`}
     >
-      <Header title="Expenses" payments={props.expenses} />
+      <Header
+        title="Expenses"
+        payments={props.expenses}
+        setShowModal={setShowModal}
+      />
       <PaymentsList type="expenses" expenses={props.expenses} />
     </main>
   );
