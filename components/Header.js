@@ -51,9 +51,9 @@ export default function Header({ title, payments }) {
   }
 
   return (
-    <header className="w-screen h-11 flex items-center px-6 md:px-12">
+    <header className="w-screen h-11 flex items-center mt-9 px-6 md:px-12 md:mt-14">
       <div className="mr-auto">
-        <h2 className="text-2xl font-medium md:text-3xl">{title}</h2>
+        <h2 className="text-2xl font-medium md:text-3xl md:mb-2">{title}</h2>
         <p
           className={`${
             isDarkMode ? 'text-white' : 'text-grayPurple'
@@ -68,7 +68,7 @@ export default function Header({ title, payments }) {
         </p>
       </div>
 
-      <div className="flex items-center gap-3 mr-5 hover:cursor-pointer">
+      <div className="flex items-center gap-3 mr-5 hover:cursor-pointer md:mr-10">
         <div
           onClick={() => setDisplayFilters(prevState => !prevState)}
           className="flex items-center gap-3"

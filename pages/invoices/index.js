@@ -11,7 +11,7 @@ export default function Invoices(props) {
     <main
       className={`${
         isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
-      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8 md:pt-14`}
+      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-[72px]`}
     >
       <Header title="Invoices" payments={props.invoices} />
       <PaymentsList type="invoices" invoices={props.invoices} />
