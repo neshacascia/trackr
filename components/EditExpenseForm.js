@@ -1,7 +1,12 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 
-export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
+export default function EditExpenseForm({
+  updateExpense,
+  data,
+  isDarkMode,
+  setShowModal,
+}) {
   const router = useRouter();
 
   const [merchantInputValidation, setMerchantInputValidation] = useState(false);
@@ -80,6 +85,14 @@ export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
       };
 
       updateExpense(expenseData);
+    }
+  }
+
+  function cancelEditsHandler() {
+    if (window.innerWidth >= 768) {
+      setShowModal(false);
+    } else {
+      router.back();
     }
   }
 
@@ -339,7 +352,7 @@ export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
       >
         <button
           type="button"
-          onClick={() => router.back()}
+          onClick={cancelEditsHandler}
           className={`${
             isDarkMode
               ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
