@@ -84,7 +84,7 @@ export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
   }
 
   return (
-    <form className="text-white" onSubmit={submitHandler}>
+    <form className="text-white md:px-6" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
         <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
@@ -335,7 +335,7 @@ export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
       <footer
         className={`${
           isDarkMode ? 'bg-mainPurple' : 'bg-white'
-        } h-[91px] flex items-center gap-2 px-6 -mx-6`}
+        } h-[91px] flex items-center gap-2 px-6 -mx-6 md:bg-transparent md:justify-end md:mb-8`}
       >
         <button
           type="button"
@@ -344,14 +344,14 @@ export default function EditExpenseForm({ updateExpense, data, isDarkMode }) {
             isDarkMode
               ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
               : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
-          } font-medium w-full rounded-3xl py-4 px-[18px]`}
+          } font-medium w-full rounded-3xl py-4 px-[18px] md:w-[96px]`}
         >
           Cancel
         </button>
         <button
           type="submit"
           onClick={submitHandler}
-          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple md:w-[138px]"
         >
           Save Changes
         </button>
