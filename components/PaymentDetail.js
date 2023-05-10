@@ -229,7 +229,7 @@ export default function PaymentDetail({
             {expenseData?.status === 'Pending' && (
               <button
                 onClick={markAsPaidHandler}
-                className="text-white bg-brightPurple font-medium w-full rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
               >
                 Mark as Paid
               </button>
@@ -237,7 +237,7 @@ export default function PaymentDetail({
             {data?.status === 'Draft' && (
               <button
                 onClick={updateToPendingHandler}
-                className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
               >
                 Save & Send
               </button>
