@@ -234,65 +234,67 @@ export default function PaymentDetail({ type, data, expenseData }) {
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
           } flex flex-col gap-[30px] rounded-lg p-6`}
         >
-          <div className="flex justify-between">
-            <div className="flex flex-col">
-              <span
-                className={`${
-                  isDarkMode ? 'text-white' : 'text-lightText'
-                } font-medium`}
-              >
-                <span className="text-detailPurple font-medium">#</span>
-                {data?.id.slice(-6).toUpperCase() ||
-                  expenseData.referenceNo.toUpperCase() ||
-                  expenseData.id.slice(-6).toUpperCase()}
-              </span>
+          <div className="md:flex justify-between">
+            <div className="flex justify-between">
+              <div className="flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } font-medium`}
+                >
+                  <span className="text-detailPurple font-medium">#</span>
+                  {data?.id.slice(-6).toUpperCase() ||
+                    expenseData.referenceNo.toUpperCase() ||
+                    expenseData.id.slice(-6).toUpperCase()}
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light`}
+                >
+                  {data?.description || expenseData.notes}
+                </span>
+              </div>
+
               <span
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
                 } font-light`}
               >
-                {data?.description || expenseData.notes}
+                {expenseData?.expenseCategory}
               </span>
             </div>
 
-            <span
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light`}
-            >
-              {expenseData?.expenseCategory}
-            </span>
+            {type === 'invoices' ? (
+              <div
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light flex flex-col md:text-right my-[30px] md:my-0`}
+              >
+                <span>{data?.street}</span>
+                <span>{data?.city}</span>
+                <span>{data?.postal}</span>
+                <span>{data?.country}</span>
+              </div>
+            ) : (
+              <div
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light flex flex-col`}
+              >
+                <span>Account Number</span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {expenseData?.accountNo}
+                </span>
+              </div>
+            )}
           </div>
 
-          {type === 'invoices' ? (
-            <div
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light flex flex-col`}
-            >
-              <span>{data?.street}</span>
-              <span>{data?.city}</span>
-              <span>{data?.postal}</span>
-              <span>{data?.country}</span>
-            </div>
-          ) : (
-            <div
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light flex flex-col`}
-            >
-              <span>Account Number</span>
-              <span
-                className={`${
-                  isDarkMode ? 'text-white' : 'text-lightText'
-                } text-[19px] font-medium`}
-              >
-                {expenseData?.accountNo}
-              </span>
-            </div>
-          )}
-
-          <div className="flex gap-10">
+          <div className="flex gap-10 -mt-6 md:gap-24 md:mb-10">
             <div className="flex flex-col gap-8">
               {type === 'invoices' ? (
                 <div className="flex flex-col">
@@ -358,10 +360,27 @@ export default function PaymentDetail({ type, data, expenseData }) {
               <span className="font-light">{data?.clientPostal}</span>
               <span className="font-light">{data?.clientCountry}</span>
             </div>
+
+            <div className="hidden md:flex flex-col">
+              <span
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light mb-3`}
+              >
+                Sent to
+              </span>
+              <span
+                className={`${
+                  isDarkMode ? 'text-white' : 'text-lightText'
+                } text-[19px] font-medium`}
+              >
+                {data.clientEmail}
+              </span>
+            </div>
           </div>
 
           {type === 'invoices' ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col md:hidden">
               <span
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
@@ -418,6 +437,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
                 </div>
               )}
             </div>
+
             <div
               className={`${
                 isDarkMode ? 'bg-black' : 'bg-draftLight'
