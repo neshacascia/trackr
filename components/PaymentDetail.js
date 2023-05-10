@@ -7,7 +7,12 @@ import EditInvoiceForm from './EditInvoiceForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function PaymentDetail({ type, data, expenseData }) {
+export default function PaymentDetail({
+  type,
+  data,
+  expenseData,
+  updateInvoice,
+}) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
@@ -550,6 +555,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
               isDarkMode={isDarkMode}
               showModal={showModal}
               setShowModal={setShowModal}
+              updateInvoice={updateInvoice}
             />
           </div>
         </div>
