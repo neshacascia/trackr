@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
@@ -9,6 +10,23 @@ export default function Invoices(props) {
   const { isDarkMode } = useContext(Context);
 
   const [showModal, setShowModal] = useState(false);
+
+  const router = useRouter();
+
+  async function addInvoiceHandler(enteredInvoiceData) {
+    const res = await fetch('/api/new-invoice', {
+      method: 'POST',
+      body: JSON.stringify(enteredInvoiceData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = res.json();
+    console.log(data);
+
+    router.push('/invoices');
+  }
 
   return (
     <main
@@ -40,6 +58,7 @@ export default function Invoices(props) {
               isDarkMode={isDarkMode}
               showModal={showModal}
               setShowModal={setShowModal}
+              addInvoice={addInvoiceHandler}
             />
           </div>
         </div>
