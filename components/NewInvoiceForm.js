@@ -265,7 +265,7 @@ export default function NewInvoiceForm({ addInvoice }) {
   }
 
   return (
-    <form className="text-white" onSubmit={submitHandler}>
+    <form className="text-white md:px-6" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
         <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
