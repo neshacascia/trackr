@@ -6,7 +6,7 @@ import FormFooter from './FormFooter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function NewInvoiceForm({ addInvoice }) {
+export default function NewInvoiceForm({ addInvoice, setShowModal }) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
@@ -308,51 +308,93 @@ export default function NewInvoiceForm({ addInvoice }) {
           />
         </label>
 
-        <div className="flex gap-6">
-          <label
-            htmlFor="city"
-            className={`${
-              !cityInputValidation && cityInputTouched
-                ? 'text-deleteBtn'
-                : isDarkMode
-                ? 'text-grayPurple'
-                : 'text-detailPurple'
-            } font-light flex flex-col`}
-          >
-            <div className="flex justify-between">
-              City
-              {!cityInputValidation && cityInputTouched && (
-                <p className="text-deleteBtn">can't be empty</p>
-              )}
-            </div>
-            <input
-              type="text"
-              id="city"
+        <div className="md:flex gap-6">
+          <div className="flex gap-6 mb-6 md:-mb-6">
+            <label
+              htmlFor="city"
               className={`${
-                isDarkMode
-                  ? 'text-white bg-mainPurple border-borderPurple'
-                  : 'text-lightText bg-white border-draft'
-              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !cityInputValidation && cityInputTouched
-                  ? 'border-deleteBtn'
-                  : ''
-              }`}
-              ref={cityInputRef}
-              onBlur={e =>
-                inputBlurHandler(
-                  setCityInputTouched,
-                  cityInputRef,
-                  setCityInputValidation
-                )
-              }
-              onChange={e => changeHandler(e, setCityInputValidation)}
-            />
-          </label>
+                  ? 'text-deleteBtn'
+                  : isDarkMode
+                  ? 'text-grayPurple'
+                  : 'text-detailPurple'
+              } font-light flex flex-col`}
+            >
+              <div className="flex justify-between">
+                City
+                {!cityInputValidation && cityInputTouched && (
+                  <p className="text-deleteBtn">can't be empty</p>
+                )}
+              </div>
+              <input
+                type="text"
+                id="city"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !cityInputValidation && cityInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={cityInputRef}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setCityInputTouched,
+                    cityInputRef,
+                    setCityInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setCityInputValidation)}
+              />
+            </label>
+
+            <label
+              htmlFor="postal-code"
+              className={`${
+                !postalInputValidation && postalInputTouched
+                  ? 'text-deleteBtn'
+                  : isDarkMode
+                  ? 'text-grayPurple'
+                  : 'text-detailPurple'
+              } font-light flex flex-col`}
+            >
+              <div className="flex justify-between">
+                Postal Code
+                {!postalInputValidation && postalInputTouched && (
+                  <p className="text-deleteBtn">can't be empty</p>
+                )}
+              </div>
+              <input
+                type="text"
+                id="postal-code"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !postalInputValidation && postalInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={postalInputRef}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setPostalInputTouched,
+                    postalInputRef,
+                    setPostalInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setPostalInputValidation)}
+              />
+            </label>
+          </div>
 
           <label
-            htmlFor="postal-code"
+            htmlFor="country"
             className={`${
-              !postalInputValidation && postalInputTouched
+              !countryInputValidation && countryInputTouched
                 ? 'text-deleteBtn'
                 : isDarkMode
                 ? 'text-grayPurple'
@@ -360,75 +402,35 @@ export default function NewInvoiceForm({ addInvoice }) {
             } font-light flex flex-col`}
           >
             <div className="flex justify-between">
-              Postal Code
-              {!postalInputValidation && postalInputTouched && (
+              Country
+              {!countryInputValidation && countryInputTouched && (
                 <p className="text-deleteBtn">can't be empty</p>
               )}
             </div>
             <input
               type="text"
-              id="postal-code"
+              id="country"
               className={`${
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-                !postalInputValidation && postalInputTouched
+              } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !countryInputValidation && countryInputTouched
                   ? 'border-deleteBtn'
                   : ''
               }`}
-              ref={postalInputRef}
+              ref={countryInputRef}
               onBlur={e =>
                 inputBlurHandler(
-                  setPostalInputTouched,
-                  postalInputRef,
-                  setPostalInputValidation
+                  setCountryInputTouched,
+                  countryInputRef,
+                  setCountryInputValidation
                 )
               }
-              onChange={e => changeHandler(e, setPostalInputValidation)}
+              onChange={e => changeHandler(e, setCountryInputValidation)}
             />
           </label>
         </div>
-
-        <label
-          htmlFor="country"
-          className={`${
-            !countryInputValidation && countryInputTouched
-              ? 'text-deleteBtn'
-              : isDarkMode
-              ? 'text-grayPurple'
-              : 'text-detailPurple'
-          } font-light flex flex-col`}
-        >
-          <div className="flex justify-between">
-            Country
-            {!countryInputValidation && countryInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
-            )}
-          </div>
-          <input
-            type="text"
-            id="country"
-            className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !countryInputValidation && countryInputTouched
-                ? 'border-deleteBtn'
-                : ''
-            }`}
-            ref={countryInputRef}
-            onBlur={e =>
-              inputBlurHandler(
-                setCountryInputTouched,
-                countryInputRef,
-                setCountryInputValidation
-              )
-            }
-            onChange={e => changeHandler(e, setCountryInputValidation)}
-          />
-        </label>
       </section>
 
       <section className="flex flex-col gap-6">
@@ -532,150 +534,154 @@ export default function NewInvoiceForm({ addInvoice }) {
           />
         </label>
 
-        <div className="flex gap-6">
-          <label
-            htmlFor="city"
-            className={`font-light ${
-              isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-            } flex flex-col`}
-          >
-            City
-            <input
-              type="text"
-              id="city"
-              className={`${
-                isDarkMode
-                  ? 'text-white bg-mainPurple border-borderPurple'
-                  : 'text-lightText bg-white border-draft'
-              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-              ref={clientCityInputRef}
-            />
-          </label>
+        <div className="md:flex gap-6">
+          <div className="flex gap-6 mb-6 md:-mb-6">
+            <label
+              htmlFor="city"
+              className={`font-light ${
+                isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+              } flex flex-col`}
+            >
+              City
+              <input
+                type="text"
+                id="city"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+                ref={clientCityInputRef}
+              />
+            </label>
+
+            <label
+              htmlFor="postal-code"
+              className={`font-light ${
+                isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+              } flex flex-col`}
+            >
+              Postal Code
+              <input
+                type="text"
+                id="postal-code"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+                ref={clientPostalInputRef}
+              />
+            </label>
+          </div>
 
           <label
-            htmlFor="postal-code"
+            htmlFor="country"
             className={`font-light ${
               isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
             } flex flex-col`}
           >
-            Postal Code
+            Country
             <input
               type="text"
-              id="postal-code"
+              id="country"
               className={`${
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-              ref={clientPostalInputRef}
+              } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+              ref={clientCountryInputRef}
             />
           </label>
         </div>
 
-        <label
-          htmlFor="country"
-          className={`font-light ${
-            isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-          } flex flex-col`}
-        >
-          Country
-          <input
-            type="text"
-            id="country"
+        <div className="md:flex justify-between gap-6 md:-mb-6">
+          <label
+            htmlFor="invoice-date"
             className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-            ref={clientCountryInputRef}
-          />
-        </label>
-
-        <label
-          htmlFor="invoice-date"
-          className={`${
-            !invoiceDateInputValidation && invoiceDateInputTouched
-              ? 'text-deleteBtn'
-              : isDarkMode
-              ? 'text-grayPurple'
-              : 'text-detailPurple'
-          } font-light flex flex-col`}
-        >
-          <div className="flex justify-between">
-            Invoice Date
-            {!invoiceDateInputValidation && invoiceDateInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
-            )}
-          </div>
-          <input
-            type="date"
-            id="invoice-date"
-            className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
               !invoiceDateInputValidation && invoiceDateInputTouched
-                ? 'border-deleteBtn'
-                : ''
-            }`}
-            ref={invoiceDateInputRef}
-            onBlur={e =>
-              inputBlurHandler(
-                setInvoiceDateInputTouched,
-                invoiceDateInputRef,
-                setInvoiceDateInputValidation
-              )
-            }
-            onChange={e => changeHandler(e, setInvoiceDateInputValidation)}
-          />
-        </label>
-
-        <label
-          htmlFor="terms"
-          className={`${
-            !paymentTermsInputValidation && paymentTermsInputTouched
-              ? 'text-deleteBtn'
-              : isDarkMode
-              ? 'text-grayPurple'
-              : 'text-detailPurple'
-          } font-light flex flex-col`}
-        >
-          <div className="flex justify-between">
-            Payment Terms
-            {!paymentTermsInputValidation && paymentTermsInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
-            )}
-          </div>
-          <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[28px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
-            <select
-              id="terms"
+                ? 'text-deleteBtn'
+                : isDarkMode
+                ? 'text-grayPurple'
+                : 'text-detailPurple'
+            } font-light flex flex-col mb-6 md:w-full`}
+          >
+            <div className="flex justify-between">
+              Invoice Date
+              {!invoiceDateInputValidation && invoiceDateInputTouched && (
+                <p className="text-deleteBtn">can't be empty</p>
+              )}
+            </div>
+            <input
+              type="date"
+              id="invoice-date"
               className={`${
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } text-base font-medium w-full border-[1px] rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
-                !paymentTermsInputValidation && paymentTermsInputTouched
+              } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+                !invoiceDateInputValidation && invoiceDateInputTouched
                   ? 'border-deleteBtn'
                   : ''
               }`}
-              ref={paymentTermsInputRef}
+              ref={invoiceDateInputRef}
               onBlur={e =>
                 inputBlurHandler(
-                  setPaymentTermsInputTouched,
-                  paymentTermsInputRef,
-                  setPaymentTermsInputValidation
+                  setInvoiceDateInputTouched,
+                  invoiceDateInputRef,
+                  setInvoiceDateInputValidation
                 )
               }
-              onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
-            >
-              <option>Net 1 Day</option>
-              <option>Net 7 Days</option>
-              <option>Net 14 Days</option>
-              <option>Net 30 Days</option>
-            </select>
-          </div>
-        </label>
+              onChange={e => changeHandler(e, setInvoiceDateInputValidation)}
+            />
+          </label>
+
+          <label
+            htmlFor="terms"
+            className={`${
+              !paymentTermsInputValidation && paymentTermsInputTouched
+                ? 'text-deleteBtn'
+                : isDarkMode
+                ? 'text-grayPurple'
+                : 'text-detailPurple'
+            } font-light w-full flex flex-col`}
+          >
+            <div className="flex justify-between">
+              Payment Terms
+              {!paymentTermsInputValidation && paymentTermsInputTouched && (
+                <p className="text-deleteBtn">can't be empty</p>
+              )}
+            </div>
+            <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[26px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
+              <select
+                id="terms"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } text-base font-medium w-full border-[1px] rounded-[4px] pt-4 pb-3 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !paymentTermsInputValidation && paymentTermsInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={paymentTermsInputRef}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setPaymentTermsInputTouched,
+                    paymentTermsInputRef,
+                    setPaymentTermsInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
+              >
+                <option>Net 1 Day</option>
+                <option>Net 7 Days</option>
+                <option>Net 14 Days</option>
+                <option>Net 30 Days</option>
+              </select>
+            </div>
+          </label>
+        </div>
 
         <label
           htmlFor="desc"
