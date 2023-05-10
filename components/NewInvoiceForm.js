@@ -929,6 +929,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
         router={router}
         saveAsDraftHandler={saveAsDraftHandler}
         isDarkMode={isDarkMode}
+        setShowModal={setShowModal}
       />
     </form>
   );
