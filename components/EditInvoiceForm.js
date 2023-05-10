@@ -8,7 +8,6 @@ export default function EditInvoiceForm({
   updateInvoice,
   invoiceData,
   isDarkMode,
-  showModal,
   setShowModal,
 }) {
   const router = useRouter();

@@ -611,7 +611,6 @@ export default function PaymentDetail({
             <EditInvoiceForm
               invoiceData={data}
               isDarkMode={isDarkMode}
-              showModal={showModal}
               setShowModal={setShowModal}
               updateInvoice={updateInvoice}
             />
