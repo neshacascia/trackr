@@ -146,7 +146,7 @@ export default function Payment({
             >
               #
             </span>
-            {referenceNo?.toUpperCase() || id.slice(-6).toUpperCase()}
+            {id?.slice(-6).toUpperCase() || id.slice(-6).toUpperCase()}
           </span>
 
           <p
