@@ -549,6 +549,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
               invoiceData={data}
               isDarkMode={isDarkMode}
               showModal={showModal}
+              setShowModal={setShowModal}
             />
           </div>
         </div>

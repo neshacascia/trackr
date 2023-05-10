@@ -9,6 +9,7 @@ export default function EditInvoiceForm({
   invoiceData,
   isDarkMode,
   showModal,
+  setShowModal,
 }) {
   const router = useRouter();
 
@@ -215,6 +216,14 @@ export default function EditInvoiceForm({
       };
 
       updateInvoice(data);
+    }
+  }
+
+  function cancelEditsHandler() {
+    if (window.innerWidth >= 768) {
+      setShowModal(false);
+    } else {
+      router.back();
     }
   }
 
@@ -843,7 +852,7 @@ export default function EditInvoiceForm({
       >
         <button
           type="button"
-          onClick={() => router.back()}
+          onClick={cancelEditsHandler}
           className={`${
             isDarkMode
               ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
