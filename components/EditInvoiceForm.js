@@ -232,10 +232,7 @@ export default function EditInvoiceForm({
   }
 
   return (
-    <form
-      className={`text-white invoice ${showModal ? 'px-6' : ''}`}
-      onSubmit={submitHandler}
-    >
+    <form className="text-white invoice md:px-6" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
         <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
