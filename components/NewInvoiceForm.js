@@ -141,11 +141,16 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
   function saveAsDraftHandler(e) {
     e.preventDefault();
 
+    setClientNameInputTouched(true);
     setInvoiceDateInputTouched(true);
     setFormInputTouched(true);
 
     if (invoiceDateInputRef.current.value.trim() === '') {
       setInvoiceDateInputValidation(false);
+      setFormValidation(false);
+      return;
+    } else if (clientNameInputRef.current.value.trim() === '') {
+      setClientNameInputValidation(false);
       setFormValidation(false);
       return;
     } else {
