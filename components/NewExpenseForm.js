@@ -310,7 +310,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
           htmlFor="notes"
           className={`font-light ${
             isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-          } flex flex-col`}
+          } flex flex-col md:mb-16`}
         >
           Notes
           <textarea
