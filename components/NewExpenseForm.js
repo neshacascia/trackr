@@ -3,7 +3,7 @@ import { useState, useRef, useContext } from 'react';
 import { Context } from './context/StateContext';
 import FormFooter from './FormFooter';
 
-export default function NewExpenseForm({ addExpense }) {
+export default function NewExpenseForm({ addExpense, setShowModal }) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
@@ -326,7 +326,12 @@ export default function NewExpenseForm({ addExpense }) {
         </label>
       </section>
 
-      <FormFooter type="expenses" router={router} isDarkMode={isDarkMode} />
+      <FormFooter
+        type="expenses"
+        router={router}
+        isDarkMode={isDarkMode}
+        setShowModal={setShowModal}
+      />
     </form>
   );
 }

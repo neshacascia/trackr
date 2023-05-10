@@ -13,6 +13,13 @@ export default function FormFooter({
       } else {
         router.back();
       }
+    } else {
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+        router.push('/expenses');
+      } else {
+        router.back();
+      }
     }
   }
 
