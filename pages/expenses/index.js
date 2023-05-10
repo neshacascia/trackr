@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
+import NewExpenseForm from '@/components/NewExpenseForm';
 
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
@@ -21,6 +22,30 @@ export default function Expenses(props) {
         setShowModal={setShowModal}
       />
       <PaymentsList type="expenses" expenses={props.expenses} />
+
+      {showModal && window.innerWidth >= 768 && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              New Expense
+            </h2>
+            <NewExpenseForm
+              isDarkMode={isDarkMode}
+              showModal={showModal}
+              setShowModal={setShowModal}
+            />
+          </div>
+        </div>
+      )}
     </main>
   );
 }
