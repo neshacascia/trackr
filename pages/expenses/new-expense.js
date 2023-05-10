@@ -30,7 +30,7 @@ export default function NewExpense() {
     <main
       className={`${
         isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-      } h-full flex flex-col gap-6 px-6`}
+      } h-full flex flex-col gap-6 px-6 pt-[72px]`}
     >
       <button
         onClick={() => router.push('/expenses')}
