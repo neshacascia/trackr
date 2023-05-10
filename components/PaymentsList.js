@@ -90,7 +90,7 @@ export default function PaymentsList({ type, invoices, expenses }) {
     <main
       className={`${
         isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-      } w-screen h-full flex flex-col gap-4 px-6 pb-[105px] md:px-12 md:pt-6`}
+      } w-screen h-full flex flex-col gap-4 px-6 pb-[105px] md:px-12 md:pt-6 xl:px-[252px]`}
     >
       {(type === 'invoices' && !invoices?.length) ||
         (type === 'expenses' && !expenses?.length && (

@@ -55,7 +55,7 @@ export default function Header({ title, payments, setShowModal }) {
   }
 
   return (
-    <header className="w-screen h-11 flex items-center mt-9 px-6 md:px-12 md:mt-14">
+    <header className="w-screen h-11 flex items-center mt-9 px-6 md:px-12 md:mt-14 xl:px-[252px]">
       <div className="mr-auto">
         <h2 className="text-2xl font-medium md:text-3xl md:mb-2">{title}</h2>
         <p
