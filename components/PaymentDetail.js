@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useContext } from 'react';
 import { Context } from './context/StateContext';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import EditInvoiceForm from './EditInvoiceForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -73,11 +74,21 @@ export default function PaymentDetail({ type, data, expenseData }) {
         }, 0)
       : '';
 
+  const [showModal, setShowModal] = useState(false);
+
   function editPaymentHandler() {
     if (type === 'invoices') {
-      router.push(`/invoices/edit/${data?.id}`);
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push(`/invoices/edit/${data?.id}`);
+      }
     } else {
-      router.push(`/expenses/edit/${expenseData.id}`);
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push(`/expenses/edit/${expenseData.id}`);
+      }
     }
   }
 
@@ -135,7 +146,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-        } h-full flex flex-col gap-6 px-6 pb-14 md:px-12 md:pb-[135px]`}
+        } h-full flex flex-col gap-6 px-6 pt-[72px] pb-14 md:px-12 md:pb-[135px]`}
       >
         <button
           onClick={() => router.push(`/${type}`)}
@@ -252,7 +263,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
                   } font-light`}
                 >
-                  {data?.description || expenseData.notes}
+                  {data?.description || expenseData?.notes}
                 </span>
               </div>
 
@@ -353,7 +364,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
                   isDarkMode ? 'text-white' : 'text-lightText'
                 } text-[19px] font-medium mb-2`}
               >
-                {data?.clientName || expenseData.merchant}
+                {data?.clientName || expenseData?.merchant}
               </span>
               <span className="font-light">{data?.clientStreet}</span>
               <span className="font-light">{data?.clientCity}</span>
@@ -503,6 +514,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
           </button>
         )}
       </footer>
+
       <DeleteConfirmationModal
         deletePayment={deletePayment}
         id={data?.id || expenseData.id}
@@ -511,6 +523,36 @@ export default function PaymentDetail({ type, data, expenseData }) {
         deletePaymentHandler={deletePaymentHandler}
         isDarkMode={isDarkMode}
       />
+
+      {showModal && window.innerWidth >= 768 && type === 'invoices' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`bg-darkPurple rounded-r-lg w-full max-w-xl h-full p-6 my-14`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              Edit{' '}
+              <span
+                className={`${
+                  isDarkMode ? 'text-boldGrayPurple' : 'text-grayPurple'
+                }`}
+              >
+                #
+              </span>
+              {data.id.slice(-6).toUpperCase()}
+            </h2>
+            <EditInvoiceForm
+              invoiceData={data}
+              isDarkMode={isDarkMode}
+              showModal={showModal}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
