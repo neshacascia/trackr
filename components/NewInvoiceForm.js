@@ -142,9 +142,11 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
     e.preventDefault();
 
     setInvoiceDateInputTouched(true);
+    setFormInputTouched(true);
 
     if (invoiceDateInputRef.current.value.trim() === '') {
       setInvoiceDateInputValidation(false);
+      setFormValidation(false);
       return;
     } else {
       const invoiceData = {
