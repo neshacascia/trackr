@@ -9,7 +9,7 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Header({ title, payments }) {
+export default function Header({ title, payments, setShowModal }) {
   const router = useRouter();
 
   const [displayFilters, setDisplayFilters] = useState(false);
@@ -44,7 +44,11 @@ export default function Header({ title, payments }) {
 
   function createNewPayment() {
     if (title === 'Invoices') {
-      router.push('/invoices/new-invoice');
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push('/invoices/new-invoice');
+      }
     } else {
       router.push('/new-expense');
     }
