@@ -11,6 +11,9 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
 
   const { isDarkMode } = useContext(Context);
 
+  const [formValidation, setFormValidation] = useState(false);
+  const [formInputTouched, setFormInputTouched] = useState(false);
+
   const [streetInputValidation, setStreetInputValidation] = useState(false);
   const [streetInputTouched, setStreetInputTouched] = useState(false);
 
@@ -190,42 +193,55 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
     setItemNameInputTouched(true);
     setQuantityInputTouched(true);
     setPriceInputTouched(true);
+    setFormInputTouched(true);
 
     if (streetInputRef.current.value.trim() === '') {
       setStreetInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (cityInputRef.current.value.trim() === '') {
       setCityInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (postalInputRef.current.value.trim() === '') {
       setPostalInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (countryInputRef.current.value.trim() === '') {
       setCountryInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (clientNameInputRef.current.value.trim() === '') {
       setClientNameInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (clientEmailInputRef.current.value.trim() === '') {
       setClientEmailInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (invoiceDateInputRef.current.value.trim() === '') {
       setInvoiceDateInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (paymentTermsInputRef.current.value.trim() === '') {
       setPaymentTermsInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (descriptionInputRef.current.value.trim() === '') {
       setDescriptionInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (itemNameInputRef.current.value.trim() === '') {
       setItemNameInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (quantityInputRef.current.value.trim() === '') {
       setQuantityInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (priceInputRef.current.value.trim() === '') {
       setPriceInputValidation(false);
+      setFormValidation(false);
       return;
     } else {
       setStreetInputValidation(true);
@@ -240,6 +256,8 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
       setItemNameInputValidation(true);
       setQuantityInputValidation(true);
       setPriceInputValidation(true);
+
+      setFormValidation(true);
 
       const invoiceData = {
         street: streetInputRef.current.value,
@@ -930,6 +948,12 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
         >
           + Add New Item
         </button>
+
+        {!formValidation && formInputTouched && (
+          <p className="hidden lg:block font-medium text-deleteBtn pb-10">
+            - Highlighted fields must be added
+          </p>
+        )}
       </section>
 
       <FormFooter
