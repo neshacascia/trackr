@@ -850,9 +850,9 @@ export default function EditInvoiceForm({
       </section>
 
       <footer
-        className={`${isDarkMode ? 'bg-mainPurple' : 'bg-white'} ${
-          showModal ? 'bg-transparent' : ''
-        } h-[91px] flex items-center gap-2 px-6 -mx-6 md:justify-end md:-mt-14 md:mb-8`}
+        className={`${
+          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        } h-[91px] flex items-center gap-2 px-6 -mx-6 md:bg-transparent md:justify-end md:-mt-14 md:mb-8`}
       >
         <button
           type="button"
