@@ -8,6 +8,9 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
 
   const { isDarkMode } = useContext(Context);
 
+  const [formValidation, setFormValidation] = useState(false);
+  const [formInputTouched, setFormInputTouched] = useState(false);
+
   const [merchantInputValidation, setMerchantInputValidation] = useState(false);
   const [merchantInputTouched, setMerchantInputTouched] = useState(false);
 
@@ -54,20 +57,25 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
     setMerchantInputTouched(true);
     setExpenseDueDateInputTouched(true);
     setExpenseAmountInputTouched(true);
+    setFormInputTouched(true);
 
     if (merchantInputRef.current.value.trim() === '') {
       setMerchantInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (expenseDueDateInputRef.current.value.trim() === '') {
       setExpenseDueDateInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (expenseAmountInputRef.current.value.trim() === '') {
       setExpenseAmountInputValidation(false);
+      setFormValidation(false);
       return;
     } else {
       setMerchantInputValidation(true);
       setExpenseDueDateInputValidation(true);
       setExpenseAmountInputValidation(true);
+      setFormValidation(true);
 
       const expenseData = {
         merchant: merchantInputRef.current.value,
@@ -328,6 +336,12 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
             ref={notesInputRef}
           ></textarea>
         </label>
+
+        {!formValidation && formInputTouched && (
+          <p className="hidden lg:block font-medium text-deleteBtn pb-10">
+            - Highlighted fields must be added
+          </p>
+        )}
       </section>
 
       <FormFooter
