@@ -17,13 +17,13 @@ export default function DeleteConfirmationModal({
           <div
             className={`${
               isDarkMode ? 'bg-mainPurple' : 'bg-white'
-            } flex flex-col rounded-[8px] p-8 mx-6`}
+            } flex flex-col rounded-[8px] p-8 mx-6 md:w-[480px] md:p-12`}
           >
             <div className="text-left mb-6">
               <h1
                 className={`${
                   isDarkMode ? 'text-white' : 'text-lightText'
-                } text-xl font-bold mb-2`}
+                } text-xl font-bold mb-2 md:text-2xl`}
               >
                 Confirm Deletion
               </h1>
