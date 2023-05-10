@@ -97,7 +97,7 @@ export default function Header({ title, payments, setShowModal }) {
           <div
             className={`${
               isDarkMode ? 'bg-borderPurple' : 'text-lightText bg-white'
-            } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6`}
+            } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6 md:top-[26%] md:right-[25%] lg:right-[20%]`}
           >
             {title === 'Invoices' ? (
               <label
