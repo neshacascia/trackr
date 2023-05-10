@@ -532,7 +532,9 @@ export default function PaymentDetail({
       {showModal && window.innerWidth >= 768 && type === 'invoices' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
           <div
-            className={`bg-darkPurple rounded-r-lg w-full max-w-xl h-full p-6 my-14`}
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14`}
             style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
           >
             <h2
