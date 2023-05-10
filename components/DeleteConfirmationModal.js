@@ -34,7 +34,7 @@ export default function DeleteConfirmationModal({
               </p>
             </div>
 
-            <div className="text-white flex place-self-end gap-8 ">
+            <div className="text-white flex place-self-end gap-2">
               <button
                 onClick={cancelDeletion}
                 className={`${
