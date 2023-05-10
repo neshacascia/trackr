@@ -250,8 +250,8 @@ export default function PaymentDetail({
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
           } flex flex-col gap-[30px] rounded-lg p-6`}
         >
-          <div className="md:flex justify-between">
-            <div className="flex justify-between">
+          <div className="md:flex md:justify-between">
+            <div className="flex justify-between md:w-full">
               <div className="flex flex-col">
                 <span
                   className={`${
@@ -266,7 +266,7 @@ export default function PaymentDetail({
                 <span
                   className={`${
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
-                  } font-light`}
+                  } font-light mb-10`}
                 >
                   {data?.description || expenseData?.notes}
                 </span>
@@ -275,7 +275,7 @@ export default function PaymentDetail({
               <span
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light`}
+                } font-light md:text-right`}
               >
                 {expenseData?.expenseCategory}
               </span>
@@ -296,7 +296,7 @@ export default function PaymentDetail({
               <div
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light flex flex-col`}
+                } font-light flex flex-col mb-8 md:hidden`}
               >
                 <span>Account Number</span>
                 <span
@@ -334,7 +334,22 @@ export default function PaymentDetail({
                 ''
               )}
 
-              <div className="flex flex-col">
+              <div
+                className={`hidden ${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light md:flex flex-col mb-8`}
+              >
+                <span>Account Number</span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {expenseData?.accountNo}
+                </span>
+              </div>
+
+              <div className="flex flex-col md:hidden">
                 <span
                   className={`${
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
@@ -377,22 +392,41 @@ export default function PaymentDetail({
               <span className="font-light">{data?.clientCountry}</span>
             </div>
 
-            <div className="hidden md:flex flex-col">
-              <span
-                className={`${
-                  isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light mb-3`}
-              >
-                Sent to
-              </span>
-              <span
-                className={`${
-                  isDarkMode ? 'text-white' : 'text-lightText'
-                } text-[19px] font-medium`}
-              >
-                {data.clientEmail}
-              </span>
-            </div>
+            {type === 'invoices' ? (
+              <div className="hidden md:flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Sent to
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {data?.clientEmail}
+                </span>
+              </div>
+            ) : (
+              <div className="hidden md:flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Payment Due
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {formattedExpenseDate}
+                </span>
+              </div>
+            )}
           </div>
 
           {type === 'invoices' ? (
@@ -420,7 +454,7 @@ export default function PaymentDetail({
             <div
               className={`${
                 isDarkMode ? 'bg-borderPurple' : 'bg-grey'
-              } flex flex-col gap-6 rounded-t-lg p-6`}
+              } flex flex-col gap-6 rounded-t-lg p-6 md:-mt-10`}
             >
               {type === 'invoices' ? (
                 data?.items.map((item, ind) => (
