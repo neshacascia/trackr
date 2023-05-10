@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
@@ -8,7 +9,24 @@ import NewExpenseForm from '@/components/NewExpenseForm';
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
 
+  const router = useRouter();
+
   const [showModal, setShowModal] = useState(false);
+
+  async function addExpenseHandler(enteredExpenseData) {
+    const res = await fetch('/api/new-expense', {
+      method: 'POST',
+      body: JSON.stringify(enteredExpenseData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = res.json();
+    console.log(data);
+
+    router.push('/expenses');
+  }
 
   return (
     <main
@@ -42,6 +60,7 @@ export default function Expenses(props) {
               isDarkMode={isDarkMode}
               showModal={showModal}
               setShowModal={setShowModal}
+              addExpense={addExpenseHandler}
             />
           </div>
         </div>
