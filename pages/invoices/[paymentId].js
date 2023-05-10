@@ -1,9 +1,38 @@
 import { MongoClient, ObjectId } from 'mongodb';
+import { useRouter } from 'next/router';
 import PaymentDetail from '../../components/PaymentDetail';
 
 export default function PaymentDetails(props) {
   const data = props.paymentData;
-  return <PaymentDetail type="invoices" data={data} />;
+
+  const router = useRouter();
+
+  async function updateInvoiceHandler(invoiceData) {
+    const res = await fetch('/api/update-invoice', {
+      method: 'PUT',
+      body: JSON.stringify(invoiceData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (window.innerWidth >= 768) {
+      router.push(`/invoices/${invoiceData.id}`);
+    } else {
+      router.back();
+    }
+  }
+
+  return (
+    <PaymentDetail
+      type="invoices"
+      data={data}
+      updateInvoice={updateInvoiceHandler}
+    />
+  );
 }
 
 export async function getStaticPaths() {
