@@ -216,6 +216,10 @@ export default function EditInvoiceForm({
       };
 
       updateInvoice(data);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 
