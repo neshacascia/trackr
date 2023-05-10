@@ -168,6 +168,10 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
       };
 
       addInvoice(invoiceData);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 
@@ -261,6 +265,10 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
       };
 
       addInvoice(invoiceData);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 
