@@ -85,6 +85,10 @@ export default function EditExpenseForm({
       };
 
       updateExpense(expenseData);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 

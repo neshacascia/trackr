@@ -3,10 +3,10 @@ import { useState, useContext } from 'react';
 import { Context } from './context/StateContext';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import EditInvoiceForm from './EditInvoiceForm';
+import EditExpenseForm from './EditExpenseForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
-import EditExpenseForm from './EditExpenseForm';
 
 export default function PaymentDetail({
   type,
@@ -144,6 +144,25 @@ export default function PaymentDetail({
       console.log(responseData);
 
       router.push('/invoices');
+    }
+  }
+
+  async function updateExpenseHandler(expenseData) {
+    const res = await fetch('/api/update-expense', {
+      method: 'PUT',
+      body: JSON.stringify(expenseData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (window.innerWidth >= 768) {
+      router.push(`/expenses/${expenseData.id}`);
+    } else {
+      router.back();
     }
   }
 
@@ -627,6 +646,7 @@ export default function PaymentDetail({
               isDarkMode={isDarkMode}
               showModal={showModal}
               setShowModal={setShowModal}
+              updateExpense={updateExpenseHandler}
             />
           </div>
         </div>
