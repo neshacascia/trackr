@@ -568,7 +568,7 @@ export default function PaymentDetail({
           <div
             className={`${
               isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-            } rounded-r-lg w-full max-w-xl h-full p-6 my-14`}
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
             style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
           >
             <h2
