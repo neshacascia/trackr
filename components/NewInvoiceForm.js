@@ -652,7 +652,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+              } font-medium h-full border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
                 !invoiceDateInputValidation && invoiceDateInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -813,7 +813,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
               />
             </label>
 
-            <div className="flex justify-between mt-6">
+            <div className="w-full flex justify-between mt-6">
               <label
                 htmlFor={`qty-${item.id}`}
                 className={`${
@@ -917,10 +917,10 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
               <label
                 className={`font-light ${
                   isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-                } flex flex-col`}
+                } flex flex-col justify-center`}
               >
                 Total
-                <div>
+                <div className="flex items-center">
                   <input
                     type="number"
                     id={`total-${item.id}`}
