@@ -628,7 +628,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
           </label>
         </div>
 
-        <div className="md:flex justify-between gap-6 md:-mb-6">
+        <div className="w-full md:flex justify-between gap-6 md:-mb-6">
           <label
             htmlFor="invoice-date"
             className={`${
