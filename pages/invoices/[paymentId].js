@@ -46,7 +46,7 @@ export async function getStaticPaths() {
   client.close();
 
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: invoices.map(invoice => ({
       params: { paymentId: invoice._id.toString() },
     })),
