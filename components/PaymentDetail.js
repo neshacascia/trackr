@@ -171,7 +171,7 @@ export default function PaymentDetail({
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-        } h-full flex flex-col gap-6 px-6 pt-[72px] pb-14 md:px-12 md:pb-[135px] xl:px-[252px]`}
+        } h-screen flex flex-col gap-6 px-6 pt-[72px] pb-14 md:px-12 md:pb-[135px] xl:px-[252px]`}
       >
         <button
           onClick={() => router.push(`/${type}`)}
