@@ -94,6 +94,6 @@ export async function getStaticProps() {
         status: expense.status,
       })),
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 }
