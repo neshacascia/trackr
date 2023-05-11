@@ -577,7 +577,7 @@ export default function EditInvoiceForm({
             <input
               type="date"
               id="invoice-date"
-              className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
+              className="text-white bg-mainPurple font-medium h-[50px] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
               defaultValue={invoiceData.invoiceDate}
               disabled
             />
