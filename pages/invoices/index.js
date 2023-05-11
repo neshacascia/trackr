@@ -100,6 +100,6 @@ export async function getStaticProps() {
         items: invoice.items,
       })),
     },
-    revalidate: 30,
+    revalidate: 5,
   };
 }
