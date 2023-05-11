@@ -353,7 +353,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                   : 'text-detailPurple'
               } font-light flex flex-col`}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between md:flex-col lg:flex-row">
                 City
                 {!cityInputValidation && cityInputTouched && (
                   <p className="text-deleteBtn">can't be empty</p>
@@ -393,7 +393,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                   : 'text-detailPurple'
               } font-light flex flex-col`}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between md:flex-col lg:flex-row">
                 Postal Code
                 {!postalInputValidation && postalInputTouched && (
                   <p className="text-deleteBtn">can't be empty</p>
@@ -434,7 +434,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 : 'text-detailPurple'
             } font-light flex flex-col`}
           >
-            <div className="flex justify-between">
+            <div className="flex justify-between md:flex-col lg:flex-row">
               Country
               {!countryInputValidation && countryInputTouched && (
                 <p className="text-deleteBtn">can't be empty</p>
@@ -822,7 +822,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                     : isDarkMode
                     ? 'text-grayPurple'
                     : 'text-detailPurple'
-                } font-light w-[64px] flex flex-col`}
+                } font-light w-[100px] flex flex-col`}
               >
                 <div className="flex flex-col">
                   Qty.
