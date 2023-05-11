@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Context } from './context/StateContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,6 +21,11 @@ export default function Header({ title, payments, setShowModal }) {
     filterExpenses,
     setFilterExpenses,
   } = useContext(Context);
+
+  useEffect(() => {
+    setFilterInvoices([]);
+    setFilterExpenses([]);
+  }, [router.pathname]);
 
   function filterPaymentsHandler(e) {
     if (title === 'Invoices') {
