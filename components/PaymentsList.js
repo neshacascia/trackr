@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Payment from './Payment';
@@ -95,7 +96,13 @@ export default function PaymentsList({ type, invoices, expenses }) {
       {(type === 'invoices' && !invoices?.length) ||
         (type === 'expenses' && !expenses?.length && (
           <section className="h-auto flex flex-col items-center my-auto">
-            <img src="/assets/illustration-empty.svg" className="mb-10" />
+            <Image
+              src="/assets/illustration-empty.svg"
+              alt=""
+              width={242}
+              height={341}
+              className="mb-10"
+            />
             <h2
               className={`${
                 isDarkMode ? 'text-white' : 'text-lightText'
