@@ -914,15 +914,13 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 />
               </label>
 
-              <div>
-                <label
-                  className={`font-light ${
-                    isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-                  } flex flex-col justify-center`}
-                >
-                  Total
-                </label>
-                <div className="w-[124px] flex items-center">
+              <label
+                className={`font-light ${
+                  isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+                } w-[124px] flex flex-col`}
+              >
+                Total
+                <div className="flex items-center">
                   <input
                     type="number"
                     id={`total-${item.id}`}
@@ -932,7 +930,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                     onChange={e =>
                       updateItemValue(item.id, 'total', Number(e.target.value))
                     }
-                    className="text-grayPurple bg-transparent font-medium py-3 pr-5 mt-4"
+                    className="text-grayPurple bg-transparent font-medium w-full py-3 mt-4"
                     disabled
                   />
                   <FontAwesomeIcon
@@ -941,7 +939,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                     className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
                   ></FontAwesomeIcon>
                 </div>
-              </div>
+              </label>
             </div>
           </div>
         ))}
