@@ -835,7 +835,7 @@ export default function EditInvoiceForm({
                     onChange={e =>
                       updateItemValue(item.id, 'total', Number(e.target.value))
                     }
-                    className="text-grayPurple bg-transparent font-medium w-full py-3 mt-4"
+                    className="text-grayPurple bg-transparent font-medium w-full py-3 mt-4 disabled:text-grayPurple"
                     disabled
                   />
                   <FontAwesomeIcon
