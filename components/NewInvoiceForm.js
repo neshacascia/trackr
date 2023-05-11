@@ -652,7 +652,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+              } font-medium h-[50px] border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
                 !invoiceDateInputValidation && invoiceDateInputTouched
                   ? 'border-deleteBtn'
                   : ''
@@ -813,7 +813,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
               />
             </label>
 
-            <div className="flex justify-between mt-6">
+            <div className="w-full flex justify-between items-center mt-6">
               <label
                 htmlFor={`qty-${item.id}`}
                 className={`${
@@ -917,10 +917,10 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
               <label
                 className={`font-light ${
                   isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-                } flex flex-col`}
+                } w-[124px] flex flex-col`}
               >
                 Total
-                <div>
+                <div className="flex items-center">
                   <input
                     type="number"
                     id={`total-${item.id}`}
@@ -930,13 +930,13 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                     onChange={e =>
                       updateItemValue(item.id, 'total', Number(e.target.value))
                     }
-                    className="text-grayPurple bg-transparent font-medium py-3 pr-5 mt-4"
+                    className="text-grayPurple bg-transparent font-medium w-full py-3 mt-4"
                     disabled
                   />
                   <FontAwesomeIcon
                     onClick={() => deleteItem(item.id)}
                     icon={faTrash}
-                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
+                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn mt-[9px]"
                   ></FontAwesomeIcon>
                 </div>
               </label>

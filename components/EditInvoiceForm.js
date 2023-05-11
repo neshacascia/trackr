@@ -577,7 +577,7 @@ export default function EditInvoiceForm({
             <input
               type="date"
               id="invoice-date"
-              className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
+              className="text-white bg-mainPurple font-medium h-[50px] border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
               defaultValue={invoiceData.invoiceDate}
               disabled
             />
@@ -724,7 +724,7 @@ export default function EditInvoiceForm({
               />
             </label>
 
-            <div className="flex justify-between mt-6">
+            <div className="w-full flex justify-between items-center mt-6">
               <label
                 htmlFor={`qty-${item.id}`}
                 className={`${
@@ -823,9 +823,9 @@ export default function EditInvoiceForm({
                 />
               </label>
 
-              <label className="font-light text-grayPurple flex flex-col">
+              <label className="font-light text-grayPurple w-[124px] flex flex-col">
                 Total
-                <div>
+                <div className="flex items-center">
                   <input
                     type="number"
                     id={`total-${item.id}`}
@@ -835,13 +835,13 @@ export default function EditInvoiceForm({
                     onChange={e =>
                       updateItemValue(item.id, 'total', Number(e.target.value))
                     }
-                    className="text-grayPurple bg-transparent font-medium py-3 pr-5 mt-4"
+                    className="text-grayPurple bg-transparent font-medium w-full py-3 mt-4"
                     disabled
                   />
                   <FontAwesomeIcon
                     onClick={() => deleteItem(item.id)}
                     icon={faTrash}
-                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
+                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn mt-[9px]"
                   ></FontAwesomeIcon>
                 </div>
               </label>
