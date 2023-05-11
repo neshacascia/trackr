@@ -4,7 +4,7 @@ export default function Layout(props) {
   return (
     <div className="font-spartan">
       <Navbar />
-      <main>{props.children}</main>
+      <main className="h-full">{props.children}</main>
     </div>
   );
 }
