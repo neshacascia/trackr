@@ -637,7 +637,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 : isDarkMode
                 ? 'text-grayPurple'
                 : 'text-detailPurple'
-            } font-light flex flex-col mb-6 md:w-full`}
+            } font-light w-full flex flex-col mb-6`}
           >
             <div className="flex justify-between">
               Invoice Date
