@@ -229,7 +229,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
               isDarkMode
                 ? 'text-white bg-mainPurple border-borderPurple'
                 : 'text-lightText bg-white border-draft'
-            } font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+            } font-medium h-[50px] border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
               !expenseAmountInputValidation && expenseAmountInputTouched
                 ? 'border-deleteBtn'
                 : ''
