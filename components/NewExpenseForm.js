@@ -114,7 +114,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
           <div className="flex justify-between">
             Merchant
             {!merchantInputValidation && merchantInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -219,7 +219,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
           <div className="flex justify-between">
             Amount
             {!expenseAmountInputValidation && expenseAmountInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -259,7 +259,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
           <div className="flex justify-between">
             Due Date
             {!expenseDueDateInputValidation && expenseDueDateInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input

@@ -262,7 +262,7 @@ export default function EditInvoiceForm({
           <div className="flex justify-between">
             Street Address
             {!streetInputValidation && streetInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -303,7 +303,7 @@ export default function EditInvoiceForm({
               <div className="flex justify-between md:flex-col lg:flex-row">
                 City
                 {!cityInputValidation && cityInputTouched && (
-                  <p className="text-deleteBtn">can't be empty</p>
+                  <p className="text-deleteBtn">can&apos;t be empty</p>
                 )}
               </div>
               <input
@@ -342,7 +342,7 @@ export default function EditInvoiceForm({
               <div className="flex justify-between md:flex-col lg:flex-row">
                 Postal Code
                 {!postalInputValidation && postalInputTouched && (
-                  <p className="text-deleteBtn">can't be empty</p>
+                  <p className="text-deleteBtn">can&apos;t be empty</p>
                 )}
               </div>
               <input
@@ -382,7 +382,7 @@ export default function EditInvoiceForm({
             <div className="flex justify-between md:flex-col lg:flex-row">
               Country
               {!countryInputValidation && countryInputTouched && (
-                <p className="text-deleteBtn">can't be empty</p>
+                <p className="text-deleteBtn">can&apos;t be empty</p>
               )}
             </div>
             <input
@@ -423,9 +423,9 @@ export default function EditInvoiceForm({
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
-            Client's Name
+            Client&apos;s Name
             {!clientNameInputValidation && clientNameInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -462,9 +462,9 @@ export default function EditInvoiceForm({
           } font-light flex flex-col`}
         >
           <div className="flex justify-between">
-            Client's Email
+            Client&apos;s Email
             {!clientEmailInputValidation && clientEmailInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -594,7 +594,7 @@ export default function EditInvoiceForm({
             <div className="flex justify-between">
               Payment Terms
               {!paymentTermsInputValidation && paymentTermsInputTouched && (
-                <p className="text-deleteBtn">can't be empty</p>
+                <p className="text-deleteBtn">can&apos;t be empty</p>
               )}
             </div>
             <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[26px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
@@ -640,7 +640,7 @@ export default function EditInvoiceForm({
           <div className="flex justify-between">
             Project Description
             {!descriptionInputValidation && descriptionInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
+              <p className="text-deleteBtn">can&apos;t be empty</p>
             )}
           </div>
           <input
@@ -687,7 +687,7 @@ export default function EditInvoiceForm({
               <div className="flex justify-between">
                 Item Name
                 {!itemNameInputValidation && itemNameInputTouched && (
-                  <p className="text-deleteBtn">can't be empty</p>
+                  <p className="text-deleteBtn">can&apos;t be empty</p>
                 )}
               </div>
               <input
@@ -736,7 +736,7 @@ export default function EditInvoiceForm({
                 <div className="flex flex-col">
                   Qty.
                   {!quantityInputValidation && quantityInputTouched && (
-                    <p className="text-deleteBtn">can't be empty</p>
+                    <p className="text-deleteBtn">can&apos;t be empty</p>
                   )}
                 </div>
                 <input
@@ -785,7 +785,7 @@ export default function EditInvoiceForm({
                 <div className="flex flex-col">
                   Price
                   {!priceInputValidation && priceInputTouched && (
-                    <p className="text-deleteBtn">can't be empty</p>
+                    <p className="text-deleteBtn">can&apos;t be empty</p>
                   )}
                 </div>
                 <input
