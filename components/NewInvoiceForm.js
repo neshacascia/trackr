@@ -628,7 +628,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
           </label>
         </div>
 
-        <div className="w-full md:flex justify-between gap-6 md:-mb-6">
+        <div className="md:flex justify-between gap-6 md:-mb-6">
           <label
             htmlFor="invoice-date"
             className={`${
@@ -637,7 +637,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 : isDarkMode
                 ? 'text-grayPurple'
                 : 'text-detailPurple'
-            } font-light w-full flex flex-col mb-6`}
+            } font-light flex flex-col mb-6`}
           >
             <div className="flex justify-between">
               Invoice Date
@@ -652,7 +652,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium w-full h-[50px] border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
+              } font-medium h-[50px] border-[1px] rounded-[4px] py-3 px-5 mt-4 cursor-pointer focus:outline-none focus:ring focus:ring-brightPurple ${
                 !invoiceDateInputValidation && invoiceDateInputTouched
                   ? 'border-deleteBtn'
                   : ''
