@@ -936,7 +936,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
                   <FontAwesomeIcon
                     onClick={() => deleteItem(item.id)}
                     icon={faTrash}
-                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn"
+                    className="text-grayPurple text-lg cursor-pointer hover:text-deleteBtn mt-[9px]"
                   ></FontAwesomeIcon>
                 </div>
               </label>
