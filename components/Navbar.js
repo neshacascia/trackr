@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
@@ -71,7 +72,13 @@ export default function Navbar() {
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
-      <img src="/assets/avatar.jpg" className="w-8 h-8 rounded-full mr-6" />
+      <Image
+        src="/assets/avatar.jpg"
+        width={32}
+        height={32}
+        alt="Profile picture"
+        className="rounded-full mr-6"
+      />
     </nav>
   );
 }
