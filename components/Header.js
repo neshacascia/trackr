@@ -9,7 +9,7 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Header({ title, payments }) {
+export default function Header({ title, payments, setShowModal }) {
   const router = useRouter();
 
   const [displayFilters, setDisplayFilters] = useState(false);
@@ -44,21 +44,30 @@ export default function Header({ title, payments }) {
 
   function createNewPayment() {
     if (title === 'Invoices') {
-      router.push('/invoices/new-invoice');
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push('/invoices/new-invoice');
+      }
     } else {
-      router.push('/new-expense');
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push('/expenses/new-expense');
+      }
     }
   }
 
   return (
-    <header className="w-screen h-11 flex items-center px-6">
+    <header className="w-screen h-11 flex items-center mt-9 px-6 md:px-12 md:mt-14 xl:px-[252px]">
       <div className="mr-auto">
-        <h2 className="text-2xl font-medium">{title}</h2>
+        <h2 className="text-2xl font-medium md:text-3xl md:mb-2">{title}</h2>
         <p
           className={`${
             isDarkMode ? 'text-white' : 'text-grayPurple'
           } font-light`}
         >
+          <span className="hidden md:inline">There are </span>
           {payments.length === 0
             ? 'No ' + title.toLowerCase()
             : payments.length === 1
@@ -67,13 +76,13 @@ export default function Header({ title, payments }) {
         </p>
       </div>
 
-      <div className="flex items-center gap-3 mr-5 hover:cursor-pointer">
+      <div className="flex items-center gap-3 mr-5 hover:cursor-pointer md:mr-10">
         <div
           onClick={() => setDisplayFilters(prevState => !prevState)}
           className="flex items-center gap-3"
         >
           <label className="font-medium hover:cursor-pointer hover:text-grayPurple">
-            Filter
+            Filter <p className="hidden md:inline-block">by status</p>
           </label>
           {displayFilters ? (
             <FontAwesomeIcon
@@ -92,7 +101,7 @@ export default function Header({ title, payments }) {
           <div
             className={`${
               isDarkMode ? 'bg-borderPurple' : 'text-lightText bg-white'
-            } w-[192px] absolute top-[22%] right-[20%] flex flex-col gap-4 rounded-lg p-6`}
+            } w-[192px] absolute top-40 right-28 flex flex-col gap-4 rounded-lg p-6 md:top-48 md:right-52 xl:right-[400px]`}
           >
             {title === 'Invoices' ? (
               <label
@@ -166,7 +175,9 @@ export default function Header({ title, payments }) {
           icon={faPlus}
           className="text-brightPurple bg-white rounded-full p-2"
         ></FontAwesomeIcon>
-        <span className="text-white pt-[1px] pr-2.5">New</span>
+        <span className="text-white pt-[1px] pr-2.5">
+          New <p className="hidden md:inline-block">{title.slice(0, -1)}</p>
+        </span>
       </button>
     </header>
   );

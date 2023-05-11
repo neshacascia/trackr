@@ -3,10 +3,13 @@ import { useState, useRef, useContext } from 'react';
 import { Context } from './context/StateContext';
 import FormFooter from './FormFooter';
 
-export default function NewExpenseForm({ addExpense }) {
+export default function NewExpenseForm({ addExpense, setShowModal }) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
+
+  const [formValidation, setFormValidation] = useState(false);
+  const [formInputTouched, setFormInputTouched] = useState(false);
 
   const [merchantInputValidation, setMerchantInputValidation] = useState(false);
   const [merchantInputTouched, setMerchantInputTouched] = useState(false);
@@ -54,20 +57,25 @@ export default function NewExpenseForm({ addExpense }) {
     setMerchantInputTouched(true);
     setExpenseDueDateInputTouched(true);
     setExpenseAmountInputTouched(true);
+    setFormInputTouched(true);
 
     if (merchantInputRef.current.value.trim() === '') {
       setMerchantInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (expenseDueDateInputRef.current.value.trim() === '') {
       setExpenseDueDateInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (expenseAmountInputRef.current.value.trim() === '') {
       setExpenseAmountInputValidation(false);
+      setFormValidation(false);
       return;
     } else {
       setMerchantInputValidation(true);
       setExpenseDueDateInputValidation(true);
       setExpenseAmountInputValidation(true);
+      setFormValidation(true);
 
       const expenseData = {
         merchant: merchantInputRef.current.value,
@@ -82,11 +90,15 @@ export default function NewExpenseForm({ addExpense }) {
       };
 
       addExpense(expenseData);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
     }
   }
 
   return (
-    <form className="text-white" onSubmit={submitHandler}>
+    <form className="text-white md:px-6" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
         <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
@@ -310,7 +322,7 @@ export default function NewExpenseForm({ addExpense }) {
           htmlFor="notes"
           className={`font-light ${
             isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
-          } flex flex-col`}
+          } flex flex-col md:mb-16`}
         >
           Notes
           <textarea
@@ -324,9 +336,20 @@ export default function NewExpenseForm({ addExpense }) {
             ref={notesInputRef}
           ></textarea>
         </label>
+
+        {!formValidation && formInputTouched && (
+          <p className="hidden lg:block font-medium text-deleteBtn pb-10">
+            - Highlighted fields must be added
+          </p>
+        )}
       </section>
 
-      <FormFooter type="expenses" router={router} isDarkMode={isDarkMode} />
+      <FormFooter
+        type="expenses"
+        router={router}
+        isDarkMode={isDarkMode}
+        setShowModal={setShowModal}
+      />
     </form>
   );
 }

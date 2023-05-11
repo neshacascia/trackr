@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav
       className={`text-white ${
         isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
-      } h-[72px] flex items-center`}
+      } w-full h-[72px] flex items-center fixed z-50`}
     >
       <div className="bg-nav bg-no-repeat w-20 h-full">
         <FontAwesomeIcon

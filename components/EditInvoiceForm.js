@@ -8,8 +8,12 @@ export default function EditInvoiceForm({
   updateInvoice,
   invoiceData,
   isDarkMode,
+  setShowModal,
 }) {
   const router = useRouter();
+
+  const [formValidation, setFormValidation] = useState(false);
+  const [formInputTouched, setFormInputTouched] = useState(false);
 
   const [streetInputValidation, setStreetInputValidation] = useState(false);
   const [streetInputTouched, setStreetInputTouched] = useState(false);
@@ -144,39 +148,51 @@ export default function EditInvoiceForm({
     setItemNameInputTouched(true);
     setQuantityInputTouched(true);
     setPriceInputTouched(true);
+    setFormInputTouched(true);
 
     if (streetInputRef.current.value.trim() === '') {
       setStreetInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (cityInputRef.current.value.trim() === '') {
       setCityInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (postalInputRef.current.value.trim() === '') {
       setPostalInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (countryInputRef.current.value.trim() === '') {
       setCountryInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (clientNameInputRef.current.value.trim() === '') {
       setClientNameInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (clientEmailInputRef.current.value.trim() === '') {
       setClientEmailInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (paymentTermsInputRef.current.value.trim() === '') {
       setPaymentTermsInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (descriptionInputRef.current.value.trim() === '') {
       setDescriptionInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (itemNameInputRef.current.value.trim() === '') {
       setItemNameInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (quantityInputRef.current.value.trim() === '') {
       setQuantityInputValidation(false);
+      setFormValidation(false);
       return;
     } else if (priceInputRef.current.value.trim() === '') {
       setPriceInputValidation(false);
+      setFormValidation(false);
       return;
     } else {
       setStreetInputValidation(true);
@@ -190,6 +206,8 @@ export default function EditInvoiceForm({
       setItemNameInputValidation(true);
       setQuantityInputValidation(true);
       setPriceInputValidation(true);
+
+      setFormValidation(true);
 
       const data = {
         id: invoiceData.id,
@@ -214,11 +232,23 @@ export default function EditInvoiceForm({
       };
 
       updateInvoice(data);
+
+      if (window.innerWidth >= 768) {
+        setShowModal(false);
+      }
+    }
+  }
+
+  function cancelEditsHandler() {
+    if (window.innerWidth >= 768) {
+      setShowModal(false);
+    } else {
+      router.back();
     }
   }
 
   return (
-    <form className="text-white" onSubmit={submitHandler}>
+    <form className="text-white invoice md:px-6" onSubmit={submitHandler}>
       <section className="flex flex-col gap-6 mb-10">
         <h4 className="text-brightPurple font-medium">Bill From</h4>
         <label
@@ -260,124 +290,126 @@ export default function EditInvoiceForm({
           />
         </label>
 
-        <div className="flex gap-6">
-          <label
-            htmlFor="city"
-            className={`${
-              !cityInputValidation && cityInputTouched
-                ? 'text-deleteBtn'
-                : 'text-grayPurple'
-            } font-light flex flex-col`}
-          >
-            <div className="flex justify-between">
-              City
-              {!cityInputValidation && cityInputTouched && (
-                <p className="text-deleteBtn">can't be empty</p>
-              )}
-            </div>
-            <input
-              type="text"
-              id="city"
+        <div className="md:flex gap-6">
+          <div className="flex gap-6 mb-6 md:-mb-6">
+            <label
+              htmlFor="city"
               className={`${
-                isDarkMode
-                  ? 'text-white bg-mainPurple border-borderPurple'
-                  : 'text-lightText bg-white border-draft'
-              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
                 !cityInputValidation && cityInputTouched
-                  ? 'border-deleteBtn'
-                  : ''
-              }`}
-              ref={cityInputRef}
-              defaultValue={invoiceData.city}
-              onBlur={e =>
-                inputBlurHandler(
-                  setCityInputTouched,
-                  cityInputRef,
-                  setCityInputValidation
-                )
-              }
-              onChange={e => changeHandler(e, setCityInputValidation)}
-            />
-          </label>
+                  ? 'text-deleteBtn'
+                  : 'text-grayPurple'
+              } font-light flex flex-col`}
+            >
+              <div className="flex justify-between md:flex-col lg:flex-row">
+                City
+                {!cityInputValidation && cityInputTouched && (
+                  <p className="text-deleteBtn">can't be empty</p>
+                )}
+              </div>
+              <input
+                type="text"
+                id="city"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !cityInputValidation && cityInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={cityInputRef}
+                defaultValue={invoiceData.city}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setCityInputTouched,
+                    cityInputRef,
+                    setCityInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setCityInputValidation)}
+              />
+            </label>
+
+            <label
+              htmlFor="postal-code"
+              className={`${
+                !postalInputValidation && postalInputTouched
+                  ? 'text-deleteBtn'
+                  : 'text-grayPurple'
+              } font-light flex flex-col`}
+            >
+              <div className="flex justify-between md:flex-col lg:flex-row">
+                Postal Code
+                {!postalInputValidation && postalInputTouched && (
+                  <p className="text-deleteBtn">can't be empty</p>
+                )}
+              </div>
+              <input
+                type="text"
+                id="postal-code"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !postalInputValidation && postalInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={postalInputRef}
+                defaultValue={invoiceData.postal}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setPostalInputTouched,
+                    postalInputRef,
+                    setPostalInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setPostalInputValidation)}
+              />
+            </label>
+          </div>
 
           <label
-            htmlFor="postal-code"
+            htmlFor="country"
             className={`${
-              !postalInputValidation && postalInputTouched
+              !countryInputValidation && countryInputTouched
                 ? 'text-deleteBtn'
                 : 'text-grayPurple'
             } font-light flex flex-col`}
           >
-            <div className="flex justify-between">
-              Postal Code
-              {!postalInputValidation && postalInputTouched && (
+            <div className="flex justify-between md:flex-col lg:flex-row">
+              Country
+              {!countryInputValidation && countryInputTouched && (
                 <p className="text-deleteBtn">can't be empty</p>
               )}
             </div>
             <input
               type="text"
-              id="postal-code"
+              id="country"
               className={`${
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-                !postalInputValidation && postalInputTouched
+              }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
+                !countryInputValidation && countryInputTouched
                   ? 'border-deleteBtn'
                   : ''
               }`}
-              ref={postalInputRef}
-              defaultValue={invoiceData.postal}
+              ref={countryInputRef}
+              defaultValue={invoiceData.country}
               onBlur={e =>
                 inputBlurHandler(
-                  setPostalInputTouched,
-                  postalInputRef,
-                  setPostalInputValidation
+                  setCountryInputTouched,
+                  countryInputRef,
+                  setCountryInputValidation
                 )
               }
-              onChange={e => changeHandler(e, setPostalInputValidation)}
+              onChange={e => changeHandler(e, setCountryInputValidation)}
             />
           </label>
         </div>
-
-        <label
-          htmlFor="country"
-          className={`${
-            !countryInputValidation && countryInputTouched
-              ? 'text-deleteBtn'
-              : 'text-grayPurple'
-          } font-light flex flex-col`}
-        >
-          <div className="flex justify-between">
-            Country
-            {!countryInputValidation && countryInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
-            )}
-          </div>
-          <input
-            type="text"
-            id="country"
-            className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple ${
-              !countryInputValidation && countryInputTouched
-                ? 'border-deleteBtn'
-                : ''
-            }`}
-            ref={countryInputRef}
-            defaultValue={invoiceData.country}
-            onBlur={e =>
-              inputBlurHandler(
-                setCountryInputTouched,
-                countryInputRef,
-                setCountryInputValidation
-              )
-            }
-            onChange={e => changeHandler(e, setCountryInputValidation)}
-          />
-        </label>
       </section>
 
       <section className="flex flex-col gap-6">
@@ -478,120 +510,124 @@ export default function EditInvoiceForm({
           />
         </label>
 
-        <div className="flex gap-6">
-          <label
-            htmlFor="city"
-            className="font-light text-grayPurple flex flex-col"
-          >
-            City
-            <input
-              type="text"
-              id="city"
-              className={`${
-                isDarkMode
-                  ? 'text-white bg-mainPurple border-borderPurple'
-                  : 'text-lightText bg-white border-draft'
-              }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-              ref={clientCityInputRef}
-              defaultValue={invoiceData.clientCity}
-            />
-          </label>
+        <div className="md:flex gap-6">
+          <div className="flex gap-6 mb-6 md:-mb-6">
+            <label
+              htmlFor="city"
+              className="font-light text-grayPurple flex flex-col"
+            >
+              City
+              <input
+                type="text"
+                id="city"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                }  font-medium w-full border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+                ref={clientCityInputRef}
+                defaultValue={invoiceData.clientCity}
+              />
+            </label>
+
+            <label
+              htmlFor="postal-code"
+              className="font-light text-grayPurple flex flex-col"
+            >
+              Postal Code
+              <input
+                type="text"
+                id="postal-code"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+                ref={clientPostalInputRef}
+                defaultValue={invoiceData.clientPostal}
+              />
+            </label>
+          </div>
 
           <label
-            htmlFor="postal-code"
+            htmlFor="country"
             className="font-light text-grayPurple flex flex-col"
           >
-            Postal Code
+            Country
             <input
               type="text"
-              id="postal-code"
+              id="country"
               className={`${
                 isDarkMode
                   ? 'text-white bg-mainPurple border-borderPurple'
                   : 'text-lightText bg-white border-draft'
-              } font-medium w-full border-[1px] border-borderPurple rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-              ref={clientPostalInputRef}
-              defaultValue={invoiceData.clientPostal}
+              }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
+              ref={clientCountryInputRef}
+              defaultValue={invoiceData.clientCountry}
             />
           </label>
         </div>
 
-        <label
-          htmlFor="country"
-          className="font-light text-grayPurple flex flex-col"
-        >
-          Country
-          <input
-            type="text"
-            id="country"
+        <div className="md:flex justify-between gap-6 md:-mb-6">
+          <label
+            htmlFor="invoice-date"
+            className="font-light text-grayPurple flex flex-col opacity-50 mb-6 md:w-full"
+          >
+            Invoice Date
+            <input
+              type="date"
+              id="invoice-date"
+              className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
+              defaultValue={invoiceData.invoiceDate}
+              disabled
+            />
+          </label>
+
+          <label
+            htmlFor="terms"
             className={`${
-              isDarkMode
-                ? 'text-white bg-mainPurple border-borderPurple'
-                : 'text-lightText bg-white border-draft'
-            }  font-medium border-[1px] rounded-[4px] py-3 pl-5 mt-4 focus:outline-none focus:ring focus:ring-brightPurple`}
-            ref={clientCountryInputRef}
-            defaultValue={invoiceData.clientCountry}
-          />
-        </label>
-
-        <label
-          htmlFor="invoice-date"
-          className="font-light text-grayPurple flex flex-col opacity-50"
-        >
-          Invoice Date
-          <input
-            type="date"
-            id="invoice-date"
-            className="text-white bg-mainPurple font-medium border-[1px] border-borderPurple rounded-[4px] py-3 px-5 mt-4 cursor-not-allowed"
-            defaultValue={invoiceData.invoiceDate}
-            disabled
-          />
-        </label>
-
-        <label
-          htmlFor="terms"
-          className={`${
-            !paymentTermsInputValidation && paymentTermsInputTouched
-              ? 'text-deleteBtn'
-              : 'text-grayPurple'
-          } font-light flex flex-col`}
-        >
-          <div className="flex justify-between">
-            Payment Terms
-            {!paymentTermsInputValidation && paymentTermsInputTouched && (
-              <p className="text-deleteBtn">can't be empty</p>
-            )}
-          </div>
-          <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[31px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
-            <select
-              id="terms"
-              className={`${
-                isDarkMode
-                  ? 'text-white bg-mainPurple border-borderPurple'
-                  : 'text-lightText bg-white border-draft'
-              } text-base font-medium w-full border-[1px] rounded-[4px] py-4 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
-                !paymentTermsInputValidation && paymentTermsInputTouched
-                  ? 'border-deleteBtn'
-                  : ''
-              }`}
-              ref={paymentTermsInputRef}
-              defaultValue={invoiceData.paymentTerms}
-              onBlur={e =>
-                inputBlurHandler(
-                  setPaymentTermsInputTouched,
-                  paymentTermsInputRef,
-                  setPaymentTermsInputValidation
-                )
-              }
-              onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
-            >
-              <option>Net 1 Day</option>
-              <option>Net 7 Days</option>
-              <option>Net 14 Days</option>
-              <option>Net 30 Days</option>
-            </select>
-          </div>
-        </label>
+              !paymentTermsInputValidation && paymentTermsInputTouched
+                ? 'text-deleteBtn'
+                : 'text-grayPurple'
+            } font-light w-full flex flex-col`}
+          >
+            <div className="flex justify-between">
+              Payment Terms
+              {!paymentTermsInputValidation && paymentTermsInputTouched && (
+                <p className="text-deleteBtn">can't be empty</p>
+              )}
+            </div>
+            <div className="text-brightPurple text-xl font-extrabold relative flex items-center after:top-[26px] after:right-[22px] after:absolute after:content-['⌄'] align-middle">
+              <select
+                id="terms"
+                className={`${
+                  isDarkMode
+                    ? 'text-white bg-mainPurple border-borderPurple'
+                    : 'text-lightText bg-white border-draft'
+                } text-base font-medium w-full border-[1px] rounded-[4px] pt-4 pb-3 pl-5 mt-4 cursor-pointer appearance-none focus:outline-none focus:ring focus:ring-brightPurple ${
+                  !paymentTermsInputValidation && paymentTermsInputTouched
+                    ? 'border-deleteBtn'
+                    : ''
+                }`}
+                ref={paymentTermsInputRef}
+                defaultValue={invoiceData.paymentTerms}
+                onBlur={e =>
+                  inputBlurHandler(
+                    setPaymentTermsInputTouched,
+                    paymentTermsInputRef,
+                    setPaymentTermsInputValidation
+                  )
+                }
+                onChange={e => changeHandler(e, setPaymentTermsInputValidation)}
+              >
+                <option>Net 1 Day</option>
+                <option>Net 7 Days</option>
+                <option>Net 14 Days</option>
+                <option>Net 30 Days</option>
+              </select>
+            </div>
+          </label>
+        </div>
 
         <label
           htmlFor="desc"
@@ -695,7 +731,7 @@ export default function EditInvoiceForm({
                   !quantityInputValidation && quantityInputTouched
                     ? 'text-deleteBtn'
                     : 'text-grayPurple'
-                } font-light w-[64px] flex flex-col`}
+                } font-light w-[100px] flex flex-col`}
               >
                 <div className="flex flex-col">
                   Qty.
@@ -824,28 +860,34 @@ export default function EditInvoiceForm({
         >
           + Add New Item
         </button>
+
+        {!formValidation && formInputTouched && (
+          <p className="hidden lg:block font-medium text-deleteBtn pb-10">
+            - Highlighted fields must be added
+          </p>
+        )}
       </section>
 
       <footer
         className={`${
           isDarkMode ? 'bg-mainPurple' : 'bg-white'
-        } h-[91px] flex items-center gap-2 px-6 -mx-6`}
+        } h-[91px] flex items-center gap-2 px-6 -mx-6 md:bg-transparent md:justify-end md:-mt-14 md:mb-8`}
       >
         <button
           type="button"
-          onClick={() => router.back()}
+          onClick={cancelEditsHandler}
           className={`${
             isDarkMode
               ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-darkPurple'
               : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
-          } font-medium w-full rounded-3xl py-4 px-[18px]`}
+          } font-medium w-full rounded-3xl py-4 px-[18px] md:w-[96px]`}
         >
           Cancel
         </button>
         <button
           type="submit"
           onClick={submitHandler}
-          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+          className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple md:w-[138px]"
         >
           Save Changes
         </button>

@@ -1,20 +1,70 @@
 import { MongoClient } from 'mongodb';
-import { useContext } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
 import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
+import NewExpenseForm from '@/components/NewExpenseForm';
 
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
+
+  const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
+
+  async function addExpenseHandler(enteredExpenseData) {
+    const res = await fetch('/api/new-expense', {
+      method: 'POST',
+      body: JSON.stringify(enteredExpenseData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = res.json();
+    console.log(data);
+
+    router.push('/expenses');
+  }
 
   return (
     <main
       className={`${
         isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
-      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-8`}
+      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-[72px]`}
     >
-      <Header title="Expenses" payments={props.expenses} />
+      <Header
+        title="Expenses"
+        payments={props.expenses}
+        setShowModal={setShowModal}
+      />
       <PaymentsList type="expenses" expenses={props.expenses} />
+
+      {showModal && window.innerWidth >= 768 && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              New Expense
+            </h2>
+            <NewExpenseForm
+              isDarkMode={isDarkMode}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              addExpense={addExpenseHandler}
+            />
+          </div>
+        </div>
+      )}
     </main>
   );
 }

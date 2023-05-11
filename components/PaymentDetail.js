@@ -2,11 +2,18 @@ import { useRouter } from 'next/router';
 import { useState, useContext } from 'react';
 import { Context } from './context/StateContext';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import EditInvoiceForm from './EditInvoiceForm';
+import EditExpenseForm from './EditExpenseForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 
-export default function PaymentDetail({ type, data, expenseData }) {
+export default function PaymentDetail({
+  type,
+  data,
+  expenseData,
+  updateInvoice,
+}) {
   const router = useRouter();
 
   const { isDarkMode } = useContext(Context);
@@ -73,11 +80,21 @@ export default function PaymentDetail({ type, data, expenseData }) {
         }, 0)
       : '';
 
+  const [showModal, setShowModal] = useState(false);
+
   function editPaymentHandler() {
     if (type === 'invoices') {
-      router.push(`/invoices/edit/${data?.id}`);
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push(`/invoices/edit/${data?.id}`);
+      }
     } else {
-      router.push(`/expenses/edit/${expenseData.id}`);
+      if (window.innerWidth >= 768) {
+        setShowModal(true);
+      } else {
+        router.push(`/expenses/edit/${expenseData.id}`);
+      }
     }
   }
 
@@ -130,16 +147,35 @@ export default function PaymentDetail({ type, data, expenseData }) {
     }
   }
 
+  async function updateExpenseHandler(expenseData) {
+    const res = await fetch('/api/update-expense', {
+      method: 'PUT',
+      body: JSON.stringify(expenseData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (window.innerWidth >= 768) {
+      router.push(`/expenses/${expenseData.id}`);
+    } else {
+      router.back();
+    }
+  }
+
   return (
     <>
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-        } h-full flex flex-col gap-6 px-6 pb-14`}
+        } h-full flex flex-col gap-6 px-6 pt-[72px] pb-14 md:px-12 md:pb-[135px] xl:px-[252px]`}
       >
         <button
           onClick={() => router.push(`/${type}`)}
-          className="flex items-center gap-6 pt-8"
+          className="flex items-center gap-6 pt-8 md:pt-12 md:pb-3"
         >
           <FontAwesomeIcon
             icon={faAngleLeft}
@@ -159,25 +195,73 @@ export default function PaymentDetail({ type, data, expenseData }) {
         <section
           className={`${
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
-          } h-[91px] flex items-center justify-between rounded-lg px-6`}
+          } h-[91px] w-full flex items-center justify-between rounded-lg px-6 md:justify-between`}
         >
-          <span
-            className={`${
-              isDarkMode ? 'text-white' : 'text-grayerPurple'
-            } font-light py-10`}
-          >
-            Status
-          </span>
-          <div
-            className={`${statusColours[currentStatus]} flex items-center gap-2 rounded-md py-2.5 px-7`}
-          >
-            <FontAwesomeIcon
-              icon={faCircle}
-              className="text-[10px]"
-            ></FontAwesomeIcon>
-            <p className="font-medium pt-[1.5px]">
-              {data?.status || expenseData.status}
-            </p>
+          <div className="w-full flex justify-between items-center md:justify-start md:gap-4">
+            <span
+              className={`${
+                isDarkMode ? 'text-white' : 'text-grayerPurple'
+              } font-light py-10 md:text-grayerPurple`}
+            >
+              Status
+            </span>
+
+            <div
+              className={`${statusColours[currentStatus]} w-[104px] flex justify-center items-center gap-2 rounded-md py-2.5 px-7`}
+            >
+              <FontAwesomeIcon
+                icon={faCircle}
+                className="text-[10px]"
+              ></FontAwesomeIcon>
+              <p className="font-medium pt-[1.5px]">
+                {data?.status || expenseData.status}
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              type="button"
+              onClick={editPaymentHandler}
+              className={`${
+                isDarkMode
+                  ? 'text-draft bg-borderPurple hover:text-detailPurple hover:bg-white'
+                  : 'text-detailPurple bg-grey hover:text-detailPurple hover:bg-draft'
+              } font-medium w-[73px] rounded-3xl pt-[17px] pb-4 px-6`}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => setDeletePayment(true)}
+              className="text-white bg-deleteBtn font-medium w-[89px] rounded-3xl pt-[17px] pb-4 px-6 hover:bg-hoverRed"
+            >
+              Delete
+            </button>
+            {data?.status === 'Pending' && (
+              <button
+                onClick={markAsPaidHandler}
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Mark as Paid
+              </button>
+            )}
+            {expenseData?.status === 'Pending' && (
+              <button
+                onClick={markAsPaidHandler}
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Mark as Paid
+              </button>
+            )}
+            {data?.status === 'Draft' && (
+              <button
+                onClick={updateToPendingHandler}
+                className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
+              >
+                Save & Send
+              </button>
+            )}
           </div>
         </section>
 
@@ -186,65 +270,67 @@ export default function PaymentDetail({ type, data, expenseData }) {
             isDarkMode ? 'bg-mainPurple' : 'bg-white'
           } flex flex-col gap-[30px] rounded-lg p-6`}
         >
-          <div className="flex justify-between">
-            <div className="flex flex-col">
-              <span
-                className={`${
-                  isDarkMode ? 'text-white' : 'text-lightText'
-                } font-medium`}
-              >
-                <span className="text-detailPurple font-medium">#</span>
-                {data?.id.slice(-6).toUpperCase() ||
-                  expenseData.referenceNo.toUpperCase() ||
-                  expenseData.id.slice(-6).toUpperCase()}
-              </span>
+          <div className="md:flex md:justify-between">
+            <div className="flex justify-between md:w-full">
+              <div className="flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } font-medium`}
+                >
+                  <span className="text-detailPurple font-medium">#</span>
+                  {data?.id.slice(-6).toUpperCase() ||
+                    expenseData.referenceNo.toUpperCase() ||
+                    expenseData.id.slice(-6).toUpperCase()}
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light md:mb-10`}
+                >
+                  {data?.description || expenseData?.notes}
+                </span>
+              </div>
+
               <span
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
-                } font-light`}
+                } font-light md:text-right`}
               >
-                {data?.description || expenseData.notes}
+                {expenseData?.expenseCategory}
               </span>
             </div>
 
-            <span
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light`}
-            >
-              {expenseData?.expenseCategory}
-            </span>
+            {type === 'invoices' ? (
+              <div
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light flex flex-col md:text-right my-[30px] md:my-0`}
+              >
+                <span>{data?.street}</span>
+                <span>{data?.city}</span>
+                <span>{data?.postal}</span>
+                <span>{data?.country}</span>
+              </div>
+            ) : (
+              <div
+                className={`${
+                  isDarkMode ? 'text-draft' : 'text-detailPurple'
+                } font-light flex flex-col my-8 md:hidden`}
+              >
+                <span>Account Number</span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {expenseData?.accountNo}
+                </span>
+              </div>
+            )}
           </div>
 
-          {type === 'invoices' ? (
-            <div
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light flex flex-col`}
-            >
-              <span>{data?.street}</span>
-              <span>{data?.city}</span>
-              <span>{data?.postal}</span>
-              <span>{data?.country}</span>
-            </div>
-          ) : (
-            <div
-              className={`${
-                isDarkMode ? 'text-draft' : 'text-detailPurple'
-              } font-light flex flex-col`}
-            >
-              <span>Account Number</span>
-              <span
-                className={`${
-                  isDarkMode ? 'text-white' : 'text-lightText'
-                } text-[19px] font-medium`}
-              >
-                {expenseData?.accountNo}
-              </span>
-            </div>
-          )}
-
-          <div className="flex gap-10">
+          <div className="flex gap-10 -mt-6 md:gap-24 md:mb-10">
             <div className="flex flex-col gap-8">
               {type === 'invoices' ? (
                 <div className="flex flex-col">
@@ -268,7 +354,24 @@ export default function PaymentDetail({ type, data, expenseData }) {
                 ''
               )}
 
-              <div className="flex flex-col">
+              {type === 'expenses' && (
+                <div
+                  className={`hidden ${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light md:flex flex-col mb-8`}
+                >
+                  <span>Account Number</span>
+                  <span
+                    className={`${
+                      isDarkMode ? 'text-white' : 'text-lightText'
+                    } text-[19px] font-medium`}
+                  >
+                    {expenseData?.accountNo}
+                  </span>
+                </div>
+              )}
+
+              <div className="flex flex-col md:hidden">
                 <span
                   className={`${
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
@@ -303,17 +406,53 @@ export default function PaymentDetail({ type, data, expenseData }) {
                   isDarkMode ? 'text-white' : 'text-lightText'
                 } text-[19px] font-medium mb-2`}
               >
-                {data?.clientName || expenseData.merchant}
+                {data?.clientName || expenseData?.merchant}
               </span>
               <span className="font-light">{data?.clientStreet}</span>
               <span className="font-light">{data?.clientCity}</span>
               <span className="font-light">{data?.clientPostal}</span>
               <span className="font-light">{data?.clientCountry}</span>
             </div>
+
+            {type === 'invoices' ? (
+              <div className="hidden md:flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Sent to
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {data?.clientEmail}
+                </span>
+              </div>
+            ) : (
+              <div className="hidden md:flex flex-col">
+                <span
+                  className={`${
+                    isDarkMode ? 'text-draft' : 'text-detailPurple'
+                  } font-light mb-3`}
+                >
+                  Payment Due
+                </span>
+                <span
+                  className={`${
+                    isDarkMode ? 'text-white' : 'text-lightText'
+                  } text-[19px] font-medium`}
+                >
+                  {formattedExpenseDate}
+                </span>
+              </div>
+            )}
           </div>
 
           {type === 'invoices' ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col md:hidden">
               <span
                 className={`${
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
@@ -337,7 +476,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
             <div
               className={`${
                 isDarkMode ? 'bg-borderPurple' : 'bg-grey'
-              } flex flex-col gap-6 rounded-t-lg p-6`}
+              } flex flex-col gap-6 rounded-t-lg p-6 md:-mt-10`}
             >
               {type === 'invoices' ? (
                 data?.items.map((item, ind) => (
@@ -370,6 +509,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
                 </div>
               )}
             </div>
+
             <div
               className={`${
                 isDarkMode ? 'bg-black' : 'bg-draftLight'
@@ -390,7 +530,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
       <footer
         className={`${
           isDarkMode ? 'bg-mainPurple' : 'bg-white'
-        } h-[91px] flex items-center gap-2 px-6`}
+        } h-[91px] flex items-center gap-2 px-6 md:hidden`}
       >
         <button
           type="button"
@@ -435,6 +575,7 @@ export default function PaymentDetail({ type, data, expenseData }) {
           </button>
         )}
       </footer>
+
       <DeleteConfirmationModal
         deletePayment={deletePayment}
         id={data?.id || expenseData.id}
@@ -443,6 +584,72 @@ export default function PaymentDetail({ type, data, expenseData }) {
         deletePaymentHandler={deletePaymentHandler}
         isDarkMode={isDarkMode}
       />
+
+      {showModal && window.innerWidth >= 768 && type === 'invoices' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              Edit{' '}
+              <span
+                className={`${
+                  isDarkMode ? 'text-boldGrayPurple' : 'text-grayPurple'
+                }`}
+              >
+                #
+              </span>
+              {data.id.slice(-6).toUpperCase()}
+            </h2>
+            <EditInvoiceForm
+              invoiceData={data}
+              isDarkMode={isDarkMode}
+              setShowModal={setShowModal}
+              updateInvoice={updateInvoice}
+            />
+          </div>
+        </div>
+      )}
+      {showModal && window.innerWidth >= 768 && type === 'expenses' && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
+          <div
+            className={`${
+              isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
+            } rounded-r-lg w-full max-w-xl h-full p-6 my-14 lg:max-w-[719px]`}
+            style={{ maxHeight: 'calc(100vh)', overflowY: 'auto' }}
+          >
+            <h2
+              className={`${
+                isDarkMode ? 'text-white' : 'text-lightText'
+              } text-3xl font-medium px-6 my-12`}
+            >
+              Edit{' '}
+              <span
+                className={`${
+                  isDarkMode ? 'text-boldGrayPurple' : 'text-grayPurple'
+                }`}
+              >
+                #
+              </span>
+              {expenseData.id.slice(-6).toUpperCase()}
+            </h2>
+            <EditExpenseForm
+              data={expenseData}
+              isDarkMode={isDarkMode}
+              showModal={showModal}
+              setShowModal={setShowModal}
+              updateExpense={updateExpenseHandler}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
