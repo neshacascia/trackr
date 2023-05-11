@@ -813,7 +813,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
               />
             </label>
 
-            <div className="w-full flex justify-between gap-6 mt-6">
+            <div className="w-full flex justify-between items-center mt-6">
               <label
                 htmlFor={`qty-${item.id}`}
                 className={`${
