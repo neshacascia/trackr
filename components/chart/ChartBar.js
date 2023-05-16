@@ -7,7 +7,13 @@ export default function ChartBar(props) {
 
   return (
     <div className="h-full flex flex-col items-center gap-2">
-      <div className="bg-borderPurple h-full w-4 flex flex-col justify-end border-[1px] border-borderPurple rounded-md overflow-hidden">
+      <div
+        className={`${
+          props.isDarkMode
+            ? 'bg-borderPurple border-borderPurple'
+            : 'bg-[#ededf1] border-[#ededf1]'
+        } h-full w-4 flex flex-col justify-end border-[1px] rounded-md overflow-hidden`}
+      >
         <div
           className="chart-bar bg-brightPurple w-full"
           style={{ height: barFillHeight }}

@@ -63,5 +63,5 @@ export default function InvoicesChart(props) {
     chartDataPoints[invoiceMonth].value += total;
   }
 
-  return <Chart dataPoints={chartDataPoints} />;
+  return <Chart dataPoints={chartDataPoints} isDarkMode={props.isDarkMode} />;
 }

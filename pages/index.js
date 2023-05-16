@@ -59,7 +59,10 @@ export default function Home(props) {
             />
           </section>
 
-          <InvoicesChart invoices={props.invoicesStats} />
+          <InvoicesChart
+            invoices={props.invoicesStats}
+            isDarkMode={isDarkMode}
+          />
         </section>
       </main>
     </>
