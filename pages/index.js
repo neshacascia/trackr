@@ -21,6 +21,10 @@ export default function Home(props) {
     });
   });
 
+  const expensesTotal = props.expensesStats.reduce(
+    (a, b) => Number(a.amount) + Number(b.amount)
+  );
+
   return (
     <>
       <Head>
@@ -40,7 +44,7 @@ export default function Home(props) {
             icon={faMoneyBillTrendUp}
             total={invoicesTotal}
           />
-          <DataStats title="Expenses" icon={faReceipt} />
+          <DataStats title="Expenses" icon={faReceipt} total={expensesTotal} />
         </section>
       </main>
     </>
