@@ -38,9 +38,9 @@ export default function Home(props) {
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
-        } w-screen h-screen flex flex-col px-6 md:px-12 xl:px-[252px]`}
+        } w-screen h-full flex flex-col gap-6 px-6 pb-8 md:h-screen md:justify-center md:gap-0 md:px-12 md:pb-0 xl:px-[252px]`}
       >
-        <section className="w-full h-[40%] flex flex-col items-center gap-4 pt-[72px] mt-8 md:flex-row md:justify-between md:mt-2">
+        <section className="w-full h-[40%] flex flex-col items-center gap-4 pt-[72px] mt-8 md:flex-row md:justify-between md:pt-0 md:mt-2">
           <DataStats
             title="Invoices"
             icon={faMoneyBillTrendUp}
