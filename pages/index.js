@@ -12,6 +12,15 @@ import {
 export default function Home(props) {
   const { isDarkMode } = useContext(Context);
 
+  let invoicesTotal = 0;
+
+  props.invoicesStats.forEach(obj => {
+    const values = Object.values(obj)[0];
+    values.forEach(value => {
+      invoicesTotal += value;
+    });
+  });
+
   return (
     <>
       <Head>
@@ -29,13 +38,9 @@ export default function Home(props) {
           <DataStats
             title="Invoices"
             icon={faMoneyBillTrendUp}
-            total={props.invoicesStats}
+            total={invoicesTotal}
           />
-          <DataStats
-            title="Expenses"
-            icon={faReceipt}
-            total={props.expensesStats}
-          />
+          <DataStats title="Expenses" icon={faReceipt} />
         </section>
       </main>
     </>
