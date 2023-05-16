@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useContext } from 'react';
 import { Context } from '@/components/context/StateContext';
 import DataStats from '@/components/DataStats';
+import InvoicesChart from '@/components/chart/InvoicesChart';
 
 import {
   faEnvelope,
@@ -52,6 +53,8 @@ export default function Home(props) {
             emails={props.invoicesStats.length}
           />
         </section>
+
+        <InvoicesChart invoices={props.invoicesStats} />
       </main>
     </>
   );
@@ -74,6 +77,7 @@ export async function getStaticProps() {
     props: {
       invoicesStats: invoices.map(invoice => ({
         total: invoice.items.map(item => item.total),
+        date: invoice.invoiceDate,
       })),
       expensesStats: expenses.map(expense => ({
         amount: expense.expenseAmount,
