@@ -54,6 +54,7 @@ export default function InvoicesChart(props) {
 
   for (const invoice of props.invoices) {
     const dateObj = new Date(invoice.date);
+    dateObj.setHours(dateObj.getHours() + dateObj.getTimezoneOffset() / 60);
 
     const invoiceMonth = dateObj.getMonth();
 
