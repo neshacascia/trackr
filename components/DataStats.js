@@ -28,7 +28,7 @@ export default function DataStats({ icon, total, emails, title }) {
             isDarkMode ? 'text-draft' : 'text-detailPurple'
           } font-light`}
         >
-          Total {title}
+          {title === 'Emails' ? `${title} Sent` : `Total ${title}`}
         </p>
       </div>
     </div>
