@@ -5,6 +5,7 @@ import { Context } from '@/components/context/StateContext';
 import DataStats from '@/components/DataStats';
 
 import {
+  faEnvelope,
   faMoneyBillTrendUp,
   faReceipt,
 } from '@fortawesome/free-solid-svg-icons';
@@ -45,6 +46,11 @@ export default function Home(props) {
             total={invoicesTotal}
           />
           <DataStats title="Expenses" icon={faReceipt} total={expensesTotal} />
+          <DataStats
+            title="Emails"
+            icon={faEnvelope}
+            emails={props.invoicesStats.length}
+          />
         </section>
       </main>
     </>
