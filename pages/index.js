@@ -1,6 +1,12 @@
 import Head from 'next/head';
 import { useContext } from 'react';
 import { Context } from '@/components/context/StateContext';
+import DataStats from '@/components/DataStats';
+
+import {
+  faMoneyBillTrendUp,
+  faReceipt,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const { isDarkMode } = useContext(Context);
@@ -16,8 +22,13 @@ export default function Home() {
       <main
         className={`${
           isDarkMode ? 'bg-darkPurple' : 'lightBg'
-        } w-screen h-screen`}
-      ></main>
+        } w-screen h-screen flex px-6`}
+      >
+        <section className="flex gap-4 pt-[72px] mt-8 md:mt-14">
+          <DataStats title="Invoices" icon={faMoneyBillTrendUp} />
+          <DataStats title="Expenses" icon={faReceipt} />
+        </section>
+      </main>
     </>
   );
 }
