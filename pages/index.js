@@ -36,7 +36,7 @@ export default function Home(props) {
 
       <main
         className={`${
-          isDarkMode ? 'bg-darkPurple' : 'lightBg'
+          isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
         } w-screen h-screen flex px-6 md:px-12 xl:px-[252px]`}
       >
         <section className="w-full h-[40%] flex flex-col items-center gap-4 pt-[72px] mt-8 md:flex-row md:justify-between md:mt-2">
