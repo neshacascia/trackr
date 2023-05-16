@@ -39,7 +39,7 @@ export default function Home(props) {
           isDarkMode ? 'bg-darkPurple' : 'lightBg'
         } w-screen h-screen flex px-6 md:px-12 xl:px-[252px]`}
       >
-        <section className="w-full h-[40%] flex flex-col items-center gap-4 pt-[72px] mt-8 md:flex-row md:justify-between md:mt-14">
+        <section className="w-full h-[40%] flex flex-col items-center gap-4 pt-[72px] mt-8 md:flex-row md:justify-between md:mt-2">
           <DataStats
             title="Invoices"
             icon={faMoneyBillTrendUp}
