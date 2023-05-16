@@ -20,7 +20,11 @@ export default function DataStats({ icon, total, emails, title }) {
       />
 
       <div className="min-w-full flex flex-col gap-2">
-        <p className={`${isDarkMode ? 'text-white' : 'text-black'} text-2xl`}>
+        <p
+          className={`${
+            isDarkMode ? 'text-white' : 'text-black font-medium'
+          } text-2xl`}
+        >
           {total ? `$${total.toFixed(2)}` : emails}
         </p>
         <p
