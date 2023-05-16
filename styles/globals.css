@@ -43,3 +43,11 @@ input[type='number'] {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.tooltiptext {
+  visibility: hidden;
+}
+
+.chart-bar:hover .tooltiptext {
+  visibility: visible;
+}
