@@ -51,4 +51,16 @@ export default function InvoicesChart(props) {
       value: 0,
     },
   ];
+
+  for (const invoice of props.invoices) {
+    const dateObj = new Date(invoice.date);
+
+    const invoiceMonth = dateObj.getMonth();
+
+    const total = invoice.total.reduce((acc, val) => acc + val, 0);
+
+    chartDataPoints[invoiceMonth].value += total;
+  }
+
+  return <Chart dataPoints={chartDataPoints} />;
 }
