@@ -12,12 +12,13 @@ export default function DataStats({ icon, total, emails, title }) {
         isDarkMode ? 'bg-mainPurple' : 'bg-white'
       } w-full h-32 flex justify-between gap-6 rounded-lg py-8 pl-6 pr-20`}
     >
-      <FontAwesomeIcon
-        icon={icon}
+      <div
         className={`text-grayerPurple ${
           isDarkMode ? 'bg-borderPurple' : 'bg-[#ededf1]'
-        } text-xl w-full p-4 rounded-full`}
-      ></FontAwesomeIcon>
+        } w-12 h-12 flex justify-center items-center rounded-full`}
+      >
+        <FontAwesomeIcon icon={icon} className="text-xl p-4"></FontAwesomeIcon>
+      </div>
 
       <div className="min-w-full flex flex-col gap-2">
         <p
