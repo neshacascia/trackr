@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +9,8 @@ import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
   const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
+
+  const pathname = usePathname();
 
   return (
     <nav
@@ -31,7 +34,9 @@ export default function Navbar() {
         <li>
           <Link
             href="/"
-            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+            className={`${
+              pathname.endsWith('/') ? 'text-[#9e8af1]' : undefined
+            } text-lg font-normal tracking-wide hover:text-grayPurple`}
           >
             home
           </Link>
@@ -39,7 +44,9 @@ export default function Navbar() {
         <li>
           <Link
             href="/invoices"
-            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+            className={`${
+              pathname.startsWith('/invoices') ? 'text-[#9e8af1]' : undefined
+            } text-lg font-normal tracking-wid`}
           >
             invoices
           </Link>
@@ -47,7 +54,9 @@ export default function Navbar() {
         <li>
           <Link
             href="/expenses"
-            className="text-lg font-normal tracking-wide hover:text-grayPurple"
+            className={`${
+              pathname.startsWith('/expenses') ? 'text-[#9e8af1]' : undefined
+            } text-lg font-normal tracking-wide hover:text-grayPurple`}
           >
             expenses
           </Link>
