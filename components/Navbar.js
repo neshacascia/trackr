@@ -35,8 +35,10 @@ export default function Navbar() {
           <Link
             href="/"
             className={`${
-              pathname.endsWith('/') ? 'text-[#9e8af1]' : undefined
-            } text-lg font-normal tracking-wide hover:text-grayPurple`}
+              pathname.endsWith('/')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
           >
             home
           </Link>
@@ -45,8 +47,10 @@ export default function Navbar() {
           <Link
             href="/invoices"
             className={`${
-              pathname.startsWith('/invoices') ? 'text-[#9e8af1]' : undefined
-            } text-lg font-normal tracking-wid`}
+              pathname.startsWith('/invoices')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
           >
             invoices
           </Link>
@@ -55,8 +59,10 @@ export default function Navbar() {
           <Link
             href="/expenses"
             className={`${
-              pathname.startsWith('/expenses') ? 'text-[#9e8af1]' : undefined
-            } text-lg font-normal tracking-wide hover:text-grayPurple`}
+              pathname.startsWith('/expenses')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
           >
             expenses
           </Link>
