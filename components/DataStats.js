@@ -10,7 +10,7 @@ export default function DataStats({ icon, total, emails, title }) {
     <div
       className={`${
         isDarkMode ? 'bg-mainPurple' : 'bg-white'
-      } w-full h-32 flex justify-between gap-6 rounded-lg py-8 pl-6 pr-24`}
+      } w-full h-32 flex justify-between gap-6 rounded-lg py-8 pl-6 pr-20`}
     >
       <FontAwesomeIcon
         icon={icon}
