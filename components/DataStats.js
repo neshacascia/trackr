@@ -16,7 +16,7 @@ export default function DataStats({ icon, total, emails, title }) {
         icon={icon}
         className={`text-grayerPurple ${
           isDarkMode ? 'bg-borderPurple' : 'bg-[#ededf1]'
-        } text-xl w-full p-4 rounded-full`}
+        } text-xl w-4 h-4 p-4 rounded-full`}
       />
 
       <div className="min-w-full flex flex-col gap-2">
