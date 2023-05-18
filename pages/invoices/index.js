@@ -69,7 +69,7 @@ export default function Invoices(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 
   const db = client.db();
@@ -100,6 +100,40 @@ export async function getStaticProps() {
         items: invoice.items,
       })),
     },
-    revalidate: 5,
   };
 }
+
+// export async function getStaticProps() {
+//   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
+
+//   const db = client.db();
+//   const invoicesCollections = db.collection('invoices');
+
+//   const invoices = await invoicesCollections.find().toArray();
+
+//   client.close();
+
+//   return {
+//     props: {
+//       invoices: invoices.map(invoice => ({
+//         id: invoice._id.toString(),
+//         street: invoice.street,
+//         city: invoice.city,
+//         postal: invoice.postal,
+//         country: invoice.country,
+//         clientName: invoice.clientName,
+//         clientEmail: invoice.clientEmail,
+//         clientStreet: invoice.clientStreet,
+//         clientCity: invoice.clientCity,
+//         clientPostal: invoice.clientPostal,
+//         clientCountry: invoice.clientCountry,
+//         invoiceDate: invoice.invoiceDate,
+//         paymentTerms: invoice.paymentTerms,
+//         description: invoice.description,
+//         status: invoice.status,
+//         items: invoice.items,
+//       })),
+//     },
+//     revalidate: 5,
+//   };
+// }

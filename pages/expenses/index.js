@@ -69,7 +69,7 @@ export default function Expenses(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 
   const db = client.db();
@@ -94,6 +94,34 @@ export async function getStaticProps() {
         status: expense.status,
       })),
     },
-    revalidate: 5,
   };
 }
+
+// export async function getStaticProps() {
+//   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
+
+//   const db = client.db();
+//   const expensesCollections = db.collection('expenses');
+
+//   const expenses = await expensesCollections.find().toArray();
+
+//   client.close();
+
+//   return {
+//     props: {
+//       expenses: expenses.map(expense => ({
+//         id: expense._id.toString(),
+//         merchant: expense.merchant,
+//         referenceNo: expense.referenceNo,
+//         accountNo: expense.accountNo,
+//         accountType: expense.accountType,
+//         expenseAmount: expense.expenseAmount,
+//         expenseDueDate: expense.expenseDueDate,
+//         expenseCategory: expense.expenseCategory,
+//         notes: expense.notes,
+//         status: expense.status,
+//       })),
+//     },
+//     revalidate: 5,
+//   };
+// }
