@@ -26,7 +26,7 @@ export default function MobileMenuModal() {
               className="text-xl absolute right-[45%] top-[5%] cursor-pointer hover:text-grayPurple"
             ></FontAwesomeIcon>
 
-            <ul className="text-2xl flex flex-col gap-6">
+            <ul className="text-2xl tracking-wide flex flex-col gap-6">
               <li>
                 <Link
                   href="/"
