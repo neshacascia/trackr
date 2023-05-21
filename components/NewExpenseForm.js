@@ -86,6 +86,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
         expenseAmount: expenseAmountInputRef.current.value,
         expenseDueDate: expenseDueDateInputRef.current.value,
         expenseCategory: expenseCategoryInputRef.current.value,
+        receipt: receiptInputRef.current.value,
         notes: notesInputRef.current.value,
         status: 'Pending',
       };
