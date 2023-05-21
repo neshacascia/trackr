@@ -31,6 +31,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
   const expenseDueDateInputRef = useRef();
   const expenseAmountInputRef = useRef();
   const expenseCategoryInputRef = useRef();
+  const receiptInputRef = useRef();
   const notesInputRef = useRef();
 
   function inputBlurHandler(setInputTouched, inputRef, setInputValidation) {
@@ -331,6 +332,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
             className={`${
               isDarkMode ? 'text-white' : 'text-lightText'
             } font-medium w-full py-3 mt-4`}
+            ref={receiptInputRef}
           />
         </label>
 
