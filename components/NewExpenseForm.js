@@ -319,6 +319,22 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
         </label>
 
         <label
+          htmlFor="receipt"
+          className={`font-light ${
+            isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
+          } flex flex-col`}
+        >
+          Upload Receipt
+          <input
+            type="file"
+            id="receipt"
+            className={`${
+              isDarkMode ? 'text-white' : 'text-lightText'
+            } font-medium w-full py-3 mt-4`}
+          />
+        </label>
+
+        <label
           htmlFor="notes"
           className={`font-light ${
             isDarkMode ? 'text-grayPurple' : 'text-detailPurple'
