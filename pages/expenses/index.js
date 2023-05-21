@@ -8,6 +8,7 @@ import NewExpenseForm from '@/components/NewExpenseForm';
 
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
+  console.log(props);
 
   const router = useRouter();
 
@@ -90,6 +91,7 @@ export async function getServerSideProps() {
         expenseAmount: expense.expenseAmount,
         expenseDueDate: expense.expenseDueDate,
         expenseCategory: expense.expenseCategory,
+        receipt: expense.receipt || null,
         notes: expense.notes,
         status: expense.status,
       })),
