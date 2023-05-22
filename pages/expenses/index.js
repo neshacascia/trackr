@@ -8,7 +8,6 @@ import NewExpenseForm from '@/components/NewExpenseForm';
 
 export default function Expenses(props) {
   const { isDarkMode } = useContext(Context);
-  console.log(props);
 
   const router = useRouter();
 
