@@ -5,7 +5,6 @@ export default function ChartBar(props) {
     barFillHeight = Math.round((props.value / props.maxValue) * 100) + '%';
   }
 
-  console.log(props.value);
   return (
     <div className="h-full flex flex-col items-center gap-2">
       <div
