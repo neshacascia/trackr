@@ -24,7 +24,8 @@ export default function Home(props) {
   });
 
   const expensesTotal = props.expensesStats.reduce(
-    (a, b) => Number(a.amount) + Number(b.amount)
+    (acc, curr) => acc + Number(curr.amount),
+    0
   );
 
   return (
