@@ -202,7 +202,7 @@ export default function PaymentDetail({
 
         <section
           className={`${
-            isDarkMode ? 'bg-mainPurple' : 'bg-white'
+            isDarkMode ? 'bg-mainPurple' : 'bg-[#fdfdfd]'
           } h-[91px] w-full flex items-center justify-between rounded-lg px-6 md:justify-between`}
         >
           <div className="w-full flex justify-between items-center md:justify-start md:gap-4">
@@ -275,7 +275,7 @@ export default function PaymentDetail({
 
         <section
           className={`text-white ${
-            isDarkMode ? 'bg-mainPurple' : 'bg-white'
+            isDarkMode ? 'bg-mainPurple' : 'bg-[#fdfdfd]'
           } flex flex-col gap-[30px] rounded-lg p-6`}
         >
           <div className="md:flex md:justify-between">
@@ -537,7 +537,7 @@ export default function PaymentDetail({
 
       <footer
         className={`${
-          isDarkMode ? 'bg-mainPurple' : 'bg-white'
+          isDarkMode ? 'bg-mainPurple' : 'bg-[#fdfdfd]'
         } h-[91px] flex items-center gap-2 px-6 md:hidden`}
       >
         <button
