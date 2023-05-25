@@ -9,7 +9,7 @@ export default function Chart(props) {
       className={`${
         props.isDarkMode
           ? 'text-draft bg-mainPurple'
-          : 'text-grayerPurple bg-white'
+          : 'text-grayerPurple bg-[#fdfdfd]'
       } text-center w-full h-72 flex justify-around rounded-lg px-4 py-6`}
     >
       {props.dataPoints.map(dataPoint => (

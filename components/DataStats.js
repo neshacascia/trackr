@@ -9,7 +9,7 @@ export default function DataStats({ icon, total, emails, title }) {
   return (
     <div
       className={`${
-        isDarkMode ? 'bg-mainPurple' : 'bg-white'
+        isDarkMode ? 'bg-mainPurple' : 'bg-[#fdfdfd]'
       } w-full h-32 flex justify-between gap-6 rounded-lg py-8 pl-6 pr-20`}
     >
       <div
