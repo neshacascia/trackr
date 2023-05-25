@@ -91,7 +91,7 @@ export default function Navbar() {
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
-      <div className="bg-darkPurple w-8 h-8 flex justify-center items-center rounded-full mr-6">
+      <div className="bg-darkPurple w-8 h-8 flex justify-center items-center rounded-full mr-6 hover:cursor-pointer">
         <FontAwesomeIcon
           icon={faUser}
           className="text-lightPurple text-sm"
