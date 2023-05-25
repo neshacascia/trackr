@@ -18,7 +18,7 @@ export default function MobileMenuModal() {
           <div
             className={`text-white ${
               isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
-            } w-[60%] h-screen flex flex-col justify-center items-center`}
+            } w-[60%] h-full flex flex-col justify-center items-center`}
           >
             <FontAwesomeIcon
               icon={faXmark}
