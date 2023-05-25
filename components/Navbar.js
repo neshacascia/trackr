@@ -2,10 +2,14 @@ import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faSun,
+  faMoon,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
   const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
@@ -87,13 +91,12 @@ export default function Navbar() {
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
-      <Image
-        src="/assets/avatar.jpg"
-        width={32}
-        height={32}
-        alt="Profile picture"
-        className="rounded-full mr-6"
-      />
+      <div className="bg-darkPurple w-8 h-8 flex justify-center items-center rounded-full mr-6 hover:cursor-pointer">
+        <FontAwesomeIcon
+          icon={faUser}
+          className="text-lightPurple text-sm"
+        ></FontAwesomeIcon>
+      </div>
     </nav>
   );
 }
