@@ -56,8 +56,16 @@ export default function PaymentDetail({
     year: 'numeric',
   };
 
+  const adjustedDate =
+    type === 'invoices'
+      ? new Date(date.getTime() + date.getTimezoneOffset() * 60000)
+      : '';
+
   const invoiceDate =
-    type === 'invoices' ? date.toLocaleDateString('en-US', options) : '';
+    type === 'invoices'
+      ? adjustedDate.toLocaleDateString('en-US', options)
+      : '';
+
   const formattedDate =
     type === 'invoices'
       ? paymentDueDate.toLocaleDateString('en-US', options)
