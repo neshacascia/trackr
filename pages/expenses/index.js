@@ -32,7 +32,7 @@ export default function Expenses(props) {
     <main
       className={`${
         isDarkMode ? 'text-white bg-darkPurple' : 'text-lightText bg-lightBg'
-      } font-spartan h-full w-full flex flex-col items-center gap-8 pt-[72px]`}
+      } font-spartan h-screen w-full flex flex-col items-center gap-8 pt-[72px]`}
     >
       <Header
         title="Expenses"
