@@ -20,7 +20,7 @@ export default function ChartBar(props) {
             props.isDarkMode
               ? 'bg-borderPurple border-borderPurple'
               : 'bg-[#ededf1] border-[#ededf1]'
-          } h-full w-4 flex flex-col justify-end border-[1px] rounded-md overflow-hidden`}
+          } h-full w-3 flex flex-col justify-end border-[1px] rounded-md overflow-hidden md:w-4`}
         >
           <div
             className="chart-bar bg-brightPurple w-full inline-block"
@@ -36,7 +36,7 @@ export default function ChartBar(props) {
             props.isDarkMode
               ? 'bg-borderPurple border-borderPurple'
               : 'bg-[#ededf1] border-[#ededf1]'
-          } h-full w-4 flex flex-col justify-end border-[1px] rounded-md overflow-hidden`}
+          } h-full w-3 flex flex-col justify-end border-[1px] rounded-md overflow-hidden md:w-4`}
         >
           <div
             className="chart-bar bg-[#3b278b] w-full inline-block"
