@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useContext } from 'react';
 import { Context } from '@/components/context/StateContext';
 import DataStats from '@/components/DataStats';
-import InvoicesChart from '@/components/chart/InvoicesChart';
+import PaymentsChart from '@/components/chart/PaymentsChart';
 
 import {
   faEnvelope,
@@ -60,8 +60,9 @@ export default function Home(props) {
             />
           </section>
 
-          <InvoicesChart
+          <PaymentsChart
             invoices={props.invoicesStats}
+            expenses={props.expensesStats}
             isDarkMode={isDarkMode}
           />
         </section>
@@ -91,6 +92,8 @@ export async function getStaticProps() {
       })),
       expensesStats: expenses.map(expense => ({
         amount: expense.expenseAmount,
+        category: expense.expenseCategory,
+        date: expense.expenseDueDate,
       })),
     },
     revalidate: 5,
