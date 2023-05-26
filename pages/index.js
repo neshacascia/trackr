@@ -12,7 +12,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home(props) {
-  console.log(props);
   const { isDarkMode } = useContext(Context);
 
   let invoicesTotal = 0;
