@@ -91,6 +91,7 @@ export async function getStaticProps() {
       })),
       expensesStats: expenses.map(expense => ({
         amount: expense.expenseAmount,
+        category: expense.expenseCategory,
       })),
     },
     revalidate: 5,
