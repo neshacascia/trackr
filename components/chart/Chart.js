@@ -6,6 +6,11 @@ export default function Chart(props) {
   );
   const totalMax = Math.max(...dataPointValues);
 
+  const expenseDataPointValues = props.dataPoints.map(
+    expenseDataPoint => expenseDataPoint.expenseValue
+  );
+  const expenseTotalMax = Math.max(...expenseDataPointValues);
+
   return (
     <div
       className={`${
@@ -18,7 +23,9 @@ export default function Chart(props) {
         <ChartBar
           key={dataPoint.label}
           value={dataPoint.invoiceValue}
+          expenseValue={dataPoint.expenseValue}
           maxValue={totalMax}
+          expenseMaxValue={expenseTotalMax}
           label={dataPoint.label}
           isDarkMode={props.isDarkMode}
         />
