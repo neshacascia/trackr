@@ -2,9 +2,9 @@ export default function ChartBar(props) {
   let invoiceBarFillHeight = '0%';
   let expenseBarFillHeight = '0%';
 
-  if (props.maxValue > 0) {
+  if (props.invoiceMaxValue > 0) {
     invoiceBarFillHeight =
-      Math.round((props.value / props.maxValue) * 100) + '%';
+      Math.round((props.invoiceValue / props.invoiceMaxValue) * 100) + '%';
   }
 
   if (props.expenseMaxValue > 0) {
@@ -27,7 +27,7 @@ export default function ChartBar(props) {
             style={{ height: invoiceBarFillHeight }}
           >
             <span className="tooltiptext text-white bg-darkPurple text-sm text-center max-w-full absolute rounded-md p-2 ml-1 z-50">
-              {`$${props.value.toFixed(2)}`}
+              {`$${props.invoiceValue.toFixed(2)}`}
             </span>
           </div>
         </div>

@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function Chart(props) {
-  const dataPointValues = props.dataPoints.map(
+  const invoiceDataPointValues = props.dataPoints.map(
     dataPoint => dataPoint.invoiceValue
   );
-  const totalMax = Math.max(...dataPointValues);
+  const invoiceTotalMax = Math.max(...invoiceDataPointValues);
 
   const expenseDataPointValues = props.dataPoints.map(
     expenseDataPoint => expenseDataPoint.expenseValue
@@ -56,9 +56,9 @@ export default function Chart(props) {
         {props.dataPoints.map(dataPoint => (
           <ChartBar
             key={dataPoint.label}
-            value={dataPoint.invoiceValue}
+            invoiceValue={dataPoint.invoiceValue}
             expenseValue={dataPoint.expenseValue}
-            maxValue={totalMax}
+            invoiceMaxValue={invoiceTotalMax}
             expenseMaxValue={expenseTotalMax}
             label={dataPoint.label}
             isDarkMode={props.isDarkMode}
