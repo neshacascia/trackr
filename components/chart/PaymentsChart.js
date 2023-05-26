@@ -1,6 +1,6 @@
 import Chart from './Chart';
 
-export default function InvoicesChart(props) {
+export default function PaymentsChart(props) {
   const chartDataPoints = [
     {
       label: 'Jan',
