@@ -14,7 +14,7 @@ export default function ChartBar(props) {
 
   return (
     <div className="h-full flex flex-col items-center gap-2">
-      <div className="h-full flex gap-2">
+      <div className="h-full flex gap-1 md:gap-2">
         <div
           className={`${
             props.isDarkMode
