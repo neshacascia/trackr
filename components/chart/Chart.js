@@ -28,7 +28,13 @@ export default function Chart(props) {
             icon={faSquare}
             className="text-brightPurple"
           ></FontAwesomeIcon>
-          <p className="text-[#bac0e1] text-xs">Invoices</p>
+          <p
+            className={`${
+              props.isDarkMode ? 'text-[#bac0e1]' : 'text-[#8c90a7]'
+            } text-xs`}
+          >
+            Invoices
+          </p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -36,7 +42,13 @@ export default function Chart(props) {
             icon={faSquare}
             className="text-[#3b278b]"
           ></FontAwesomeIcon>
-          <p className="text-[#bac0e1] text-xs">Expenses</p>
+          <p
+            className={`${
+              props.isDarkMode ? 'text-[#bac0e1]' : 'text-[#8c90a7]'
+            } text-xs`}
+          >
+            Expenses
+          </p>
         </div>
       </div>
 
