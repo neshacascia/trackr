@@ -1,7 +1,9 @@
 import ChartBar from './ChartBar';
 
 export default function Chart(props) {
-  const dataPointValues = props.dataPoints.map(dataPoint => dataPoint.value);
+  const dataPointValues = props.dataPoints.map(
+    dataPoint => dataPoint.invoiceValue
+  );
   const totalMax = Math.max(...dataPointValues);
 
   return (
@@ -15,7 +17,7 @@ export default function Chart(props) {
       {props.dataPoints.map(dataPoint => (
         <ChartBar
           key={dataPoint.label}
-          value={dataPoint.value}
+          value={dataPoint.invoiceValue}
           maxValue={totalMax}
           label={dataPoint.label}
           isDarkMode={props.isDarkMode}
