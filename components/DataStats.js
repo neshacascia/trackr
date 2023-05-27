@@ -3,7 +3,7 @@ import { Context } from './context/StateContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function DataStats({ icon, total, emails, title }) {
+export default function DataStats({ icon, total, title }) {
   const { isDarkMode } = useContext(Context);
 
   return (
@@ -26,14 +26,14 @@ export default function DataStats({ icon, total, emails, title }) {
             isDarkMode ? 'text-white' : 'text-black font-medium'
           } text-2xl`}
         >
-          {total ? `$${total.toFixed(2)}` : emails}
+          {`$${total.toFixed(2)}`}
         </p>
         <p
           className={`${
             isDarkMode ? 'text-draft' : 'text-detailPurple'
           } font-light`}
         >
-          {title === 'Emails' ? `${title} Sent` : `Total ${title}`}
+          {`Total ${title}`}
         </p>
       </div>
     </div>
