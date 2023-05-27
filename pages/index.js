@@ -6,7 +6,6 @@ import DataStats from '@/components/DataStats';
 import PaymentsChart from '@/components/chart/PaymentsChart';
 
 import {
-  faEnvelope,
   faMoneyBillTrendUp,
   faReceipt,
 } from '@fortawesome/free-solid-svg-icons';
@@ -52,11 +51,6 @@ export default function Home(props) {
               title="Expenses"
               icon={faReceipt}
               total={expensesTotal}
-            />
-            <DataStats
-              title="Emails"
-              icon={faEnvelope}
-              emails={props.invoicesStats.length}
             />
           </section>
 
