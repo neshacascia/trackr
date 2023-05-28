@@ -27,7 +27,7 @@ export default function FormFooter({
     <footer
       className={`${
         isDarkMode ? 'bg-mainPurple' : 'bg-white'
-      } h-[91px] flex items-center gap-2 px-6 -mx-6 md:bg-transparent md:justify-end md:-mt-14 md:mb-8`}
+      } h-[91px] flex items-center gap-2 px-6 -mx-6 md:bg-transparent md:justify-end md:-mt-14 md:mb-8 md:fixed md:bottom-0`}
     >
       <button
         type="button"
