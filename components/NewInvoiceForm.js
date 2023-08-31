@@ -1,3 +1,4 @@
+import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import { useState, useRef, useContext } from 'react';
 import { Context } from './context/StateContext';
@@ -8,6 +9,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function NewInvoiceForm({ addInvoice, setShowModal }) {
   const router = useRouter();
+
+  const { userId } = useAuth();
 
   const { isDarkMode } = useContext(Context);
 
@@ -267,6 +270,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
       setFormValidation(true);
 
       const invoiceData = {
+        userId: userId,
         street: streetInputRef.current.value,
         city: cityInputRef.current.value,
         postal: postalInputRef.current.value,
