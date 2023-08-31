@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,8 @@ import {
 
 export default function Navbar() {
   const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
+  const [userSettings, setUserSettings] = useState(false);
+  console.log(userSettings);
 
   const pathname = usePathname();
 
@@ -94,6 +96,7 @@ export default function Navbar() {
       <div className="bg-darkPurple w-8 h-8 flex justify-center items-center rounded-full mr-6 hover:cursor-pointer">
         <FontAwesomeIcon
           icon={faUser}
+          onClick={() => setUserSettings(prevState => !prevState)}
           className="text-lightPurple text-sm"
         ></FontAwesomeIcon>
       </div>
