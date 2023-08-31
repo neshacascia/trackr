@@ -158,6 +158,7 @@ export default function NewInvoiceForm({ addInvoice, setShowModal }) {
       return;
     } else {
       const invoiceData = {
+        userId: userId,
         street: streetInputRef.current.value,
         city: cityInputRef.current.value,
         postal: postalInputRef.current.value,
