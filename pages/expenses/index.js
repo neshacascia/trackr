@@ -70,7 +70,7 @@ export default function Expenses(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
   const { userId } = getAuth(ctx.req);
   console.log(userId);
 
