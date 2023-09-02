@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { UserButton } from '@clerk/nextjs';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -93,12 +94,8 @@ export default function Navbar() {
 
       <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
-      <div className="bg-darkPurple w-8 h-8 flex justify-center items-center rounded-full mr-6 hover:cursor-pointer">
-        <FontAwesomeIcon
-          icon={faUser}
-          onClick={() => setUserSettings(prevState => !prevState)}
-          className="text-lightPurple text-sm"
-        ></FontAwesomeIcon>
+      <div className="mr-6">
+        <UserButton afterSignOutUrl="/" />
       </div>
     </nav>
   );
