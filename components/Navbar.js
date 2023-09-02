@@ -5,17 +5,10 @@ import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-  faSun,
-  faMoon,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
   const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
-  const [userSettings, setUserSettings] = useState(false);
-  console.log(userSettings);
 
   const pathname = usePathname();
 
