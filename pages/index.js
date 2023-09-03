@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { getAuth } from '@clerk/nextjs/server';
 import Head from 'next/head';
 import { useContext } from 'react';
 import { Context } from '@/components/context/StateContext';
@@ -65,16 +66,19 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(ctx) {
+  const { userId } = getAuth(ctx.req);
+  console.log(userId);
+
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 
   const db = client.db();
 
   const invoicesCollections = db.collection('invoices');
-  const invoices = await invoicesCollections.find().toArray();
+  const invoices = await invoicesCollections.find({ userId: userId }).toArray();
 
   const expensesCollections = db.collection('expenses');
-  const expenses = await expensesCollections.find().toArray();
+  const expenses = await expensesCollections.find({ userId: userId }).toArray();
 
   client.close();
 
@@ -90,6 +94,5 @@ export async function getStaticProps() {
         date: expense.expenseDueDate,
       })),
     },
-    revalidate: 5,
   };
 }
