@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Payment from './Payment';
+import GetStarted from './GetStarted';
 
 export default function PaymentsList({ type, invoices, expenses }) {
   const { filterInvoices, filterExpenses, isDarkMode } = useContext(Context);
@@ -93,34 +94,12 @@ export default function PaymentsList({ type, invoices, expenses }) {
         isDarkMode ? 'bg-darkPurple' : 'bg-lightBg'
       } w-screen h-full flex flex-col gap-4 px-6 pb-[105px] md:px-12 md:pt-6 xl:px-[252px]`}
     >
-      {(type === 'invoices' && !invoices?.length) ||
-        (type === 'expenses' && !expenses?.length && (
-          <section className="h-auto flex flex-col items-center my-auto">
-            <Image
-              src="/assets/illustration-empty.svg"
-              alt=""
-              width={242}
-              height={341}
-              className="mb-10"
-            />
-            <h2
-              className={`${
-                isDarkMode ? 'text-white' : 'text-lightText'
-              } text-2xl font-medium mb-6`}
-            >
-              There is nothing here
-            </h2>
-            <p
-              className={`${
-                isDarkMode ? 'text-lilacPurple' : 'text-grayPurple'
-              } font-light`}
-            >
-              Create an {type === 'invoices' ? 'invoice' : 'expense'} by
-              clicking the <span className="font-medium">New</span> button and
-              get started
-            </p>
-          </section>
-        ))}
+      {type === 'invoices' && !invoices?.length && (
+        <GetStarted type={type} isDarkMode={isDarkMode} />
+      )}
+      {type === 'expenses' && !expenses?.length && (
+        <GetStarted type={type} isDarkMode={isDarkMode} />
+      )}
       {type === 'invoices'
         ? invoices.length > 0 && invoicesList
         : expenses.length > 0 && expensesList}

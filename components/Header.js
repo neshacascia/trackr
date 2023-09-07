@@ -72,12 +72,22 @@ export default function Header({ title, payments, setShowModal }) {
             isDarkMode ? 'text-white' : 'text-grayPurple'
           } font-light`}
         >
-          <span className="hidden md:inline">There are </span>
-          {payments.length === 0
-            ? 'No ' + title.toLowerCase()
-            : payments.length === 1
-            ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
-            : payments.length + ' ' + title.toLowerCase()}
+          <span className="hidden md:inline">
+            There are
+            {payments.length === 0
+              ? ' no ' + title.toLowerCase()
+              : payments.length === 1
+              ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
+              : payments.length + ' ' + title.toLowerCase()}
+          </span>
+
+          <span className="md:hidden">
+            {payments.length === 0
+              ? 'No ' + title.toLowerCase()
+              : payments.length === 1
+              ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
+              : payments.length + ' ' + title.toLowerCase()}
+          </span>
         </p>
       </div>
 
