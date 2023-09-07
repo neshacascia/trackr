@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { getAuth } from '@clerk/nextjs/server';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Context } from '@/components/context/StateContext';
@@ -69,13 +70,16 @@ export default function Expenses(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
+  const { userId } = getAuth(ctx.req);
+  console.log(userId);
+
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 
   const db = client.db();
   const expensesCollections = db.collection('expenses');
 
-  const expenses = await expensesCollections.find().toArray();
+  const expenses = await expensesCollections.find({ userId: userId }).toArray();
 
   client.close();
 
@@ -83,6 +87,7 @@ export async function getServerSideProps() {
     props: {
       expenses: expenses.map(expense => ({
         id: expense._id.toString(),
+        userId: expense.userId || '',
         merchant: expense.merchant,
         referenceNo: expense.referenceNo,
         accountNo: expense.accountNo,

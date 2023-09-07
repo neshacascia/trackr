@@ -1,3 +1,4 @@
+import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import { useState, useRef, useContext } from 'react';
 import { Context } from './context/StateContext';
@@ -5,6 +6,8 @@ import FormFooter from './FormFooter';
 
 export default function NewExpenseForm({ addExpense, setShowModal }) {
   const router = useRouter();
+
+  const { userId } = useAuth();
 
   const { isDarkMode } = useContext(Context);
 
@@ -78,6 +81,7 @@ export default function NewExpenseForm({ addExpense, setShowModal }) {
       setFormValidation(true);
 
       const expenseData = {
+        userId: userId,
         merchant: merchantInputRef.current.value,
         referenceNo: referenceNumberInputRef.current.value,
         accountNo: accountNumberInputRef.current.value,

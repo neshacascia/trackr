@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import { ContextProvider } from '../components/context/StateContext';
 
 import Layout from '@/components/Layout';
@@ -6,11 +7,13 @@ import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }) {
   return (
-    <ContextProvider>
-      <Layout>
-        <Component {...pageProps} />
-        <MobileMenuModal />
-      </Layout>
-    </ContextProvider>
+    <ClerkProvider {...pageProps}>
+      <ContextProvider>
+        <Layout>
+          <Component {...pageProps} />
+          <MobileMenuModal />
+        </Layout>
+      </ContextProvider>
+    </ClerkProvider>
   );
 }
