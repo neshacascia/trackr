@@ -1,4 +1,6 @@
-import { useContext, useState } from 'react';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -30,62 +32,64 @@ export default function Navbar() {
         trackr
       </h1>
 
-      <ul className="hidden md:flex mr-auto gap-10">
-        <li>
-          <Link
-            href="/"
-            className={`${
-              pathname.endsWith('/')
-                ? 'text-[#9e8af1]'
-                : 'hover:text-grayPurple'
-            } text-lg font-normal tracking-wide`}
-          >
-            home
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/invoices"
-            className={`${
-              pathname.startsWith('/invoices')
-                ? 'text-[#9e8af1]'
-                : 'hover:text-grayPurple'
-            } text-lg font-normal tracking-wide`}
-          >
-            invoices
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/expenses"
-            className={`${
-              pathname.startsWith('/expenses')
-                ? 'text-[#9e8af1]'
-                : 'hover:text-grayPurple'
-            } text-lg font-normal tracking-wide`}
-          >
-            expenses
-          </Link>
-        </li>
-      </ul>
+      <SignedIn>
+        <ul className="hidden md:flex mr-auto gap-10">
+          <li>
+            <Link
+              href="/dashboard"
+              className={`${
+                pathname.startsWith('/dashboard')
+                  ? 'text-[#9e8af1]'
+                  : 'hover:text-grayPurple'
+              } text-lg font-normal tracking-wide`}
+            >
+              home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/invoices"
+              className={`${
+                pathname.startsWith('/invoices')
+                  ? 'text-[#9e8af1]'
+                  : 'hover:text-grayPurple'
+              } text-lg font-normal tracking-wide`}
+            >
+              invoices
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/expenses"
+              className={`${
+                pathname.startsWith('/expenses')
+                  ? 'text-[#9e8af1]'
+                  : 'hover:text-grayPurple'
+              } text-lg font-normal tracking-wide`}
+            >
+              expenses
+            </Link>
+          </li>
+        </ul>
 
-      {isDarkMode ? (
-        <FontAwesomeIcon
-          icon={faSun}
-          onClick={toggleDarkMode}
-          className="text-lightPurple text-lg cursor-pointer"
-        ></FontAwesomeIcon>
-      ) : (
-        <FontAwesomeIcon
-          icon={faMoon}
-          onClick={toggleDarkMode}
-          className={`${
-            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
-          } text-lg cursor-pointer`}
-        ></FontAwesomeIcon>
-      )}
+        {isDarkMode ? (
+          <FontAwesomeIcon
+            icon={faSun}
+            onClick={toggleDarkMode}
+            className="text-lightPurple text-lg cursor-pointer"
+          ></FontAwesomeIcon>
+        ) : (
+          <FontAwesomeIcon
+            icon={faMoon}
+            onClick={toggleDarkMode}
+            className={`${
+              isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+            } text-lg cursor-pointer`}
+          ></FontAwesomeIcon>
+        )}
 
-      <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
+        <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
+      </SignedIn>
 
       <div className="mr-6">
         <UserButton afterSignOutUrl="/" />
