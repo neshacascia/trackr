@@ -92,11 +92,13 @@ export default function Navbar() {
       </SignedIn>
 
       <SignedOut>
-        <div className="ml-auto">
-          <SignInButton mode="modal" />
+        <div className="flex gap-8 ml-auto">
+          <SignInButton />
 
-          <SignUpButton mode="modal">
-            <button>Sign up</button>
+          <SignUpButton>
+            <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
+              Sign up
+            </button>
           </SignUpButton>
         </div>
       </SignedOut>
