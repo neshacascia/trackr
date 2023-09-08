@@ -93,7 +93,9 @@ export default function Navbar() {
 
       <SignedOut>
         <div className="flex gap-8 ml-auto">
-          <SignInButton />
+          <SignInButton>
+            <button className="hover:text-hoverPurple">Sign in</button>
+          </SignInButton>
 
           <SignUpButton>
             <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
