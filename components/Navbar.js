@@ -91,6 +91,16 @@ export default function Navbar() {
         <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
       </SignedIn>
 
+      <SignedOut>
+        <div className="ml-auto">
+          <SignInButton mode="modal" />
+
+          <SignUpButton mode="modal">
+            <button>Sign up</button>
+          </SignUpButton>
+        </div>
+      </SignedOut>
+
       <div className="mr-6">
         <UserButton afterSignOutUrl="/" />
       </div>
