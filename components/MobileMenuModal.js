@@ -31,7 +31,7 @@ export default function MobileMenuModal() {
               <ul className="text-2xl tracking-wide flex flex-col gap-6">
                 <li>
                   <Link
-                    href="/"
+                    href="/dashboard"
                     onClick={closeMobileMenu}
                     className={`${
                       pathname.endsWith('/')
