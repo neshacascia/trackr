@@ -18,9 +18,9 @@ export default function LandingPage() {
               Simplify your finances so you can focus on what matters most.
             </h1>
             <p className="text-lg font-light text-center md:text-2xl lg:text-left">
-              Whether you're an individual, small business owner, or freelancer,
-              Trackr puts you in total control, allowing you to manage your
-              invoices and expenses all in one place.
+              Whether you&apos;re an individual, small business owner, or
+              freelancer, Trackr puts you in total control, allowing you to
+              manage your invoices and expenses all in one place.
             </p>
 
             <SignUpButton>
