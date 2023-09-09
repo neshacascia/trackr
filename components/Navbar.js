@@ -21,11 +21,13 @@ export default function Navbar() {
       } w-full h-[72px] flex items-center fixed z-50`}
     >
       <div className="bg-nav bg-no-repeat w-20 h-full">
-        <FontAwesomeIcon
-          icon={faBars}
-          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
-          onClick={openMobileMenu}
-        ></FontAwesomeIcon>
+        <SignedIn>
+          <FontAwesomeIcon
+            icon={faBars}
+            className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
+            onClick={openMobileMenu}
+          ></FontAwesomeIcon>
+        </SignedIn>
       </div>
 
       <h1 className="font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
