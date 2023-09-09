@@ -73,9 +73,9 @@ export default function Header({ title, payments, setShowModal }) {
           } font-light`}
         >
           <span className="hidden md:inline">
-            There are
+            There are&nbsp;
             {payments.length === 0
-              ? ' no ' + title.toLowerCase()
+              ? 'no ' + title.toLowerCase()
               : payments.length === 1
               ? payments.length + ' ' + title.toLowerCase().slice(0, -1)
               : payments.length + ' ' + title.toLowerCase()}
