@@ -38,6 +38,12 @@ export default function LandingPage() {
             className="mb-10"
           />
         </section>
+        <p className="text-xs text-center">
+          <a href="https://www.freepik.com/free-vector/investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-capital-analyzing-profit-graphs-vector-illustration-finance-stock-trading-investment_10173124.htm#query=finances&position=1&from_view=search&track=sph">
+            Image by pch.vector
+          </a>{' '}
+          on Freepik
+        </p>
       </main>
     </>
   );
