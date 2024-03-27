@@ -1,10 +1,7 @@
-import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { UserButton } from '@clerk/nextjs';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
@@ -21,95 +18,89 @@ export default function Navbar() {
       } w-full h-[72px] flex items-center fixed z-50`}
     >
       <div className="bg-nav bg-no-repeat w-20 h-full">
-        <SignedIn>
-          <FontAwesomeIcon
-            icon={faBars}
-            className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
-            onClick={openMobileMenu}
-          ></FontAwesomeIcon>
-        </SignedIn>
+        {/* displayed when signed in */}
+        <FontAwesomeIcon
+          icon={faBars}
+          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
+          onClick={openMobileMenu}
+        ></FontAwesomeIcon>
+        {/* displayed when signed in */}
       </div>
 
       <h1 className="font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
         trackr
       </h1>
 
-      <SignedIn>
-        <ul className="hidden md:flex mr-auto gap-10">
-          <li>
-            <Link
-              href="/dashboard"
-              className={`${
-                pathname.startsWith('/dashboard')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/invoices"
-              className={`${
-                pathname.startsWith('/invoices')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              invoices
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/expenses"
-              className={`${
-                pathname.startsWith('/expenses')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              expenses
-            </Link>
-          </li>
-        </ul>
-
-        {isDarkMode ? (
-          <FontAwesomeIcon
-            icon={faSun}
-            onClick={toggleDarkMode}
-            className="text-lightPurple text-lg cursor-pointer"
-          ></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon
-            icon={faMoon}
-            onClick={toggleDarkMode}
+      {/* displayed when signed in */}
+      <ul className="hidden md:flex mr-auto gap-10">
+        <li>
+          <Link
+            href="/dashboard"
             className={`${
-              isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
-            } text-lg cursor-pointer`}
-          ></FontAwesomeIcon>
-        )}
+              pathname.startsWith('/dashboard')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            home
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/invoices"
+            className={`${
+              pathname.startsWith('/invoices')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            invoices
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/expenses"
+            className={`${
+              pathname.startsWith('/expenses')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            expenses
+          </Link>
+        </li>
+      </ul>
 
-        <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
-      </SignedIn>
+      {isDarkMode ? (
+        <FontAwesomeIcon
+          icon={faSun}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg cursor-pointer"
+        ></FontAwesomeIcon>
+      ) : (
+        <FontAwesomeIcon
+          icon={faMoon}
+          onClick={toggleDarkMode}
+          className={`${
+            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+          } text-lg cursor-pointer`}
+        ></FontAwesomeIcon>
+      )}
 
-      <SignedOut>
-        <div className="flex gap-8 ml-auto">
-          <SignInButton>
-            <button className="hover:text-hoverPurple">Sign in</button>
-          </SignInButton>
+      <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
+      {/* displayed when signed in */}
 
-          <SignUpButton>
-            <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
-              Sign up
-            </button>
-          </SignUpButton>
-        </div>
-      </SignedOut>
+      {/* displayed when signed out */}
+      <div className="flex gap-8 ml-auto">
+        <button className="hover:text-hoverPurple">Sign in</button>
 
-      <div className="mr-6">
-        <UserButton afterSignOutUrl="/" />
+        <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
+          Sign up
+        </button>
       </div>
+      {/* displayed when signed out */}
+
+      {/* logout button */}
     </nav>
   );
 }

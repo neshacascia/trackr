@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
 
 export default function LandingPage() {
   return (
@@ -23,11 +22,9 @@ export default function LandingPage() {
               manage your invoices and expenses all in one place.
             </p>
 
-            <SignUpButton>
-              <button className="text-white text-lg bg-brightPurple rounded-3xl py-4 px-10 hover:bg-hoverPurple md:text-xl">
-                Sign up now
-              </button>
-            </SignUpButton>
+            <button className="text-white text-lg bg-brightPurple rounded-3xl py-4 px-10 hover:bg-hoverPurple md:text-xl">
+              Sign up now
+            </button>
           </div>
 
           <Image
