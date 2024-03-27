@@ -7,7 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
-  const { openMobileMenu, isDarkMode, toggleDarkMode } = useContext(Context);
+  const { storeAuthValue, openMobileMenu, isDarkMode, toggleDarkMode } =
+    useContext(Context);
 
   const pathname = usePathname();
 
@@ -91,12 +92,22 @@ export default function Navbar() {
       {/* displayed when signed in */}
 
       {/* displayed when signed out */}
-      <div className="flex gap-8 ml-auto">
-        <button className="hover:text-hoverPurple">Sign in</button>
+      <div className="flex items-center gap-8 ml-auto">
+        <Link
+          href="/auth"
+          onClick={() => storeAuthValue('login')}
+          className="hover:text-hoverPurple"
+        >
+          Login
+        </Link>
 
-        <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
+        <Link
+          href="/auth"
+          onClick={() => storeAuthValue('signup')}
+          className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple"
+        >
           Sign up
-        </button>
+        </Link>
       </div>
       {/* displayed when signed out */}
 
