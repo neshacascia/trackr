@@ -3,6 +3,22 @@ import { createContext, useState } from 'react';
 const Context = createContext();
 
 function ContextProvider(props) {
+  function storeAuthValue(value) {
+    if (value === 'signup') {
+      localStorage.setItem('authValue', 'signup');
+    } else if (value === 'login') {
+      localStorage.setItem('authValue', 'login');
+    }
+  }
+
+  function changeAuthValue(value) {
+    if (value === 'signup') {
+      localStorage.setItem('authValue', 'login');
+    } else if (value === 'login') {
+      localStorage.setItem('authValue', 'signup');
+    }
+  }
+
   const [toggleMenu, setToggleMenu] = useState(false);
 
   function openMobileMenu() {
@@ -25,6 +41,8 @@ function ContextProvider(props) {
   return (
     <Context.Provider
       value={{
+        storeAuthValue,
+        changeAuthValue,
         toggleMenu,
         openMobileMenu,
         closeMobileMenu,
