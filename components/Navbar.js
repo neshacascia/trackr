@@ -45,7 +45,7 @@ export default function Navbar() {
                   : 'hover:text-grayPurple'
               } text-lg font-normal tracking-wide`}
             >
-              home
+              dashboard
             </Link>
           </li>
           <li>

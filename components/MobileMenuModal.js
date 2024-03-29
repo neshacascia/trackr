@@ -39,7 +39,7 @@ export default function MobileMenuModal() {
                         : 'hover:text-grayPurple'
                     }`}
                   >
-                    home
+                    dashboard
                   </Link>
                 </li>
                 <li>
