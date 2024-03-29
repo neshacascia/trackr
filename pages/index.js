@@ -23,7 +23,10 @@ export default function LandingPage() {
               manage your invoices and expenses all in one place.
             </p>
 
-            <SignUpButton>
+            <SignUpButton
+              afterSignInUrl="/dashboard"
+              afterSignUpUrl="/dashboard"
+            >
               <button className="text-white text-lg bg-brightPurple rounded-3xl py-4 px-10 hover:bg-hoverPurple md:text-xl">
                 Sign up now
               </button>
