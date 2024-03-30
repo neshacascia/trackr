@@ -15,12 +15,12 @@ export default function LandingPage() {
         <section className="w-full h-full flex flex-col justify-center items-center gap-4 pt-[72px] md:mt-8 lg:-mt-4 lg:flex-row">
           <div className="flex flex-col items-center lg:items-start gap-4 lg:gap-10">
             <h1 className="text-3xl font-medium text-center md:text-5xl lg:text-left">
-              Simplify your finances so you can focus on what matters most.
+              Simplify your finances to focus on what matters most.
             </h1>
             <p className="text-lg font-light text-center md:text-2xl lg:text-left">
               Whether you&apos;re an individual, small business owner, or
-              freelancer, Trackr puts you in total control, allowing you to
-              manage your invoices and expenses all in one place.
+              freelancer, Trackr allows you to manage your invoices and expenses
+              all in one place.
             </p>
 
             <SignUpButton
