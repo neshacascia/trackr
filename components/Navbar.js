@@ -1,11 +1,13 @@
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 
+import logo from '../public/assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,7 +22,16 @@ export default function Navbar() {
         isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
       } w-full h-[72px] flex items-center fixed z-50`}
     >
-      <div className="bg-nav bg-no-repeat w-20 h-full">
+      <div className="bg-nav bg-no-repeat w-20 h-full flex">
+        <SignedOut>
+          <Image
+            src="/assets/logo.svg"
+            alt=""
+            width={34}
+            height={36}
+            className="mx-4"
+          />
+        </SignedOut>
         <SignedIn>
           <FontAwesomeIcon
             icon={faBars}
