@@ -28,7 +28,7 @@ export default function LandingPage() {
               afterSignUpUrl="/dashboard"
             >
               <button className="text-white text-lg tracking-wider bg-brightPurple rounded py-3 px-8 hover:bg-hoverPurple md:text-xl">
-                Signup now
+                Get Started
               </button>
             </SignUpButton>
           </div>
