@@ -105,14 +105,14 @@ export default function Navbar() {
       </SignedIn>
 
       <SignedOut>
-        <div className="flex gap-8 ml-auto">
+        <div className="tracking-wider flex gap-8 ml-auto">
           <SignInButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
-            <button className="hover:text-hoverPurple">Sign in</button>
+            <button className="hover:text-hoverPurple">Login</button>
           </SignInButton>
 
           <SignUpButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
-            <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
-              Sign up
+            <button className="bg-brightPurple rounded py-2 px-6 hover:bg-hoverPurple">
+              Signup
             </button>
           </SignUpButton>
         </div>
