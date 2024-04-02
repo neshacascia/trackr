@@ -12,12 +12,12 @@ export default function LandingPage() {
       </Head>
 
       <main className="bg-white w-screen h-full flex flex-col px-6 pt-[72px] pb-8 md:h-screen md:px-12">
-        <section className="w-full h-full flex flex-col justify-center items-center gap-4 pt-[72px] md:mt-8 lg:-mt-4 lg:flex-row">
+        <section className="w-full h-full flex flex-col justify-center items-center gap-10 pt-[72px] md:mt-8 lg:-mt-4 lg:flex-row">
           <div className="flex flex-col items-center lg:items-start gap-4 lg:gap-10">
-            <h1 className="text-3xl font-medium text-center md:text-5xl lg:text-left">
-              Simplify your finances to focus on what matters most.
+            <h1 className="font-home text-transparent text-3xl text-center lg:text-6xl font-semibold tracking-wider leading-[65px] lg:text-left gradient">
+              Tracking made easy.
             </h1>
-            <p className="text-lg font-light text-center md:text-2xl lg:text-left">
+            <p className="text-[#292929] font-spartan text-lg text-center md:text-2xl lg:text-left w-[645px]">
               Whether you&apos;re an individual, small business owner, or
               freelancer, Trackr allows you to manage your invoices and expenses
               all in one place.
@@ -27,26 +27,21 @@ export default function LandingPage() {
               afterSignInUrl="/dashboard"
               afterSignUpUrl="/dashboard"
             >
-              <button className="text-white text-lg tracking-wider bg-brightPurple rounded py-3 px-8 hover:bg-hoverPurple md:text-xl">
+              <button className="text-white text-lg tracking-wider bg-brightPurple rounded py-4 px-8 hover:bg-hoverPurple md:text-xl">
                 Get Started
               </button>
             </SignUpButton>
           </div>
 
           <Image
-            src="/assets/finances-illustration.jpg"
+            src="/assets/preview.jpg"
             alt=""
-            width={600}
-            height={500}
-            className="mb-10"
+            width={650}
+            height={600}
+            quality={90}
+            className="object-fit mb-10"
           />
         </section>
-        <p className="text-xs text-center">
-          <a href="https://www.freepik.com/free-vector/investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-capital-analyzing-profit-graphs-vector-illustration-finance-stock-trading-investment_10173124.htm#query=finances&position=1&from_view=search&track=sph">
-            Image by pch.vector
-          </a>{' '}
-          on Freepik
-        </p>
       </main>
     </>
   );
