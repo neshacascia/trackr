@@ -2,6 +2,9 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+
 export default function LandingPage() {
   return (
     <>
@@ -47,8 +50,8 @@ export default function LandingPage() {
         </SignedOut>
       </nav>
 
-      <main className="bg-white w-screen h-full flex flex-col px-6 pt-[72px] pb-8 md:h-screen md:px-12">
-        <section className="w-full h-full flex flex-col justify-center items-center gap-10 pt-[72px] md:mt-8 lg:-mt-4 lg:flex-row">
+      <main className="bg-white w-screen h-full flex flex-col pt-[72px] pb-8 md:h-screen">
+        <section className="w-full h-screen flex flex-col justify-center items-center gap-10 pt-[72px] px-6 md:px-12 md:mt-8 lg:-mt-4 lg:flex-row">
           <div className="flex flex-col items-center lg:items-start gap-4 lg:gap-10">
             <h1 className="font-home text-transparent text-3xl text-center lg:text-6xl font-semibold tracking-wider leading-[65px] lg:text-left gradient">
               Tracking made easy.
@@ -59,14 +62,24 @@ export default function LandingPage() {
               all in one place.
             </p>
 
-            <SignUpButton
-              afterSignInUrl="/dashboard"
-              afterSignUpUrl="/dashboard"
-            >
-              <button className="text-white text-lg tracking-wider bg-brightPurple rounded py-4 px-8 hover:bg-hoverPurple md:text-xl">
-                Get Started
-              </button>
-            </SignUpButton>
+            <div className="flex items-center gap-8">
+              <SignUpButton
+                afterSignInUrl="/dashboard"
+                afterSignUpUrl="/dashboard"
+              >
+                <button className="text-white text-lg tracking-wider bg-brightPurple flex items-center gap-2 rounded py-4 px-8 hover:bg-hoverPurple md:text-xl">
+                  Get Started
+                </button>
+              </SignUpButton>
+
+              <a
+                href="#more"
+                className="text-[#7e839f] text-lg md:text-xl flex items-center gap-3"
+              >
+                Learn more{' '}
+                <FontAwesomeIcon icon={faArrowDown} className="text-sm" />
+              </a>
+            </div>
           </div>
 
           <Image
@@ -77,6 +90,10 @@ export default function LandingPage() {
             quality={90}
             className="object-fit mb-10"
           />
+        </section>
+
+        <section id="#more" className="bg-[#eeeeee]">
+          <h2 className="text-4xl">What are the features?</h2>
         </section>
       </main>
     </>
