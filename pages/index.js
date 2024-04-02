@@ -29,25 +29,19 @@ export default function LandingPage() {
           trackr
         </h1>
 
-        <SignedOut>
-          <div className="text-lg tracking-wider flex gap-8 ml-auto mr-6">
-            <SignInButton
-              afterSignInUrl="/dashboard"
-              afterSignUpUrl="/dashboard"
-            >
-              <button className="hover:text-hoverPurple">Login</button>
-            </SignInButton>
+        <div className="text-lg tracking-wider flex gap-8 ml-auto mr-6">
+          <SignInButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
+            <button className="text-[#2a2e49] hover:text-hoverPurple">
+              Login
+            </button>
+          </SignInButton>
 
-            <SignUpButton
-              afterSignInUrl="/dashboard"
-              afterSignUpUrl="/dashboard"
-            >
-              <button className="text-white bg-brightPurple rounded py-2 px-6 hover:bg-hoverPurple">
-                Signup
-              </button>
-            </SignUpButton>
-          </div>
-        </SignedOut>
+          <SignUpButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
+            <button className="text-white bg-brightPurple rounded py-2 px-6 hover:bg-hoverPurple">
+              Signup
+            </button>
+          </SignUpButton>
+        </div>
       </nav>
 
       <main className="bg-white w-screen h-full flex flex-col pt-[72px] pb-8 md:h-screen">
