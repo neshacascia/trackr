@@ -22,12 +22,12 @@ export default function LandingPage() {
           />
         </div>
 
-        <h1 className="text-[#2a2e49] font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
+        <h1 className="text-[#2a2e49] font-medium text-[28px] tracking-wider ml-6 mr-auto md:mr-20">
           trackr
         </h1>
 
         <SignedOut>
-          <div className="tracking-wider flex gap-8 ml-auto mr-6">
+          <div className="text-lg tracking-wider flex gap-8 ml-auto mr-6">
             <SignInButton
               afterSignInUrl="/dashboard"
               afterSignUpUrl="/dashboard"
