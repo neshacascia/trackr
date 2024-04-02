@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 
-import logo from '../public/assets/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,22 +22,19 @@ export default function Navbar() {
       } w-full h-[72px] flex items-center fixed z-50`}
     >
       <div className="bg-nav bg-no-repeat w-20 h-full flex">
-        <SignedOut>
-          <Image
-            src="/assets/logo.svg"
-            alt=""
-            width={34}
-            height={36}
-            className="mx-4"
-          />
-        </SignedOut>
-        <SignedIn>
-          <FontAwesomeIcon
-            icon={faBars}
-            className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
-            onClick={openMobileMenu}
-          ></FontAwesomeIcon>
-        </SignedIn>
+        <Image
+          src="/assets/logo.svg"
+          alt=""
+          width={34}
+          height={36}
+          className="hidden md:block mx-4"
+        />
+
+        <FontAwesomeIcon
+          icon={faBars}
+          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
+          onClick={openMobileMenu}
+        ></FontAwesomeIcon>
       </div>
 
       <h1 className="font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
