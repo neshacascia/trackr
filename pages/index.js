@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import { SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
 
 export default function LandingPage() {
   return (
@@ -10,6 +10,42 @@ export default function LandingPage() {
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
+      <nav className="bg-white w-full h-[72px] flex items-center fixed z-50 border-b">
+        <div className="bg-nav bg-no-repeat w-20 h-full flex">
+          <Image
+            src="/assets/logo.svg"
+            alt=""
+            width={34}
+            height={36}
+            className="mx-4"
+          />
+        </div>
+
+        <h1 className="text-[#2a2e49] font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
+          trackr
+        </h1>
+
+        <SignedOut>
+          <div className="tracking-wider flex gap-8 ml-auto mr-6">
+            <SignInButton
+              afterSignInUrl="/dashboard"
+              afterSignUpUrl="/dashboard"
+            >
+              <button className="hover:text-hoverPurple">Login</button>
+            </SignInButton>
+
+            <SignUpButton
+              afterSignInUrl="/dashboard"
+              afterSignUpUrl="/dashboard"
+            >
+              <button className="text-white bg-brightPurple rounded py-2 px-6 hover:bg-hoverPurple">
+                Signup
+              </button>
+            </SignUpButton>
+          </div>
+        </SignedOut>
+      </nav>
 
       <main className="bg-white w-screen h-full flex flex-col px-6 pt-[72px] pb-8 md:h-screen md:px-12">
         <section className="w-full h-full flex flex-col justify-center items-center gap-10 pt-[72px] md:mt-8 lg:-mt-4 lg:flex-row">
