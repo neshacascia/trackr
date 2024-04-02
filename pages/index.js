@@ -52,7 +52,7 @@ export default function LandingPage() {
 
       <main className="bg-white w-screen h-full flex flex-col pt-[72px] pb-8 md:h-screen">
         <section className="w-full h-screen flex flex-col justify-center items-center gap-10 pt-[72px] px-6 md:px-12 md:mt-8 lg:-mt-4 lg:flex-row">
-          <div className="flex flex-col items-center lg:items-start gap-4 lg:gap-10">
+          <div className="flex flex-col items-center lg:items-start gap-4 lg:gap-6">
             <h1 className="font-home text-transparent text-3xl text-center lg:text-6xl font-semibold tracking-wider leading-[65px] lg:text-left gradient">
               Tracking made easy.
             </h1>
@@ -62,7 +62,7 @@ export default function LandingPage() {
               all in one place.
             </p>
 
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-8 pt-3">
               <SignUpButton
                 afterSignInUrl="/dashboard"
                 afterSignUpUrl="/dashboard"
