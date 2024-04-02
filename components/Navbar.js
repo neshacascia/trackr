@@ -1,5 +1,3 @@
-import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
@@ -41,78 +39,62 @@ export default function Navbar() {
         trackr
       </h1>
 
-      <SignedIn>
-        <ul className="hidden md:flex mr-auto gap-10">
-          <li>
-            <Link
-              href="/dashboard"
-              className={`${
-                pathname.startsWith('/dashboard')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              dashboard
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/invoices"
-              className={`${
-                pathname.startsWith('/invoices')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              invoices
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/expenses"
-              className={`${
-                pathname.startsWith('/expenses')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              expenses
-            </Link>
-          </li>
-        </ul>
-
-        {isDarkMode ? (
-          <FontAwesomeIcon
-            icon={faSun}
-            onClick={toggleDarkMode}
-            className="text-lightPurple text-lg cursor-pointer"
-          ></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon
-            icon={faMoon}
-            onClick={toggleDarkMode}
+      <ul className="hidden md:flex mr-auto gap-10">
+        <li>
+          <Link
+            href="/dashboard"
             className={`${
-              isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
-            } text-lg cursor-pointer`}
-          ></FontAwesomeIcon>
-        )}
+              pathname.startsWith('/dashboard')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            dashboard
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/invoices"
+            className={`${
+              pathname.startsWith('/invoices')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            invoices
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/expenses"
+            className={`${
+              pathname.startsWith('/expenses')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            expenses
+          </Link>
+        </li>
+      </ul>
 
-        <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
-      </SignedIn>
+      {isDarkMode ? (
+        <FontAwesomeIcon
+          icon={faSun}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg cursor-pointer"
+        ></FontAwesomeIcon>
+      ) : (
+        <FontAwesomeIcon
+          icon={faMoon}
+          onClick={toggleDarkMode}
+          className={`${
+            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+          } text-lg cursor-pointer`}
+        ></FontAwesomeIcon>
+      )}
 
-      <SignedOut>
-        <div className="tracking-wider flex gap-8 ml-auto">
-          <SignInButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
-            <button className="hover:text-hoverPurple">Login</button>
-          </SignInButton>
-
-          <SignUpButton afterSignInUrl="/dashboard" afterSignUpUrl="/dashboard">
-            <button className="bg-brightPurple rounded py-2 px-6 hover:bg-hoverPurple">
-              Signup
-            </button>
-          </SignUpButton>
-        </div>
-      </SignedOut>
+      <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
       <div className="mr-6">
         <UserButton afterSignOutUrl="/" />
