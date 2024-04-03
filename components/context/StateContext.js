@@ -13,6 +13,9 @@ function ContextProvider(props) {
     setToggleMenu(false);
   }
 
+  const [invoices, setInvoices] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+
   const [filterInvoices, setFilterInvoices] = useState([]);
   const [filterExpenses, setFilterExpenses] = useState([]);
 
@@ -34,6 +37,10 @@ function ContextProvider(props) {
         setFilterExpenses,
         isDarkMode,
         toggleDarkMode,
+        invoices,
+        setInvoices,
+        expenses,
+        setExpenses,
       }}
     >
       {props.children}
