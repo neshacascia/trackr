@@ -1,9 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { SignedOut, SignInButton, SignUpButton } from '@clerk/nextjs';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { SignInButton, SignUpButton } from '@clerk/nextjs';
 
 export default function LandingPage() {
   return (
@@ -65,14 +62,6 @@ export default function LandingPage() {
                   Get Started
                 </button>
               </SignUpButton>
-
-              <a
-                href="#more"
-                className="text-[#7e839f] text-lg md:text-xl flex items-center gap-3"
-              >
-                Learn more{' '}
-                <FontAwesomeIcon icon={faArrowDown} className="text-sm" />
-              </a>
             </div>
           </div>
 
@@ -86,12 +75,6 @@ export default function LandingPage() {
           />
         </section>
       </main>
-
-      <section className="bg-[#eeeeee] h-screen">
-        <h2 id="more" className="text-4xl font-medium pt-10 px-6">
-          What are the features?
-        </h2>
-      </section>
     </>
   );
 }
