@@ -35,7 +35,7 @@ export default function PaymentDetails() {
   return (
     <PaymentDetail
       type="invoices"
-      data={invoice[0]}
+      invoiceData={invoice[0]}
       updateInvoice={updateInvoiceHandler}
     />
   );
