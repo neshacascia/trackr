@@ -1,5 +1,3 @@
-import { MongoClient } from 'mongodb';
-import { getAuth } from '@clerk/nextjs/server';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
@@ -8,8 +6,8 @@ import Header from '@/components/Header';
 import PaymentsList from '@/components/PaymentsList';
 import NewInvoiceForm from '@/components/NewInvoiceForm';
 
-export default function Invoices(props) {
-  const { isDarkMode } = useContext(Context);
+export default function Invoices() {
+  const { invoices, isDarkMode } = useContext(Context);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -45,10 +43,10 @@ export default function Invoices(props) {
       >
         <Header
           title="Invoices"
-          payments={props.invoices}
+          payments={invoices}
           setShowModal={setShowModal}
         />
-        <PaymentsList type="invoices" invoices={props.invoices} />
+        <PaymentsList type="invoices" invoices={invoices} />
 
         {showModal && window.innerWidth >= 768 && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-40">
@@ -78,75 +76,3 @@ export default function Invoices(props) {
     </>
   );
 }
-
-export async function getServerSideProps(ctx) {
-  const { userId } = getAuth(ctx.req);
-
-  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
-
-  const db = client.db();
-  const invoicesCollections = db.collection('invoices');
-
-  const invoices = await invoicesCollections.find({ userId: userId }).toArray();
-
-  client.close();
-
-  return {
-    props: {
-      invoices: invoices.map(invoice => ({
-        id: invoice._id.toString(),
-        userId: invoice.userId || '',
-        street: invoice.street,
-        city: invoice.city,
-        postal: invoice.postal,
-        country: invoice.country,
-        clientName: invoice.clientName,
-        clientEmail: invoice.clientEmail,
-        clientStreet: invoice.clientStreet,
-        clientCity: invoice.clientCity,
-        clientPostal: invoice.clientPostal,
-        clientCountry: invoice.clientCountry,
-        invoiceDate: invoice.invoiceDate,
-        paymentTerms: invoice.paymentTerms,
-        description: invoice.description,
-        status: invoice.status,
-        items: invoice.items,
-      })),
-    },
-  };
-}
-
-// export async function getStaticProps() {
-//   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
-
-//   const db = client.db();
-//   const invoicesCollections = db.collection('invoices');
-
-//   const invoices = await invoicesCollections.find().toArray();
-
-//   client.close();
-
-//   return {
-//     props: {
-//       invoices: invoices.map(invoice => ({
-//         id: invoice._id.toString(),
-//         street: invoice.street,
-//         city: invoice.city,
-//         postal: invoice.postal,
-//         country: invoice.country,
-//         clientName: invoice.clientName,
-//         clientEmail: invoice.clientEmail,
-//         clientStreet: invoice.clientStreet,
-//         clientCity: invoice.clientCity,
-//         clientPostal: invoice.clientPostal,
-//         clientCountry: invoice.clientCountry,
-//         invoiceDate: invoice.invoiceDate,
-//         paymentTerms: invoice.paymentTerms,
-//         description: invoice.description,
-//         status: invoice.status,
-//         items: invoice.items,
-//       })),
-//     },
-//     revalidate: 5,
-//   };
-// }

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Payment from './Payment';
@@ -15,11 +14,11 @@ export default function PaymentsList({ type, invoices, expenses }) {
   const invoicesList =
     filteredPayments?.length === 0
       ? invoices?.map(
-          ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
+          ({ _id, clientName, invoiceDate, paymentTerms, items, status }) => (
             <Payment
               type={type}
-              key={id}
-              id={id}
+              key={_id}
+              id={_id}
               clientName={clientName}
               invoiceDate={invoiceDate}
               paymentTerms={paymentTerms}
@@ -29,11 +28,11 @@ export default function PaymentsList({ type, invoices, expenses }) {
           )
         )
       : filteredPayments?.map(
-          ({ id, clientName, invoiceDate, paymentTerms, items, status }) => (
+          ({ _id, clientName, invoiceDate, paymentTerms, items, status }) => (
             <Payment
               type={type}
-              key={id}
-              id={id}
+              key={_id}
+              id={_id}
               clientName={clientName}
               invoiceDate={invoiceDate}
               paymentTerms={paymentTerms}
