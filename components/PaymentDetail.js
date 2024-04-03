@@ -95,7 +95,7 @@ export default function PaymentDetail({
       if (window.innerWidth >= 768) {
         setShowModal(true);
       } else {
-        router.push(`/invoices/edit/${data?.id}`);
+        router.push(`/invoices/edit/${data?._id}`);
       }
     } else {
       if (window.innerWidth >= 768) {
@@ -111,7 +111,7 @@ export default function PaymentDetail({
   async function deletePaymentHandler() {
     const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
       method: 'DELETE',
-      body: JSON.stringify(data?.id || expenseData.id),
+      body: JSON.stringify(data?._id || expenseData.id),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -126,7 +126,7 @@ export default function PaymentDetail({
   async function markAsPaidHandler() {
     const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
       method: 'POST',
-      body: JSON.stringify(data?.id || expenseData.id),
+      body: JSON.stringify(data?._id || expenseData.id),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -142,7 +142,7 @@ export default function PaymentDetail({
     if (type === 'invoices') {
       const res = await fetch('/api/new-invoice', {
         method: 'PUT',
-        body: JSON.stringify(data.id),
+        body: JSON.stringify(data._id),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -287,7 +287,7 @@ export default function PaymentDetail({
                   } font-medium`}
                 >
                   <span className="text-detailPurple font-medium">#</span>
-                  {data?.id.slice(-6).toUpperCase() ||
+                  {data?._id.slice(-6).toUpperCase() ||
                     expenseData.referenceNo.toUpperCase() ||
                     expenseData.id.slice(-6).toUpperCase()}
                 </span>
@@ -586,7 +586,7 @@ export default function PaymentDetail({
 
       <DeleteConfirmationModal
         deletePayment={deletePayment}
-        id={data?.id || expenseData.id}
+        id={data?._id || expenseData.id}
         referenceNo={expenseData?.referenceNo}
         setDeletePayment={setDeletePayment}
         deletePaymentHandler={deletePaymentHandler}
@@ -614,7 +614,7 @@ export default function PaymentDetail({
               >
                 #
               </span>
-              {data.id.slice(-6).toUpperCase()}
+              {data._id.slice(-6).toUpperCase()}
             </h2>
             <EditInvoiceForm
               invoiceData={data}
