@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { SignInButton, SignUpButton } from '@clerk/nextjs';
 
+import preview from '../public/assets/preview.png';
+
 export default function LandingPage() {
   return (
     <>
@@ -66,12 +68,9 @@ export default function LandingPage() {
           </div>
 
           <Image
-            src="/assets/preview.jpg"
-            alt=""
-            width={650}
-            height={600}
-            quality={90}
-            className="object-fit mb-10"
+            src={preview}
+            alt="Preview of app's components"
+            className="w-fit mb-10"
           />
         </section>
       </main>
