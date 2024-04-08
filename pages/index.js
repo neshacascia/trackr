@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { SignInButton, SignUpButton, useSignIn } from '@clerk/nextjs';
+import { useEffect } from 'react';
+import { SignInButton, SignUpButton, useSignIn, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +12,13 @@ export default function LandingPage() {
   const router = useRouter();
 
   const { isLoaded, signIn, setActive } = useSignIn();
+  const { isSignedIn } = useUser();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.replace('/dashboard');
+    }
+  }, [isSignedIn, router]);
 
   async function handleDemoLogin(e) {
     e.preventDefault();
