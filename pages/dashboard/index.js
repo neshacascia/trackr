@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { getAuth } from '@clerk/nextjs/server';
 import Head from 'next/head';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Context } from '@/components/context/StateContext';
 import DataStats from '@/components/DataStats';
 import PaymentsChart from '@/components/chart/PaymentsChart';
@@ -11,29 +11,19 @@ import {
   faReceipt,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Home({
-  invoices,
-  expenses,
-  invoicesStats,
-  expensesStats,
-}) {
-  const { setInvoices, setExpenses, isDarkMode } = useContext(Context);
-
-  useEffect(() => {
-    setInvoices(invoices);
-    setExpenses(expenses);
-  }, [invoices, expenses]);
+export default function Home(props) {
+  const { isDarkMode } = useContext(Context);
 
   let invoicesTotal = 0;
 
-  invoicesStats.forEach(obj => {
+  props.invoicesStats.forEach(obj => {
     const values = Object.values(obj)[0];
     values.forEach(value => {
       invoicesTotal += value;
     });
   });
 
-  const expensesTotal = expensesStats.reduce(
+  const expensesTotal = props.expensesStats.reduce(
     (acc, curr) => acc + Number(curr.amount),
     0
   );
@@ -66,8 +56,8 @@ export default function Home({
           </section>
 
           <PaymentsChart
-            invoices={invoicesStats}
-            expenses={expensesStats}
+            invoices={props.invoicesStats}
+            expenses={props.expensesStats}
             isDarkMode={isDarkMode}
           />
         </section>
@@ -91,23 +81,8 @@ export async function getServerSideProps(ctx) {
 
   client.close();
 
-  const invoicesWithStrId = invoices.map(invoice => {
-    return {
-      ...invoice,
-      _id: invoice._id.toString(),
-    };
-  });
-  const expensesWithStrId = expenses.map(expense => {
-    return {
-      ...expense,
-      _id: expense._id.toString(),
-    };
-  });
-
   return {
     props: {
-      invoices: invoicesWithStrId,
-      expenses: expensesWithStrId,
       invoicesStats: invoices.map(invoice => ({
         total: invoice.items.map(item => item.total),
         date: invoice.invoiceDate,

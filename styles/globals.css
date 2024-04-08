@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@400&family=Josefin+Sans:wght@400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,4 +61,26 @@ input[type='number'] {
   border-width: 5px;
   border-style: solid;
   border-color: transparent black transparent transparent;
+}
+
+.gradient {
+  position: relative;
+  background-image: repeating-linear-gradient(90deg, #59c5dd, #6c47ff, #59c5dd);
+  z-index: 1;
+  background-position-x: 0;
+  background-size: 200%;
+  background-clip: text;
+  animation: gradimate 3s linear infinite;
+}
+
+@keyframes gradimate {
+  0% {
+    background-position-x: 0;
+  }
+  50% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: 200%;
+  }
 }
