@@ -75,7 +75,7 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <main className="bg-white w-screen h-full flex flex-col pt-[72px] pb-8 md:h-screen">
+      <main className="bg-white w-screen h-full flex flex-col pt-10 mb-48 lg:pt-[72px] md:h-screen">
         <section className="w-full h-screen flex flex-col justify-around items-center gap-10 pt-[72px] px-6 md:px-12 md:mt-8 lg:-mt-4 xl:flex-row xl:gap-0">
           <div className="flex flex-col items-center xl:items-start gap-4 lg:gap-6">
             <h1 className="font-home text-transparent text-5xl text-center lg:text-6xl font-semibold tracking-wider leading-[65px] xl:text-left gradient">
