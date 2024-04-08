@@ -1,10 +1,40 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, useSignIn } from '@clerk/nextjs';
+import { useRouter } from 'next/router';
 
 import preview from '../public/assets/preview.png';
 
 export default function LandingPage() {
+  const router = useRouter();
+
+  const { isLoaded, signIn, setActive } = useSignIn();
+
+  async function handleDemoLogin(e) {
+    e.preventDefault();
+
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const res = await signIn.create({
+        identifier: process.env.NEXT_PUBLIC_DEMO_EMAIL,
+        password: process.env.NEXT_PUBLIC_DEMO_PASSWORD,
+      });
+
+      if (res.status === 'complete') {
+        console.log(res);
+        await setActive({ session: res.createdSessionId });
+        router.push('/dashboard');
+      } else {
+        console.log(res);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -64,6 +94,12 @@ export default function LandingPage() {
                   Get Started
                 </button>
               </SignUpButton>
+              <button
+                onClick={handleDemoLogin}
+                className="text-brightPurple text-lg tracking-wider border-brightPurple border-2 flex items-center gap-2 rounded py-4 px-8 hover:text-white hover:bg-hoverPurple md:text-xl"
+              >
+                Try Demo
+              </button>
             </div>
           </div>
 
