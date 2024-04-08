@@ -4,7 +4,7 @@ import PaymentDetail from '../../components/PaymentDetail';
 
 export default function PaymentDetails(props) {
   const data = props.paymentData;
-
+  console.log(props);
   const router = useRouter();
 
   async function updateInvoiceHandler(invoiceData) {

@@ -41,6 +41,7 @@ module.exports = {
       },
       fontFamily: {
         spartan: ['League Spartan'],
+        home: ['Josefin Sans'],
       },
     },
   },

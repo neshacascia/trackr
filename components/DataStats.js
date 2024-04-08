@@ -17,7 +17,7 @@ export default function DataStats({ icon, total, title }) {
           isDarkMode ? 'bg-borderPurple' : 'bg-[#ededf1]'
         } w-12 h-12 flex justify-center items-center rounded-full`}
       >
-        <FontAwesomeIcon icon={icon} className="text-xl p-4"></FontAwesomeIcon>
+        <FontAwesomeIcon icon={icon} className="text-xl p-4" />
       </div>
 
       <div className="min-w-full flex flex-col gap-2">

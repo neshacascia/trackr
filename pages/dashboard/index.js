@@ -68,7 +68,6 @@ export default function Home(props) {
 
 export async function getServerSideProps(ctx) {
   const { userId } = getAuth(ctx.req);
-  console.log(userId);
 
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
 

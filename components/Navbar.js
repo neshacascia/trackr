@@ -1,5 +1,4 @@
-import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { SignInButton, SignUpButton } from '@clerk/nextjs';
+import Image from 'next/image';
 import { useContext } from 'react';
 import { Context } from './context/StateContext';
 import Link from 'next/link';
@@ -20,92 +19,82 @@ export default function Navbar() {
         isDarkMode ? 'bg-mainPurple' : 'bg-draftBtn'
       } w-full h-[72px] flex items-center fixed z-50`}
     >
-      <div className="bg-nav bg-no-repeat w-20 h-full">
-        <SignedIn>
-          <FontAwesomeIcon
-            icon={faBars}
-            className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
-            onClick={openMobileMenu}
-          ></FontAwesomeIcon>
-        </SignedIn>
+      <div className="bg-nav bg-no-repeat w-20 h-full flex">
+        <Image
+          src="/assets/logo.svg"
+          alt=""
+          width={34}
+          height={36}
+          className="hidden md:block mx-4"
+        />
+
+        <FontAwesomeIcon
+          icon={faBars}
+          className="text-white text-2xl pl-5 py-[22px] md:hidden cursor-pointer "
+          onClick={openMobileMenu}
+        ></FontAwesomeIcon>
       </div>
 
       <h1 className="font-medium text-2xl tracking-wide ml-6 mr-auto md:mr-20">
         trackr
       </h1>
 
-      <SignedIn>
-        <ul className="hidden md:flex mr-auto gap-10">
-          <li>
-            <Link
-              href="/dashboard"
-              className={`${
-                pathname.startsWith('/dashboard')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/invoices"
-              className={`${
-                pathname.startsWith('/invoices')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              invoices
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/expenses"
-              className={`${
-                pathname.startsWith('/expenses')
-                  ? 'text-[#9e8af1]'
-                  : 'hover:text-grayPurple'
-              } text-lg font-normal tracking-wide`}
-            >
-              expenses
-            </Link>
-          </li>
-        </ul>
-
-        {isDarkMode ? (
-          <FontAwesomeIcon
-            icon={faSun}
-            onClick={toggleDarkMode}
-            className="text-lightPurple text-lg cursor-pointer"
-          ></FontAwesomeIcon>
-        ) : (
-          <FontAwesomeIcon
-            icon={faMoon}
-            onClick={toggleDarkMode}
+      <ul className="hidden md:flex mr-auto gap-10">
+        <li>
+          <Link
+            href="/dashboard"
             className={`${
-              isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
-            } text-lg cursor-pointer`}
-          ></FontAwesomeIcon>
-        )}
+              pathname.startsWith('/dashboard')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            dashboard
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/invoices"
+            className={`${
+              pathname.startsWith('/invoices')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            invoices
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/expenses"
+            className={`${
+              pathname.startsWith('/expenses')
+                ? 'text-[#9e8af1]'
+                : 'hover:text-grayPurple'
+            } text-lg font-normal tracking-wide`}
+          >
+            expenses
+          </Link>
+        </li>
+      </ul>
 
-        <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
-      </SignedIn>
+      {isDarkMode ? (
+        <FontAwesomeIcon
+          icon={faSun}
+          onClick={toggleDarkMode}
+          className="text-lightPurple text-lg cursor-pointer"
+        ></FontAwesomeIcon>
+      ) : (
+        <FontAwesomeIcon
+          icon={faMoon}
+          onClick={toggleDarkMode}
+          className={`${
+            isDarkMode ? 'text-lightPurple' : 'text-detailPurple'
+          } text-lg cursor-pointer`}
+        ></FontAwesomeIcon>
+      )}
 
-      <SignedOut>
-        <div className="flex gap-8 ml-auto">
-          <SignInButton>
-            <button className="hover:text-hoverPurple">Sign in</button>
-          </SignInButton>
-
-          <SignUpButton>
-            <button className="bg-brightPurple rounded-3xl py-3 px-6 hover:bg-hoverPurple">
-              Sign up
-            </button>
-          </SignUpButton>
-        </div>
-      </SignedOut>
+      <div className="h-full border-lightPurple border-r-[1px] mx-6"></div>
 
       <div className="mr-6">
         <UserButton afterSignOutUrl="/" />
