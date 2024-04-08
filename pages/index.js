@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { SignInButton, SignUpButton, useSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import preview from '../public/assets/preview.png';
 
 export default function LandingPage() {
@@ -96,9 +98,10 @@ export default function LandingPage() {
               </SignUpButton>
               <button
                 onClick={handleDemoLogin}
-                className="text-brightPurple text-lg tracking-wider border-brightPurple border-2 flex items-center gap-2 rounded py-4 px-8 hover:text-white hover:bg-hoverPurple md:text-xl"
+                className="text-brightPurple text-lg tracking-wider border-brightPurple border-2 flex items-center gap-2 rounded py-4 px-8 hover:border-hoverPurple hover:text-hoverPurple md:text-xl"
               >
-                Try Demo
+                View Demo
+                <FontAwesomeIcon icon={faCircleArrowRight} />
               </button>
             </div>
           </div>
