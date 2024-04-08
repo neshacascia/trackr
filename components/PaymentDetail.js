@@ -10,7 +10,7 @@ import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function PaymentDetail({
   type,
-  invoiceData,
+  data,
   expenseData,
   updateInvoice,
 }) {
@@ -19,7 +19,7 @@ export default function PaymentDetail({
   const { isDarkMode } = useContext(Context);
 
   const currentStatus =
-    invoiceData?.status[0].toLowerCase() + invoiceData?.status.slice(1) ||
+    data?.status[0].toLowerCase() + data?.status.slice(1) ||
     expenseData.status[0].toLowerCase() + expenseData.status.slice(1);
   const statusColours = {
     paid: 'bg-bgPaid text-paid',
@@ -29,16 +29,16 @@ export default function PaymentDetail({
     }`,
   };
 
-  const date = type === 'invoices' ? new Date(invoiceData.invoiceDate) : '';
+  const date = type === 'invoices' ? new Date(data.invoiceDate) : '';
 
   let paymentPeriod;
 
   if (type === 'invoices') {
-    if (invoiceData.paymentTerms === 'Net 1 Day') {
+    if (data.paymentTerms === 'Net 1 Day') {
       paymentPeriod = 1;
-    } else if (invoiceData.paymentTerms === 'Net 7 Days') {
+    } else if (data.paymentTerms === 'Net 7 Days') {
       paymentPeriod = 7;
-    } else if (invoiceData.paymentTerms === 'Net 14 Days') {
+    } else if (data.paymentTerms === 'Net 14 Days') {
       paymentPeriod = 14;
     } else {
       paymentPeriod = 30;
@@ -83,7 +83,7 @@ export default function PaymentDetail({
 
   const totals =
     type === 'invoices'
-      ? Array.from(invoiceData.items).reduce((acc, curr) => {
+      ? Array.from(data.items).reduce((acc, curr) => {
           return acc + Number(curr.total);
         }, 0)
       : '';
@@ -95,7 +95,7 @@ export default function PaymentDetail({
       if (window.innerWidth >= 768) {
         setShowModal(true);
       } else {
-        router.push(`/invoices/edit/${invoiceData?._id}`);
+        router.push(`/invoices/edit/${data?.id}`);
       }
     } else {
       if (window.innerWidth >= 768) {
@@ -111,7 +111,7 @@ export default function PaymentDetail({
   async function deletePaymentHandler() {
     const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
       method: 'DELETE',
-      body: JSON.stringify(invoiceData?._id || expenseData.id),
+      body: JSON.stringify(data?.id || expenseData.id),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -126,7 +126,7 @@ export default function PaymentDetail({
   async function markAsPaidHandler() {
     const res = await fetch(`/api/update-${type.slice(0, -1)}`, {
       method: 'POST',
-      body: JSON.stringify(invoiceData?._id || expenseData.id),
+      body: JSON.stringify(data?.id || expenseData.id),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -142,7 +142,7 @@ export default function PaymentDetail({
     if (type === 'invoices') {
       const res = await fetch('/api/new-invoice', {
         method: 'PUT',
-        body: JSON.stringify(invoiceData._id),
+        body: JSON.stringify(data.id),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -222,7 +222,7 @@ export default function PaymentDetail({
                 className="text-[10px]"
               ></FontAwesomeIcon>
               <p className="font-medium pt-[1.5px]">
-                {invoiceData?.status || expenseData.status}
+                {data?.status || expenseData.status}
               </p>
             </div>
           </div>
@@ -246,7 +246,7 @@ export default function PaymentDetail({
             >
               Delete
             </button>
-            {invoiceData?.status === 'Pending' && (
+            {data?.status === 'Pending' && (
               <button
                 onClick={markAsPaidHandler}
                 className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl pt-[17px] pb-4 px-[18px] hover:bg-hoverPurple"
@@ -262,7 +262,7 @@ export default function PaymentDetail({
                 Mark as Paid
               </button>
             )}
-            {invoiceData?.status === 'Draft' && (
+            {data?.status === 'Draft' && (
               <button
                 onClick={updateToPendingHandler}
                 className="text-white bg-brightPurple font-medium w-[131px] rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
@@ -287,7 +287,7 @@ export default function PaymentDetail({
                   } font-medium`}
                 >
                   <span className="text-detailPurple font-medium">#</span>
-                  {invoiceData?._id.slice(-6).toUpperCase() ||
+                  {data?.id.slice(-6).toUpperCase() ||
                     expenseData.referenceNo.toUpperCase() ||
                     expenseData.id.slice(-6).toUpperCase()}
                 </span>
@@ -296,7 +296,7 @@ export default function PaymentDetail({
                     isDarkMode ? 'text-draft' : 'text-detailPurple'
                   } font-light md:mb-10`}
                 >
-                  {invoiceData?.description || expenseData?.notes}
+                  {data?.description || expenseData?.notes}
                 </span>
               </div>
 
@@ -315,10 +315,10 @@ export default function PaymentDetail({
                   isDarkMode ? 'text-draft' : 'text-detailPurple'
                 } font-light flex flex-col md:text-right my-[30px] md:my-0`}
               >
-                <span>{invoiceData?.street}</span>
-                <span>{invoiceData?.city}</span>
-                <span>{invoiceData?.postal}</span>
-                <span>{invoiceData?.country}</span>
+                <span>{data?.street}</span>
+                <span>{data?.city}</span>
+                <span>{data?.postal}</span>
+                <span>{data?.country}</span>
               </div>
             ) : (
               <div
@@ -414,12 +414,12 @@ export default function PaymentDetail({
                   isDarkMode ? 'text-white' : 'text-lightText'
                 } text-[19px] font-medium mb-2`}
               >
-                {invoiceData?.clientName || expenseData?.merchant}
+                {data?.clientName || expenseData?.merchant}
               </span>
-              <span className="font-light">{invoiceData?.clientStreet}</span>
-              <span className="font-light">{invoiceData?.clientCity}</span>
-              <span className="font-light">{invoiceData?.clientPostal}</span>
-              <span className="font-light">{invoiceData?.clientCountry}</span>
+              <span className="font-light">{data?.clientStreet}</span>
+              <span className="font-light">{data?.clientCity}</span>
+              <span className="font-light">{data?.clientPostal}</span>
+              <span className="font-light">{data?.clientCountry}</span>
             </div>
 
             {type === 'invoices' ? (
@@ -436,7 +436,7 @@ export default function PaymentDetail({
                     isDarkMode ? 'text-white' : 'text-lightText'
                   } text-[19px] font-medium`}
                 >
-                  {invoiceData?.clientEmail}
+                  {data?.clientEmail}
                 </span>
               </div>
             ) : (
@@ -473,7 +473,7 @@ export default function PaymentDetail({
                   isDarkMode ? 'text-white' : 'text-lightText'
                 } text-[19px] font-medium`}
               >
-                {invoiceData.clientEmail}
+                {data.clientEmail}
               </span>
             </div>
           ) : (
@@ -487,7 +487,7 @@ export default function PaymentDetail({
               } flex flex-col gap-6 rounded-t-lg p-6 md:-mt-10`}
             >
               {type === 'invoices' ? (
-                invoiceData?.items.map((item, ind) => (
+                data?.items.map((item, ind) => (
                   <div
                     key={ind}
                     className={`${
@@ -558,7 +558,7 @@ export default function PaymentDetail({
         >
           Delete
         </button>
-        {invoiceData?.status === 'Pending' && (
+        {data?.status === 'Pending' && (
           <button
             onClick={markAsPaidHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
@@ -574,7 +574,7 @@ export default function PaymentDetail({
             Mark as Paid
           </button>
         )}
-        {invoiceData?.status === 'Draft' && (
+        {data?.status === 'Draft' && (
           <button
             onClick={updateToPendingHandler}
             className="text-white bg-brightPurple font-medium w-full rounded-3xl py-4 px-[18px] hover:bg-hoverPurple"
@@ -586,7 +586,7 @@ export default function PaymentDetail({
 
       <DeleteConfirmationModal
         deletePayment={deletePayment}
-        id={invoiceData?._id || expenseData.id}
+        id={data?.id || expenseData.id}
         referenceNo={expenseData?.referenceNo}
         setDeletePayment={setDeletePayment}
         deletePaymentHandler={deletePaymentHandler}
@@ -614,10 +614,10 @@ export default function PaymentDetail({
               >
                 #
               </span>
-              {invoiceData._id.slice(-6).toUpperCase()}
+              {data.id.slice(-6).toUpperCase()}
             </h2>
             <EditInvoiceForm
-              invoiceData={invoiceData}
+              invoiceData={data}
               isDarkMode={isDarkMode}
               setShowModal={setShowModal}
               updateInvoice={updateInvoice}

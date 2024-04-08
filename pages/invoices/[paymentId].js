@@ -1,17 +1,11 @@
-import { useContext } from 'react';
-import { Context } from '@/components/context/StateContext';
+import { MongoClient, ObjectId } from 'mongodb';
 import { useRouter } from 'next/router';
 import PaymentDetail from '../../components/PaymentDetail';
 
-export default function PaymentDetails() {
-  const { invoices } = useContext(Context);
+export default function PaymentDetails(props) {
+  const data = props.paymentData;
 
   const router = useRouter();
-  const paymentId = router.query.paymentId;
-
-  const invoice = invoices.filter(
-    invoice => invoice._id.toString() === paymentId
-  );
 
   async function updateInvoiceHandler(invoiceData) {
     const res = await fetch('/api/update-invoice', {
@@ -35,8 +29,103 @@ export default function PaymentDetails() {
   return (
     <PaymentDetail
       type="invoices"
-      invoiceData={invoice[0]}
+      data={data}
       updateInvoice={updateInvoiceHandler}
     />
   );
 }
+
+export async function getServerSideProps(context) {
+  const paymentId = context.params.paymentId;
+
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
+
+  const db = client.db();
+  const invoicesCollections = db.collection('invoices');
+
+  const selectedPayment = await invoicesCollections.findOne({
+    _id: new ObjectId(paymentId),
+  });
+
+  client.close();
+
+  return {
+    props: {
+      paymentData: {
+        id: selectedPayment._id.toString(),
+        street: selectedPayment.street,
+        city: selectedPayment.city,
+        postal: selectedPayment.postal,
+        country: selectedPayment.country,
+        clientName: selectedPayment.clientName,
+        clientEmail: selectedPayment.clientEmail,
+        clientStreet: selectedPayment.clientStreet,
+        clientCity: selectedPayment.clientCity,
+        clientPostal: selectedPayment.clientPostal,
+        clientCountry: selectedPayment.clientCountry,
+        invoiceDate: selectedPayment.invoiceDate,
+        paymentTerms: selectedPayment.paymentTerms,
+        description: selectedPayment.description,
+        status: selectedPayment.status,
+        items: selectedPayment.items,
+      },
+    },
+  };
+}
+
+// export async function getStaticPaths() {
+//   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
+
+//   const db = client.db();
+//   const invoicesCollections = db.collection('invoices');
+
+//   const invoices = await invoicesCollections.find({}, { _id: 1 }).toArray();
+
+//   client.close();
+
+//   return {
+//     fallback: 'blocking',
+//     paths: invoices.map(invoice => ({
+//       params: { paymentId: invoice._id.toString() },
+//     })),
+//   };
+// }
+
+// export async function getStaticProps(context) {
+//   const paymentId = context.params.paymentId;
+
+//   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_API_TOKEN);
+
+//   const db = client.db();
+//   const invoicesCollections = db.collection('invoices');
+
+//   const selectedPayment = await invoicesCollections.findOne({
+//     _id: new ObjectId(paymentId),
+//   });
+
+//   client.close();
+
+//   return {
+//     props: {
+//       paymentData: {
+//         id: selectedPayment._id.toString(),
+//         street: selectedPayment.street,
+//         city: selectedPayment.city,
+//         postal: selectedPayment.postal,
+//         country: selectedPayment.country,
+//         clientName: selectedPayment.clientName,
+//         clientEmail: selectedPayment.clientEmail,
+//         clientStreet: selectedPayment.clientStreet,
+//         clientCity: selectedPayment.clientCity,
+//         clientPostal: selectedPayment.clientPostal,
+//         clientCountry: selectedPayment.clientCountry,
+//         invoiceDate: selectedPayment.invoiceDate,
+//         paymentTerms: selectedPayment.paymentTerms,
+//         description: selectedPayment.description,
+//         status: selectedPayment.status,
+//         items: selectedPayment.items,
+//       },
+//     },
+//     revalidate: 10,
+//   };
+// }
