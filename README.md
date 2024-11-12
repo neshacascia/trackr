@@ -2,7 +2,7 @@
 > Trackr is designed to help users manage their finances with ease. This full-stack app allows users to sign up for an account to create, update, and delete their invoices and expenses, making it simple to keep track of their finances.
 
 ## Demo
-[Live Demo](https://trackr-nc.vercel.app/)
+[Live Demo](https://www.nc-trackr.xyz/)
 
 <img src="trackr-screenshot.png" alt="" border="0">
 
